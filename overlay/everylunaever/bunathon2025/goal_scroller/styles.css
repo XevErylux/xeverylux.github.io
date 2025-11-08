@@ -1,12 +1,228 @@
+@import url('https://fonts.googleapis.com/css?family=Boogaloo');
+
+:root {
+    --leaf-fill: #DBCC65;
+    --leaf-border: #57610B;
+
+    --shirt-fill1: #B3BF91;
+    --shirt-fill2: #8D9269;
+    --shirt-fill3: #51684B;
+    --shirt-fill4: #55684C;
+    --shirt-border: #163510;
+    --shirt-text: #2b3627;
+
+    --foreground-border: #17170B;
+
+
+
+    --highlight-fill: #F87D51;
+    --highlight-border: #A73D16;
+
+    --montain-fill: #6A8689;
+    --montain-border: #61524D;
+
+    --completed-fill: #A09567;
+    --completed-border: #44402b;
+    --completed-text: #3d3a27;
+
+    --active-fill: #D18D22;
+    --active-border: #352409;
+    --active-text: #422d0a;
+
+    --upcoming-fill: var(--shirt-fill1);
+    --upcoming-border: var(--shirt-border);
+    --upcoming-text: var(--shirt-text);
+
+    --bush-fill: #647153;
+    --bush-border: #3D4F1B;
+
+    --gras-background: #3D4F1B;
+    --gras-color: #A3BA68;
+
+    --border-radius: 12px;
+
+    --title-padding: 4px;
+
+    --goal-padding: 4px;
+    --goal-padding-vertical: 1px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 html {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Boogaloo;
 }
 
 body {
-    margin: 0;
+    margin: 4px;
     background: transparent;
+    /*background-color: var(--leaf-fill);*/
+    overflow: hidden;
 }
 
-span#counter {
-    font-size: 34px;
+div#container {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 242px;
+}
+
+div#pointsContainer {
+    --margin: 8px;
+    display: flex;
+    flex-direction: row;
+    align-self: flex-start;
+    width: calc(100% - var(--margin) * 2);
+    margin-left: var(--margin);
+    margin-right: var(--margin);
+    background: var(--montain-fill);
+    border: var(--montain-border) solid;
+    border-width: 4px;
+    border-bottom-width: 0px;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    padding: var(--title-padding);
+    box-shadow: #0d1f096e 2px 0px 4px;
+}
+
+div#pointsContainer span {
+    font-size: 38px;
+    color: var(--highlight-fill);
+    text-shadow: var(--highlight-border) 0px 0px 4px, var(--highlight-border) 2px 2px;
+}
+
+div#pointsContainer span:first-of-type {
+    align-self: flex-start;
+    flex-grow: 1;
+}
+
+div#pointsContainer span:not(:first-of-type) {
+    align-self: flex-end;
+}
+
+div#pointsContainer span#counterSeparator,
+div#pointsContainer span#counterMaximum {
+    display: none;
+}
+
+div#goalsContainer {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    width: calc(100% + 8px);
+    overflow: hidden;
+    padding-right: 8px;
+}
+
+div#goalsContainer div.goal {
+    width: 100%;
+    font-size: 28px;
+    border-style: solid;
+    border-width: 4px;
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    transition: all;
+    padding-top: var(--goal-padding-vertical);
+    padding-bottom: var(--goal-padding-vertical);
+    box-shadow: #0d1f096e 2px 0px 4px;
+    justify-content: space-between;
+}
+
+div#goalsContainer div.goal:not(:first-of-type) {
+    margin-top: 4px;
+}
+
+div#goalsContainer div.goal[data-state=completed] {
+    background: linear-gradient(var(--completed-fill) 95%, var(--completed-border));
+    border-color: var(--completed-border);
+    color: var(--completed-text);
+}
+
+div#goalsContainer div.goal[data-state=active] {
+    background: linear-gradient(var(--active-fill) 95%, var(--active-border));
+    border-color: var(--active-border);
+    color: var(--active-text);
+}
+
+div#goalsContainer div.goal[data-state=upcoming] {
+    background: linear-gradient(var(--upcoming-fill) 95%, var(--upcoming-border));
+    border-color: var(--upcoming-border);
+    color: var(--upcoming-text);
+}
+
+div#goalsContainer div.goal .goal-head {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+div#goalsContainer div.goal .title-container {
+    align-self: flex-start;
+    flex-grow: 1;
+    min-width: 0;
+    overflow: hidden;
+    margin-right: 4px;
+}
+
+div#goalsContainer div.goal .title-container .title {
+    text-wrap-mode: nowrap;
+    display: inline-block;
+}
+
+div#goalsContainer div.goal .title-container.marquee .title {
+    animation-name: title-container-marquee;
+    animation-iteration-count: infinite;
+    animation-duration: calc(2s + 2s + 1s + 15s);
+    animation-timing-function: linear;
+    transition: all;
+    /*transform: translateX(calc((0px - (var(--scroll-width) - var(--client-width))) * var(--progress)));*/
+}
+
+@keyframes title-container-marquee {
+    0% {
+        --progress: 0;
+        transform: translateX(calc((0px - (var(--scroll-width) - var(--client-width))) * 0.0));
+    }
+
+    10% {
+        --progress: 1;
+        transform: translateX(calc((0px - (var(--scroll-width) - var(--client-width))) * 1.0));
+    }
+
+    20% {
+        --progress: 1;
+        transform: translateX(calc((0px - (var(--scroll-width) - var(--client-width))) * 1.0));
+    }
+
+    25% {
+        --progress: 0;
+        transform: translateX(calc((0px - (var(--scroll-width) - var(--client-width))) * 0.0));
+    }
+
+    100% {
+        --progress: 0;
+        transform: translateX(calc((0px - (var(--scroll-width) - var(--client-width))) * 0.0));
+    }
+}
+
+div#goalsContainer div.goal .subtext {
+    font-size: 20px;
+    line-height: 1em;
+    margin-top: -4px;
+    opacity: 90%;
+}
+
+div#goalsContainer div.goal .subtext:empty {
+    height: 1em;
+}
+
+div#goalsContainer div.goal .subtext::before {
+    content: '\A';
+}
+
+div#goalsContainer div.goal .points {
+    align-self: flex-end;
 }

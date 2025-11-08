@@ -1,6 +1,35 @@
 {
+    "uiVersion": 1,
     "encryptedBucketUrl": {
         "iv": "N00BgePyJvA8G+9l",
         "data": "BcbV1dgMn5ouAoywouWjnqQC0/ttnW2O7B/qN1SXvGOilB9A5VYWNMSLN1RTW8hCAzMuGmeuB1ZO7boaBVnvcXQWzTGxxw58SKXzRc+gYBQ45s1F27Y9yVGsilKqS3AL0fHCUqFC2QS8uhvPMf8ChTqR3EM="
-    }
+    },
+    "goals": [
+        { "points": 11, "text": "Rawr for Chat" },
+        { "points": 111, "text": "Chat bestimmt Tweet" },
+        { "points": 222, "text": "Twitter bestimmt Profilbild", "subtext": "Bis Ende Bunathon" },
+        { "points": 333, "text": "Chat bestimmt Essensbestellung", "subtext": "vegetarisch" },
+        { "points": 444, "text": "Cringe Anime Voice für 15 Minuten" },
+        { "points": 555, "text": "Steinverlosung" },
+        { "points": 666, "text": "Chat bestimmt neuen Soundalert" },
+        { "points": 888, "text": "Chat bestimmt Artwork", "subtext": "SFW" },
+        { "points": 1111, "text": "1h altes 3D Model" },
+        { "points": 1666, "text": "Slender man spielen - 1h" },
+        { "points": 2222, "text": "Chat bestimmt ein Modelasset" },
+        { "points": 2777, "text": "Vegane Benjamin Blümchen Torte backen" },
+        { "points": 3333, "text": "Pokemon Kiss Marry Hug" },
+        { "points": 3888, "text": "1h kein denglisch" },
+        { "points": 4444, "text": "Grave of the fireflies DC Watchparty", "subtext": "Ich hasse traurige Filme" },
+        { "points": 4999, "text": "Buna Werneko Design" },
+        { "points": 5555, "text": "Chat sucht Tierpatenschaft aus" },
+        { "points": 6111, "text": "Chat bestimmt etwas fürs 2.0 Debut", "subtext": "+ Giveaway" },
+        { "points": 6666, "text": "Dino themed Food Stream" },
+        { "points": 7222, "text": "Katzen suchen Outfit aus" },
+        { "points": 7777, "text": "Eye Tracker Challenge" },
+        { "points": 8333, "text": "Chat bestimmt Cover" },
+        { "points": 8888, "text": "VR Date mit einem anderen Vtuber" },
+        { "points": 9444, "text": "Silent Hill Gameathon" },
+        { "points": 9888, "text": "Stream mit Schwester Betty!" },
+        { "points": 10001, "text": "Lost Place IRL Stream", "subtext": "Ich bin ein Schisser" }
+    ]
 }

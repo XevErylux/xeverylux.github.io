@@ -4,12 +4,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HTML5 Boilerplate</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Goal Scroller for Bunathon 2025</title>
+  <link rel="stylesheet" data-href="./styles.css">
+  <script>
+    document.querySelectorAll("link[rel=stylesheet][data-href]").forEach((/** @type {HTMLLinkElement} */ link) =>
+      link.href = link.getAttribute("data-href") + "?t=" + new Date().getTime());
+  </script>
+
+  <template id="goalEntryTemplate">
+    <div class="goal">
+      <div class="goal-head">
+        <div class="title-container">
+          <span class="title"></span>
+        </div>
+        <span class="points"></span>
+      </div>
+      <span class="subtext"></span>
+    </div>
+  </template>
 </head>
 
 <body>
-  <span id="counter"></span>
+  <div id="container">
+    <div id="pointsContainer">
+      <span id="counterTitle">Bunathon</span>
+      <span id="counterValue"></span>
+      <span id="counterSeparator">/</span>
+      <span id="counterMaximum"></span>
+    </div>
+
+    <div id="goalsContainer"></div>
+  </div>
 
   <script src="scripts.mjs" type="module"></script>
 </body>

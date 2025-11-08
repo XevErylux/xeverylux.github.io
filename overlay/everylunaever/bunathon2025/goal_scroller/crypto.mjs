@@ -97,11 +97,11 @@ export async function initialize(originalText) {
     const encrypted = await encrypt(originalText, key);
 
     //console.log("Original:", originalText);
-    //console.log("Verschlüsselt (Base64):", JSON.stringify(encrypted, undefined, 4));
+    //console.log("Verschlüsselt (Base64Url):", JSON.stringify(encrypted, undefined, 4));
     //console.log("Entschlüsselt:", decrypted);
 
     const exportedKey = await exportKey(key);
-    //console.log("Exportierter Schlüssel (Base64):", exportedKey);
+    //console.log("Exportierter Schlüssel (Base64Url):", exportedKey);
 
     //const importedKey = await importKey(exportedKey);
     //const decryptedAgain = await decrypt(encrypted, importedKey);
