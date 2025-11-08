@@ -156,7 +156,7 @@ const ui = (function () {
      */
     function getOrCreateGoalElement(index) {
         if (index < 0)
-            throw 'index was less than zero';
+            throw new Error('index was less than zero');
 
         let element;
         for (let i = goalsContainer.childElementCount; i <= index; i++) {
@@ -184,6 +184,7 @@ const ui = (function () {
         /** @type {number} */ index,
         /** @type {GoalWithState} */ goal) {
         const element = getOrCreateGoalElement(index);
+        element.setAttribute('data-points', `${goal.points}`);
         element.setAttribute('data-state', goal.state);
 
         /** @type {HTMLSpanElement | null} */
@@ -236,7 +237,7 @@ const ui = (function () {
         if (!goalEntries)
             return;
 
-        console.log(goalEntries);
+        //console.log(goalEntries);
         for (let i = 0; i < goalEntries.length; i++) {
             renderGoal(i, goalEntries[i]);
         }
@@ -247,11 +248,11 @@ const ui = (function () {
     function render() {
         const totalPoints = model.totalPoints;
         if (totalPoints === undefined)
-            counterValue.innerText = '...';
+            setTextContentIfChanged(counterValue, '...');
         else if (totalPoints === null)
-            counterValue.innerText = 'Error';
+            setTextContentIfChanged(counterValue, 'Error');
         else
-            counterValue.innerText = totalPoints.toLocaleString();
+            setTextContentIfChanged(counterValue, totalPoints.toLocaleString());
 
         counterMaximum.innerText = maximum.toLocaleString();
 

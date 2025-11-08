@@ -168,7 +168,7 @@ div#goalsContainer div.goal .title-container {
 }
 
 div#goalsContainer div.goal .title-container .title {
-    text-wrap-mode: nowrap;
+    text-wrap: nowrap;
     display: inline-block;
 }
 
