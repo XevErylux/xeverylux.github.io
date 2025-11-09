@@ -6,9 +6,11 @@ import * as crypto from "./crypto.mjs";
 'use strict';
 
 const config = await (async function () {
-    const url = `./config.json?t=${new Date().getTime()}`;
-
-    const response = await fetch(url);
+    const response = await fetch('./config.json', {
+        method: 'GET',
+        // Ignore the disk cache and rely on the 304 Not Modified response
+        cache: 'no-cache',
+    });
     const json = await response.json();
     return /** @type {Config} */(json);
 })();
@@ -40,7 +42,11 @@ async function pageAutoRefresh() {
         await wait(isDevelopment ? 6000 : 60000);
 
         try {
-            const response = await fetch("./version.json");
+            const response = await fetch("./version.json", {
+                method: 'GET',
+                // Ignore the disk cache and rely on the 304 Not Modified response
+                cache: 'no-cache',
+            });
             if (!response.ok)
                 continue;
 
