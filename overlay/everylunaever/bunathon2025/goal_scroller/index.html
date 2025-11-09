@@ -36,7 +36,11 @@
     <div id="goalsContainer"></div>
   </div>
 
-  <script src="scripts.mjs" type="module"></script>
+  <script data-src="scripts.mjs" type="module"></script>
+  <script>
+    document.querySelectorAll("script[data-src]").forEach((/** @type {HTMLScriptElement} */ link) =>
+      link.src = link.getAttribute("data-src") + "?t=" + new Date().getTime());
+  </script>
 </body>
 
 </html>
