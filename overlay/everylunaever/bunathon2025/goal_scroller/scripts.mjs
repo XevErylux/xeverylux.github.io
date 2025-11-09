@@ -84,27 +84,32 @@ async function createStateLoader() {
     const url = await crypto.decrypt(encryptedBucketUrl, key);
 
     return async function () {
-        let fetchUrl = url;
-        if (isDevelopment) {
-            fetchUrl = './debug-points.json';
+        try {
+            let fetchUrl = url;
+            if (isDevelopment) {
+                fetchUrl = './debug-points.json';
+            }
+
+            const response = await fetch(fetchUrl);
+            if (!response.ok)
+                return null;
+
+            const body = /** @type {unknown} */(await response.json());
+            if (!body
+                || typeof body !== "object"
+                || Array.isArray(body)
+                || !('total' in body))
+                return null;
+
+            const total = body.total;
+            if (typeof total !== "number")
+                return null;
+
+            return total;
+        } catch (err) {
+            console.error("Failed to fetch points value", err);
+            return null;
         }
-
-        const response = await fetch(fetchUrl);
-        if (!response.ok)
-            return null;
-
-        const body = /** @type {unknown} */(await response.json());
-        if (!body
-            || typeof body !== "object"
-            || Array.isArray(body)
-            || !('total' in body))
-            return null;
-
-        const total = body.total;
-        if (typeof total !== "number")
-            return null;
-
-        return total;
     };
 }
 
