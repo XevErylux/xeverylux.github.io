@@ -43,6 +43,8 @@
 
     --title-padding: 4px;
 
+    --goal-margin: 4px;
+    --goal-border-width: 4px;
     --goal-padding: 4px;
     --goal-padding-vertical: 1px;
 }
@@ -117,38 +119,88 @@ div#goalsContainer {
 }
 
 div#goalsContainer div.goal {
+    position: relative;
     width: 100%;
     font-size: 28px;
     border-style: solid;
-    border-width: 4px;
+    border-width: var(--goal-border-width);
     border-radius: var(--border-radius);
     display: flex;
     flex-direction: column;
-    transition: all;
+    background: var(--upcoming-fill);
+    transition: 0s;
+    transition-property: background, border-color, color, transform, box-shadow;
     padding-top: var(--goal-padding-vertical);
     padding-bottom: var(--goal-padding-vertical);
     box-shadow: #0d1f096e 2px 0px 4px;
     justify-content: space-between;
 }
 
+div#goalsContainer div.goal::before {
+    position: absolute;
+    content: "";
+    inset: 0;
+    /* same as { top: 0; right: 0; bottom: 0; left: 0; } */
+    background-image: linear-gradient(to bottom, transparent, transparent 85%, black 100%);
+    border: white;
+    margin: -4px;
+    border-radius: var(--border-radius);
+    z-index: 1;
+}
+
 div#goalsContainer div.goal:not(:first-of-type) {
-    margin-top: 4px;
+    margin-top: var(--goal-margin);
+}
+
+div#goalsContainer div.goal[data-active-transition] {
+    transition-duration: 1s, 1s, 1s, 2s, 2s;
+    transform: translateY(0px);
+}
+
+div#goalsContainer div.goal[data-active-transition][data-move=clear] {
+    transition-property: none;
+    transform: translateY(0px);
+}
+
+div#goalsContainer div.goal[data-active-transition][data-move=up] {
+    transform: translateY(calc(0px - var(--client-height) - var(--goal-margin) - var(--goal-border-width) * 2));
+}
+
+div#goalsContainer div.goal[data-active-transition][data-move=down] {
+    animation-name: goal-move-down;
+    animation-iteration-count: 1;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+@keyframes goal-move-down {
+    from {
+        transform: translateY(calc(0px - var(--client-height) - var(--goal-margin) - var(--goal-border-width) * 2));
+    }
+
+    to {
+        transform: translateY(0px);
+    }
+}
+
+div#goalsContainer div.goal[data-active-transition][data-move=no-box-shadow] {
+    box-shadow: transparent 2px 0px 4px;
 }
 
 div#goalsContainer div.goal[data-state=completed] {
-    background: linear-gradient(var(--completed-fill) 95%, var(--completed-border));
+    background: var(--completed-fill);
     border-color: var(--completed-border);
     color: var(--completed-text);
 }
 
 div#goalsContainer div.goal[data-state=active] {
-    background: linear-gradient(var(--active-fill) 95%, var(--active-border));
+    background: var(--active-fill);
     border-color: var(--active-border);
     color: var(--active-text);
 }
 
 div#goalsContainer div.goal[data-state=upcoming] {
-    background: linear-gradient(var(--upcoming-fill) 95%, var(--upcoming-border));
+    background: var(--upcoming-fill);
     border-color: var(--upcoming-border);
     color: var(--upcoming-text);
 }
@@ -177,33 +229,26 @@ div#goalsContainer div.goal .title-container.marquee .title {
     animation-iteration-count: infinite;
     animation-duration: calc(2s + 2s + 1s + 15s);
     animation-timing-function: linear;
-    transition: all;
-    /*transform: translateX(calc((0px - (var(--scroll-width) - var(--client-width))) * var(--progress)));*/
 }
 
 @keyframes title-container-marquee {
     0% {
-        --progress: 0;
         transform: translateX(calc((0px - (var(--scroll-width) - var(--client-width))) * 0.0));
     }
 
     10% {
-        --progress: 1;
         transform: translateX(calc((0px - (var(--scroll-width) - var(--client-width))) * 1.0));
     }
 
     20% {
-        --progress: 1;
         transform: translateX(calc((0px - (var(--scroll-width) - var(--client-width))) * 1.0));
     }
 
     25% {
-        --progress: 0;
         transform: translateX(calc((0px - (var(--scroll-width) - var(--client-width))) * 0.0));
     }
 
     100% {
-        --progress: 0;
         transform: translateX(calc((0px - (var(--scroll-width) - var(--client-width))) * 0.0));
     }
 }

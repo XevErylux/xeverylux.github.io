@@ -8,15 +8,16 @@ import config from "./config.json" with { type: 'json' };
 
 const isDevelopment = location.host === '127.0.0.1:5500';
 
-/** @type {{active: "active", upcoming: "upcoming", completed: "completed"}} */
+function unreachable(/** @type {never} */ never) {
+    return new Error(`Hit unreachable value: ${never}`);
+}
+
+/** @type {Record<GoalState, GoalState> & {active: "active", upcoming: "upcoming", completed: "completed"}} */
 const GoalStates = {
     active: "active",
     completed: "completed",
     upcoming: "upcoming",
 };
-
-/** @typedef {typeof config.goals[0]} Goal */
-/** @typedef {Goal & { state: keyof GoalStates }} GoalWithState */
 
 async function wait(/** @type {number} */ ms) {
     return new Promise(function (resolve) {
@@ -107,67 +108,169 @@ async function createStateLoader() {
     };
 }
 
+/**
+ * @returns {Goal[]}
+ */
+function loadGoalsFromConfig() {
+    /** @type {Goal[]} */
+    const goals = [];
+
+    for (const goalConfig of config.goals) {
+        /** @type {Goal} */
+        const goal = {
+            config: goalConfig,
+        };
+
+        goals.push(goal);
+    }
+
+    return goals;
+}
+
+/**
+ * @param {number} points
+ * @returns {number | null}
+ */
+function calculateDoneIndex(points) {
+    const index = config.goals.findLastIndex(x => x.points <= points);
+    return index < 0 ? null : index;
+}
+
+/**
+ * @param {number} initialPoints
+ * @returns {ScrollerAnimation}
+ */
+function initializeAnimation(initialPoints) {
+    return {
+        type: "static",
+        doneIndex: calculateDoneIndex(initialPoints),
+    };
+}
+
 const ui = (function () {
     const settings = {
         maxGoalsEntryCount: 3,
+        // The CSS Animation is exactly 2s. Give it additional 50ms, so its definitely done.
+        scrollAnimationDuration: 2050,
     };
 
-    let maximum = config.goals.map(x => x.points).sort()[0];
-    /** @type {{totalPoints: number | undefined | null}} */
-    let model = { totalPoints: undefined };
+    const maximum = Math.max(...config.goals.map(x => x.points));
+
+    let model = (/** @returns {UIModel} */ function () {
+        const initialTotalPoints = isDevelopment ? 9887 : 0;
+        return {
+            totalPoints: initialTotalPoints,
+            goals: loadGoalsFromConfig(),
+            animation: initializeAnimation(initialTotalPoints),
+        };
+    })();
 
     function setTotalPoints(/** @type {number | null} */ totalPoints) {
         model.totalPoints = totalPoints;
     }
 
-    /**
-     * @returns {GoalWithState[] | undefined}
-     */
-    function figureOutGoalEntries() {
-        const totalPoints = model.totalPoints;
+    function updateScrollerAnimation() {
+        let animation = model.animation;
+        if (animation.activeTimeout)
+            return;
+
+        let totalPoints = model.totalPoints;
         if (typeof totalPoints !== "number")
             return;
 
-        const doneGoals = config.goals.filter(x => x.points <= totalPoints).reverse();
-        const incompleteGoals = config.goals.filter(x => x.points > totalPoints);
+        const currentDoneIndex = animation.doneIndex;
+        const targetDoneIndex = calculateDoneIndex(totalPoints);
 
-        const incompleteGoalsDisplayCount = Math.min(incompleteGoals.length, settings.maxGoalsEntryCount - Math.min(doneGoals.length, 1));
-        const doneGoalsDisplayCount = settings.maxGoalsEntryCount - incompleteGoalsDisplayCount;
+        function setAnimation(/** @type {ScrollerAnimation} */ updated) {
+            model.animation = animation = updated;
+        }
 
-        const result = [];
-        for (let i = Math.min(doneGoals.length, doneGoalsDisplayCount) - 1; i >= 0; i--) {
-            result.push({ ...doneGoals[i], state: GoalStates.completed });
+        function startAnimation() {
+            if ((currentDoneIndex ?? -1) > (targetDoneIndex ?? -1)) {
+                // Probably the calculation was improved which resulted to revert
+                // an already done goal?
+                setAnimation({
+                    type: "downwards:begin",
+                    doneIndex: (currentDoneIndex ?? -1) - 1,
+                });
+            } else {
+                // Finish next goal
+                setAnimation({
+                    type: "upwards:begin",
+                    doneIndex: (currentDoneIndex ?? -1) + 1,
+                });
+            }
         }
-        for (let i = 0; i < incompleteGoalsDisplayCount; i++) {
-            result.push({ ...incompleteGoals[i], state: i == 0 ? GoalStates.active : GoalStates.upcoming });
+
+        // Write out every possible state, to be easier to reason about
+        switch (animation.type) {
+            case "static":
+                if (currentDoneIndex === targetDoneIndex)
+                    // Already on correct index
+                    return;
+
+                startAnimation();
+                break;
+
+            case "upwards:end":
+            case "downwards:end":
+                if (currentDoneIndex === targetDoneIndex) {
+                    setAnimation({
+                        type: "static",
+                        doneIndex: animation.doneIndex,
+                    });
+                    return;
+                } else {
+                    setAnimation({
+                        type: "static",
+                        doneIndex: animation.doneIndex,
+                    });
+                }
+                break;
+
+            case "upwards:begin":
+                setAnimation({
+                    type: "upwards:moving",
+                    doneIndex: animation.doneIndex,
+                });
+                break;
+
+            case "upwards:moving":
+                setAnimation({
+                    type: "upwards:end",
+                    doneIndex: animation.doneIndex,
+                });
+                break;
+
+            case "downwards:begin":
+                setAnimation({
+                    type: "downwards:moving",
+                    doneIndex: animation.doneIndex,
+                });
+                break;
+
+            case "downwards:moving":
+                setAnimation({
+                    type: "downwards:end",
+                    doneIndex: animation.doneIndex,
+                });
+                break;
+
+            default:
+                throw unreachable(animation);
         }
-        return result;
+
+        // Automatically proceed after the timeout with our state machine.
+        animation.activeTimeout = setTimeout(function () {
+            animation.activeTimeout = undefined;
+
+            renderGoals();
+        }, settings.scrollAnimationDuration);
     }
 
     function createNewGoalElement() {
         const result = /** @type {Element} */(goalEntryTemplate.content.cloneNode(true));
         return /** @type {HTMLDivElement} */(result.firstElementChild);
-    }
-
-    /**
-     * 
-     * @param {number} index 
-     * @returns {HTMLDivElement}
-     */
-    function getOrCreateGoalElement(index) {
-        if (index < 0)
-            throw new Error('index was less than zero');
-
-        let element;
-        for (let i = goalsContainer.childElementCount; i <= index; i++) {
-            element = createNewGoalElement();
-            goalsContainer.appendChild(element);
-        }
-
-        if (!element)
-            return /** @type {HTMLDivElement} */(goalsContainer.children[index]);
-
-        return element;
     }
 
     function setTextContentIfChanged(
@@ -180,17 +283,156 @@ const ui = (function () {
         element.textContent = text;
     }
 
-    function renderGoal(
+    /** @returns {{state: GoalState, position: number, animation?: GoalAnimation} | undefined} */
+    function determineGoalInfo(
         /** @type {number} */ index,
-        /** @type {GoalWithState} */ goal) {
-        const element = getOrCreateGoalElement(index);
-        element.setAttribute('data-points', `${goal.points}`);
-        element.setAttribute('data-state', goal.state);
+        /** @type {Goal} */ goal
+    ) {
+        const scrollAnimation = model.animation;
+        const position = index - (scrollAnimation.doneIndex ?? 0);
+        if (position < -2)
+            return;
+
+        const remaining = model.goals.length - (scrollAnimation.doneIndex ?? 0);
+        const levels = (/** @returns {GoalState[] | undefined} */ function () {
+            switch (remaining) {
+                case 1:
+                    return ["completed", "completed", "completed", "completed"];
+
+                case 2:
+                    return ["completed", "completed", "completed", "active"];
+
+                case 3:
+                    return ["completed", "completed", "active", "upcoming"];
+            }
+        })();
+
+        const elementAnimation = (/** @returns {{covered: GoalAnimation | undefined, others: GoalAnimation | undefined}} */ function () {
+            switch (scrollAnimation.type) {
+                case "static":
+                    return { covered: undefined, others: "clear" };
+
+                case "upwards:begin":
+                    return { covered: undefined, others: undefined };
+
+                case "upwards:moving":
+                    return { covered: undefined, others: scrollAnimation.doneIndex === 0 || remaining <= 2 ? undefined : "up" };
+
+                case "upwards:end":
+                    return { covered: "no-box-shadow", others: scrollAnimation.doneIndex === 0 || remaining <= 2 ? undefined : "up" };
+
+                case "downwards:begin":
+                    return { covered: undefined, others: undefined };
+
+                case "downwards:moving":
+                    return { covered: "no-box-shadow", others: "down" };
+
+                case "downwards:end":
+                    return { covered: undefined, others: "down" };
+
+                default:
+                    throw unreachable(scrollAnimation);
+            }
+        })();
+
+        const picker = position + (remaining <= 3 ? 3 - remaining : 0);
+
+        switch (scrollAnimation.type) {
+            case "static":
+                if (scrollAnimation.doneIndex === null) {
+                    switch (picker) {
+                        case 0: return { state: levels?.[picker + 1] ?? "active", position: picker, animation: elementAnimation.others };
+                        case 1: return { state: levels?.[picker + 1] ?? "upcoming", position: picker, animation: elementAnimation.others };
+                        case 2: return { state: levels?.[picker + 1] ?? "upcoming", position: picker, animation: elementAnimation.others };
+                        default: return;
+                    }
+                } else {
+                    switch (picker) {
+                        case 0: return { state: levels?.[picker + 1] ?? "completed", position: picker, animation: elementAnimation.others };
+                        case 1: return { state: levels?.[picker + 1] ?? "active", position: picker, animation: elementAnimation.others };
+                        case 2: return { state: levels?.[picker + 1] ?? "upcoming", position: picker, animation: elementAnimation.others };
+                        default: return;
+                    }
+                }
+
+            case "upwards:begin":
+            case "upwards:moving":
+            case "upwards:end":
+            case "downwards:begin":
+            case "downwards:moving":
+            case "downwards:end":
+                const positionOffset = (scrollAnimation.doneIndex ?? -1) >= 1 && remaining >= 3 ? 1 : 0;
+                switch (picker) {
+                    case -1:
+                        if (remaining <= 2) return;
+                        return { state: levels?.[picker + 1] ?? "completed", position: picker + positionOffset, animation: elementAnimation.covered };
+                    case 0:
+                        return { state: levels?.[picker + 1] ?? "completed", position: picker + positionOffset, animation: elementAnimation.others };
+
+                    case 1: return { state: levels?.[picker + 1] ?? "active", position: picker + positionOffset, animation: elementAnimation.others };
+                    case 2: return { state: levels?.[picker + 1] ?? "upcoming", position: picker + positionOffset, animation: elementAnimation.others };
+                    default: return;
+                }
+
+
+            default:
+                throw unreachable(scrollAnimation);
+        }
+    }
+
+    function placeGoal(
+        /** @type {HTMLDivElement} */
+        element,
+        /** @type {number} */
+        position,
+    ) {
+        const currentElement = goalsContainer.children[position];
+        if (currentElement == element)
+            return;
+
+        if (!currentElement) {
+            goalsContainer.appendChild(element);
+        } else {
+            goalsContainer.insertBefore(element, currentElement);
+        }
+
+        element.setAttribute('data-active-transition', '');
+    }
+
+    function renderGoal(
+        /** @type {number} */ index) {
+        const goal = model.goals[index];
+        const goalConfig = goal.config;
+        const info = determineGoalInfo(index, goal);
+
+        if (info === undefined) {
+            if (goal.element) {
+                if (goalsContainer.contains(goal.element)) {
+                    goalsContainer.removeChild(goal.element);
+                }
+            }
+            return;
+        }
+
+        if (!goal.element) {
+            const element = createNewGoalElement();;
+            element.setAttribute('data-points', `${goal.config.points}`);
+            goal.element = element;
+        }
+
+        const element = goal.element;
+        element.setAttribute('data-state', info.state);
+        placeGoal(element, info.position);
+        if (info.animation) {
+            element.setAttribute('data-move', info.animation);
+        } else {
+            element.removeAttribute('data-move');
+        }
 
         /** @type {HTMLSpanElement | null} */
         const titleSpan = element.querySelector("span.title");
         if (titleSpan) {
-            setTextContentIfChanged(titleSpan, goal.text);
+            setTextContentIfChanged(titleSpan, goalConfig.text);
         }
 
         /** @type {HTMLDivElement | null} */
@@ -199,9 +441,7 @@ const ui = (function () {
             if (titleContainer.scrollWidth > titleContainer.clientWidth) {
                 titleContainer.style.setProperty('--scroll-width', `${titleContainer.scrollWidth}px`);
                 titleContainer.style.setProperty('--client-width', `${titleContainer.clientWidth}px`);
-                requestAnimationFrame(function () {
-                    titleContainer.classList.add('marquee');
-                });
+                titleContainer.classList.add('marquee');
             } else {
                 titleContainer.classList.remove('marquee');
                 titleContainer.style.removeProperty('--scroll-width');
@@ -212,37 +452,27 @@ const ui = (function () {
         /** @type {HTMLSpanElement | null} */
         const pointsSpan = element.querySelector("span.points");
         if (pointsSpan) {
-            setTextContentIfChanged(pointsSpan, goal.points.toLocaleString());
+            setTextContentIfChanged(pointsSpan, goalConfig.points.toLocaleString());
         }
 
         /** @type {HTMLSpanElement | null} */
         const subtextSpan = element.querySelector("span.subtext");
         if (subtextSpan) {
-            setTextContentIfChanged(subtextSpan, goal.subtext ?? '');
+            setTextContentIfChanged(subtextSpan, goalConfig.subtext ?? '');
         }
-    }
 
-    function cleanupUnneededElements(/** @type {number} */ goalCount) {
-        for (let i = goalsContainer.childElementCount - 1; i >= goalCount; i--) {
-            const last = goalsContainer.lastElementChild;
-            if (!last)
-                break;
-
-            goalsContainer.removeChild(last);
-        }
+        element.style.setProperty('--client-height', `${element.clientHeight}px`);
     }
 
     function renderGoals() {
-        const goalEntries = figureOutGoalEntries();
-        if (!goalEntries)
-            return;
+        updateScrollerAnimation();
 
-        //console.log(goalEntries);
-        for (let i = 0; i < goalEntries.length; i++) {
-            renderGoal(i, goalEntries[i]);
+        goalsContainer.setAttribute('data-scroll-state', model.animation.type);
+
+        const goals = model.goals.length;
+        for (let i = 0; i < goals; i++) {
+            renderGoal(i);
         }
-
-        cleanupUnneededElements(goalEntries.length);
     }
 
     function render() {
@@ -254,10 +484,12 @@ const ui = (function () {
         else
             setTextContentIfChanged(counterValue, totalPoints.toLocaleString());
 
-        counterMaximum.innerText = maximum.toLocaleString();
+        setTextContentIfChanged(counterMaximum, maximum.toLocaleString());
 
         renderGoals();
     }
+
+    render();
 
     return {
         setTotalPoints,
