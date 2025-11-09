@@ -2,9 +2,16 @@
 /// <reference path="./index.d.ts" />
 
 import * as crypto from "./crypto.mjs";
-import config from "./config.json" with { type: 'json' };
 
 'use strict';
+
+const config = await (async function () {
+    const url = `./config.json?t=${new Date().getTime()}`;
+
+    const response = await fetch(url);
+    const json = await response.json();
+    return /** @type {Config} */(json);
+})();
 
 const isDevelopment = location.host === '127.0.0.1:5500';
 
@@ -27,14 +34,13 @@ async function wait(/** @type {number} */ ms) {
 
 async function pageAutoRefresh() {
     // Automatic reload of page - checks config every minute
-    let previousText = JSON.stringify(config);
-    /** @type {string} */
+    let previousText = '';
     let previousEtag = '';
     while (true) {
-        await wait(60000);
+        await wait(isDevelopment ? 6000 : 60000);
 
         try {
-            const response = await fetch("./config.json");
+            const response = await fetch("./version.json");
             if (!response.ok)
                 continue;
 
@@ -49,6 +55,11 @@ async function pageAutoRefresh() {
                 continue;
 
             // Config changed - refresh page
+            if (previousText === '') {
+                previousText = newText;
+                continue;
+            }
+
             previousText = newText;
             window.location.replace(document.location.toString());
         } catch (err) {
