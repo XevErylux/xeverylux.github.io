@@ -129,7 +129,7 @@ div#goalsContainer div.goal {
     flex-direction: column;
     background: var(--upcoming-fill);
     transition: 0s;
-    transition-property: background, border-color, color, transform, box-shadow;
+    transition-property: background, border-color, color, box-shadow, transform;
     padding-top: var(--goal-padding-vertical);
     padding-bottom: var(--goal-padding-vertical);
     box-shadow: #0d1f096e 2px 0px 4px;
@@ -157,20 +157,27 @@ div#goalsContainer div.goal[data-active-transition] {
     transform: translateY(0px);
 }
 
-div#goalsContainer div.goal[data-active-transition][data-move=clear] {
+div#goalsContainer:not([data-scroll-state='downwards:end']) div.goal[data-active-transition][data-move=clear] {
     transition-property: none;
     transform: translateY(0px);
+}
+
+div#goalsContainer[data-scroll-state='downwards:end'] div.goal[data-active-transition][data-move=clear] {
+    transition-property: background, border-color, color, box-shadow;
+    transform: translateY(calc(0px - var(--client-height) - var(--goal-margin) - var(--goal-border-width) * 2));
 }
 
 div#goalsContainer div.goal[data-active-transition][data-move=up] {
     transform: translateY(calc(0px - var(--client-height) - var(--goal-margin) - var(--goal-border-width) * 2));
 }
 
-div#goalsContainer div.goal[data-active-transition][data-move=down] {
-    animation-name: goal-move-down;
-    animation-iteration-count: 1;
-    animation-duration: 2s;
-    animation-timing-function: linear;
+div#goalsContainer[data-scroll-state='downwards:begin'] div.goal[data-active-transition][data-move=down] {
+    transition-property: background, border-color, color, box-shadow;
+    transform: translateY(calc(0px - var(--client-height) - var(--goal-margin) - var(--goal-border-width) * 2));
+}
+
+div#goalsContainer:not([data-scroll-state='downwards:begin']) div.goal[data-active-transition][data-move=down] {
+    transform: translateY(0px);
 }
 
 @keyframes goal-move-down {
@@ -225,10 +232,10 @@ div#goalsContainer div.goal .title-container .title {
 }
 
 div#goalsContainer div.goal .title-container.marquee .title {
-    animation-name: title-container-marquee;
     animation-iteration-count: infinite;
     animation-duration: calc(2s + 2s + 1s + 15s);
     animation-timing-function: linear;
+    animation-name: title-container-marquee;
 }
 
 @keyframes title-container-marquee {

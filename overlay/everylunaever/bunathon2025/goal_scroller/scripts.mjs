@@ -157,7 +157,7 @@ const ui = (function () {
     const maximum = Math.max(...config.goals.map(x => x.points));
 
     let model = (/** @returns {UIModel} */ function () {
-        const initialTotalPoints = isDevelopment ? 9887 : 0;
+        const initialTotalPoints = isDevelopment ? 0 : 0;
         return {
             totalPoints: initialTotalPoints,
             goals: loadGoalsFromConfig(),
@@ -191,7 +191,7 @@ const ui = (function () {
                 // an already done goal?
                 setAnimation({
                     type: "downwards:begin",
-                    doneIndex: (currentDoneIndex ?? -1) - 1,
+                    doneIndex: currentDoneIndex,
                 });
             } else {
                 // Finish next goal
@@ -213,19 +213,22 @@ const ui = (function () {
                 break;
 
             case "upwards:end":
-            case "downwards:end":
-                if (currentDoneIndex === targetDoneIndex) {
-                    setAnimation({
-                        type: "static",
-                        doneIndex: animation.doneIndex,
-                    });
+                setAnimation({
+                    type: "static",
+                    doneIndex: animation.doneIndex,
+                });
+                if (currentDoneIndex === targetDoneIndex)
                     return;
-                } else {
-                    setAnimation({
-                        type: "static",
-                        doneIndex: animation.doneIndex,
-                    });
-                }
+
+                break;
+            case "downwards:end":
+                setAnimation({
+                    type: "static",
+                    doneIndex: animation.doneIndex,
+                });
+                if (currentDoneIndex === targetDoneIndex)
+                    return;
+
                 break;
 
             case "upwards:begin":
@@ -252,7 +255,7 @@ const ui = (function () {
             case "downwards:moving":
                 setAnimation({
                     type: "downwards:end",
-                    doneIndex: animation.doneIndex,
+                    doneIndex: animation.doneIndex === null || animation.doneIndex === 0 ? null : animation.doneIndex - 1,
                 });
                 break;
 
@@ -305,6 +308,10 @@ const ui = (function () {
                 case 3:
                     return ["completed", "completed", "active", "upcoming"];
             }
+
+            if (scrollAnimation.doneIndex === null && scrollAnimation.type === "downwards:end") {
+                return ["active", "active", "upcoming", "upcoming"];
+            }
         })();
 
         const elementAnimation = (/** @returns {{covered: GoalAnimation | undefined, others: GoalAnimation | undefined}} */ function () {
@@ -321,14 +328,15 @@ const ui = (function () {
                 case "upwards:end":
                     return { covered: "no-box-shadow", others: scrollAnimation.doneIndex === 0 || remaining <= 2 ? undefined : "up" };
 
+                // Note: truthy of scrollAnimation.doneIndex is the same as 'scrollAnimation.doneIndex !== null && scrollAnimation.doneIndex !== 0'
                 case "downwards:begin":
-                    return { covered: undefined, others: undefined };
+                    return { covered: "no-box-shadow", others: scrollAnimation.doneIndex && remaining > 2 ? "down" : undefined };
 
                 case "downwards:moving":
-                    return { covered: "no-box-shadow", others: "down" };
+                    return { covered: undefined, others: scrollAnimation.doneIndex && remaining > 2 ? "down" : undefined };
 
                 case "downwards:end":
-                    return { covered: undefined, others: "down" };
+                    return { covered: "no-box-shadow", others: scrollAnimation.doneIndex && remaining > 2 ? "clear" : undefined };
 
                 default:
                     throw unreachable(scrollAnimation);
@@ -336,6 +344,7 @@ const ui = (function () {
         })();
 
         const picker = position + (remaining <= 3 ? 3 - remaining : 0);
+        const positionOffset = (scrollAnimation.doneIndex ?? -1) >= 1 && remaining >= 3 ? 1 : 0;
 
         switch (scrollAnimation.type) {
             case "static":
@@ -361,7 +370,6 @@ const ui = (function () {
             case "downwards:begin":
             case "downwards:moving":
             case "downwards:end":
-                const positionOffset = (scrollAnimation.doneIndex ?? -1) >= 1 && remaining >= 3 ? 1 : 0;
                 switch (picker) {
                     case -1:
                         if (remaining <= 2) return;
@@ -441,7 +449,12 @@ const ui = (function () {
             if (titleContainer.scrollWidth > titleContainer.clientWidth) {
                 titleContainer.style.setProperty('--scroll-width', `${titleContainer.scrollWidth}px`);
                 titleContainer.style.setProperty('--client-width', `${titleContainer.clientWidth}px`);
-                titleContainer.classList.add('marquee');
+                // animation-delay does not work properly. Apply it with setTimeout instead.
+                setTimeout(function () {
+                    if (titleContainer.scrollWidth > titleContainer.clientWidth) {
+                        titleContainer.classList.add('marquee');
+                    }
+                }, 4000);
             } else {
                 titleContainer.classList.remove('marquee');
                 titleContainer.style.removeProperty('--scroll-width');
@@ -482,7 +495,7 @@ const ui = (function () {
         else if (totalPoints === null)
             setTextContentIfChanged(counterValue, 'Error');
         else
-            setTextContentIfChanged(counterValue, totalPoints.toLocaleString());
+            setTextContentIfChanged(counterValue, Math.floor(totalPoints).toLocaleString());
 
         setTextContentIfChanged(counterMaximum, maximum.toLocaleString());
 
