@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bunathon 2025 Dashboard</title>
+    <link rel="stylesheet" data-href="styles.css" />
+    <link rel="stylesheet" data-href="theme.css" />
+    <script>
+        document.querySelectorAll("link[rel=stylesheet][data-href]").forEach((/** @type {HTMLLinkElement} */ link) =>
+            link.href = link.getAttribute("data-href") + "?t=" + new Date().getTime());
+    </script>
+    <style>
+        body:not([data-has-key]):has(> #loadingState:not(:empty))> :not(#loadingState) {
+            display: none;
+        }
+
+        #loadingState:not(:empty) {
+            display: block;
+            margin-top: calc(100vh / 2 - 1em);
+            text-align: center;
+            font-size: 32px;
+        }
+
+        #loadingState:empty {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <span id="loadingState">Loading...</span>
+
+    <header>
+        <h1>Bunathon 2025</h1>
+    </header>
+
+    <section class="summary">
+        <div class="card" id="wheel-spins-card">
+            <h3>🎡 Rad drehen</h3>
+            <p id="wheel-spins-count">0</p>
+            <button disabled onclick="openDialog('wheel')">Details</button>
+        </div>
+        <div class="card" id="postcards-card">
+            <h3>📮 Postkarten</h3>
+            <p id="postcards-count">0</p>
+            <button disabled onclick="openDialog('postcards')">Details</button>
+        </div>
+        <div class="card" id="artwork-names-card">
+            <h3>🎨 Namen auf Artwork</h3>
+            <p id="artwork-names-count">0</p>
+            <button disabled onclick="openDialog('artwork')">Details</button>
+        </div>
+        <div class="card" id="keychains-card">
+            <h3>🔑 Keychains</h3>
+            <p id="keychains-count">0</p>
+            <button disabled onclick="openDialog('keychains')">Details</button>
+        </div>
+    </section>
+
+    <h2 class="leaderboards-header">🏆 Top Unterstützer</h2>
+    <section class="leaderboards">
+        <div class="leaderboard">
+            <h3>Direkte Spender</h3>
+            <table id="donor-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Punkte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="donor-1-name"></td>
+                        <td id="donor-1-points"></td>
+                    </tr>
+                    <tr>
+                        <td id="donor-2-name"></td>
+                        <td id="donor-2-points"></td>
+                    </tr>
+                    <tr>
+                        <td id="donor-3-name"></td>
+                        <td id="donor-3-points"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="leaderboard">
+            <h3>Abonnement-Verschenker</h3>
+            <table id="gifter-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Punkte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="gifter-1-name"></td>
+                        <td id="gifter-1-points"></td>
+                    </tr>
+                    <tr>
+                        <td id="gifter-2-name"></td>
+                        <td id="gifter-2-points"></td>
+                    </tr>
+                    <tr>
+                        <td id="gifter-3-name"></td>
+                        <td id="gifter-3-points"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="leaderboard">
+            <h3>Bits Cheerer</h3>
+            <table id="cheerer-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Punkte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="cheerer-1-name"></td>
+                        <td id="cheerer-1-points"></td>
+                    </tr>
+                    <tr>
+                        <td id="cheerer-2-name"></td>
+                        <td id="cheerer-2-points"></td>
+                    </tr>
+                    <tr>
+                        <td id="cheerer-3-name"></td>
+                        <td id="cheerer-3-points"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="leaderboard">
+            <h3>Gesamt-Unterstützer</h3>
+            <table id="supporter-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Punkte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="supporter-1-name"></td>
+                        <td id="supporter-1-points"></td>
+                    </tr>
+                    <tr>
+                        <td id="supporter-2-name"></td>
+                        <td id="supporter-2-points"></td>
+                    </tr>
+                    <tr>
+                        <td id="supporter-3-name"></td>
+                        <td id="supporter-3-points"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+    <section class="events">
+        <h2>📅 Ereignisse der letzten Stunde</h2>
+        <button onclick="toggleEvents()">Ein-/Ausklappen</button>
+        <table>
+            <thead>
+                <tr>
+                    <th class="timestamp">Zeitpunkt</th>
+                    <th class="viewer-name">Zuschauer</th>
+                    <th class="category">Kategorie</th>
+                    <th class="amount">Menge</th>
+                    <th class="points">Punkte</th>
+                </tr>
+            </thead>
+            <tbody id="event-table-body"></tbody>
+        </table>
+        <button class="fold-in" onclick="toggleEvents()">Einklappen</button>
+
+        <template id="event-row-template">
+            <tr>
+                <td class="timestamp"></td>
+                <td class="viewer-name"></td>
+                <td class="category"></td>
+                <td class="amount"></td>
+                <td class="points"></td>
+            </tr>
+        </template>
+    </section>
+
+    <script>
+        var openDialogClicked = undefined;
+
+        function openDialog(type) {
+            if (openDialogClicked) {
+                openDialogClicked(type);
+            }
+
+            alert("Details für: " + type);
+        }
+
+        function toggleEvents() {
+            document.querySelector(".events").classList.toggle("expanded");
+        }
+    </script>
+    <script data-src="scripts.mjs" type="module"></script>
+    <script>
+        document.querySelectorAll("script[data-src]").forEach((/** @type {HTMLScriptElement} */ link) =>
+            link.src = link.getAttribute("data-src") + (location.host === '127.0.0.1:5500' ? '' : "?t=" + new Date().getTime()));
+    </script>
+</body>
+
+</html>

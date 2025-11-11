@@ -169,6 +169,16 @@ function initializeAnimation(initialPoints) {
     };
 }
 
+function setTextContentIfChanged(
+        /** @type {HTMLSpanElement} */ element,
+        /** @type {string} */ text
+) {
+    if (element.textContent === text)
+        return;
+
+    element.textContent = text;
+}
+
 const ui = (function () {
     const settings = {
         maxGoalsEntryCount: 3,
@@ -296,16 +306,6 @@ const ui = (function () {
     function createNewGoalElement() {
         const result = /** @type {Element} */(goalEntryTemplate.content.cloneNode(true));
         return /** @type {HTMLDivElement} */(result.firstElementChild);
-    }
-
-    function setTextContentIfChanged(
-        /** @type {HTMLSpanElement} */ element,
-        /** @type {string} */ text
-    ) {
-        if (element.textContent === text)
-            return;
-
-        element.textContent = text;
     }
 
     /** @returns {{state: GoalState, position: number, animation?: GoalAnimation} | undefined} */

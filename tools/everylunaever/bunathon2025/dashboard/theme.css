@@ -1,0 +1,120 @@
+:root {
+    --plant-fill: #DBCC65;
+    --plant-border: #57610B;
+
+    --lava-fill: #F87D51;
+    --lava-border: #A73D16;
+
+    --vulcan-fill: #6A8689;
+    --vulcan-border: #61524D;
+
+    --rock-fill: #A09567;
+    --rock-border: #44402b;
+    --rock-text: #3d3a27;
+
+    --animal-fill: #D18D22;
+    --animal-border: #352409;
+    --animal-text: #422d0a;
+
+    --sheet-fill: #B3BF91;
+    --sheet-border: #163510;
+    --sheet-text: #2b3627;
+
+    --bush-fill: #647153;
+    --bush-border: #3D4F1B;
+
+    --gras-background: #88A04C;
+    --gras-color: #A3BA68;
+
+    --forst-fill: #274550;
+    --forst-border: #2A2F11;
+
+    --river-background: #458A9A;
+    --river-stream-lines: #458A9A;
+
+    /* Grundfarben */
+    --background-color: var(--gras-background);
+    --card-background: var(--sheet-fill);
+    --card-border: var(--sheet-border);
+    --card-text: var(--sheet-text);
+
+    --header-background: var(--forst-fill);
+    --header-text: var(--lava-fill);
+    --header-shadow: var(--lava-border);
+
+    --button-background: var(--lava-fill);
+    --button-hover: var(--lava-border);
+    --button-text: white;
+
+    --table-header-bg: var(--vulcan-fill);
+    --table-header-text: white;
+    --table-row-bg: var(--rock-fill);
+    --table-row-border: var(--rock-border);
+    --table-text: var(--rock-text);
+}
+
+/* Hintergrund und Text */
+body {
+    background-color: var(--background-color);
+    color: var(--card-text);
+}
+
+/* Header */
+header {
+    background-color: var(--header-background);
+    color: var(--header-text);
+    text-shadow: var(--header-shadow) 0px 0px 4px, var(--header-shadow) 2px 2px;
+    box-shadow: var(--animal-border) 0px 0px 8px;
+}
+
+h2 {
+    text-shadow: var(--gras-color) 0px 0px 4px, var(--gras-color) 2px 2px;
+}
+
+h3 {
+    text-shadow: var(--gras-color) 0px 0px 4px, var(--gras-color) 2px 2px;
+}
+
+/* Karten */
+.card {
+    background-color: var(--card-background);
+    border: 2px solid var(--card-border);
+    color: var(--card-text);
+}
+
+/* Buttons */
+button {
+    background-color: var(--button-background);
+    color: var(--button-text);
+}
+
+button:hover:not(:disabled) {
+    background-color: var(--button-hover);
+}
+
+/* Tabellen */
+.leaderboard table,
+.events table {
+    background-color: var(--card-background);
+    color: var(--table-text);
+    border: 2px solid var(--card-border);
+}
+
+.leaderboard th,
+.events th {
+    background-color: var(--table-header-bg);
+    color: var(--table-header-text);
+}
+
+.leaderboard td,
+.events td {
+    background-color: var(--table-row-bg);
+    border-bottom: 1px solid var(--table-row-border);
+}
+
+/* Leaderboard Container */
+.leaderboard {
+    background-color: var(--card-background);
+    border: 2px solid var(--card-border);
+    color: var(--card-text);
+}

@@ -4,16 +4,7 @@
     --leaf-fill: #DBCC65;
     --leaf-border: #57610B;
 
-    --shirt-fill1: #B3BF91;
-    --shirt-fill2: #8D9269;
-    --shirt-fill3: #51684B;
-    --shirt-fill4: #55684C;
-    --shirt-border: #163510;
-    --shirt-text: #2b3627;
-
     --foreground-border: #17170B;
-
-
 
     --highlight-fill: #F87D51;
     --highlight-border: #A73D16;
@@ -29,15 +20,18 @@
     --active-border: #352409;
     --active-text: #422d0a;
 
-    --upcoming-fill: var(--shirt-fill1);
-    --upcoming-border: var(--shirt-border);
-    --upcoming-text: var(--shirt-text);
+    --upcoming-fill: #B3BF91;
+    --upcoming-border: #163510;
+    --upcoming-text: #2b3627;
 
     --bush-fill: #647153;
     --bush-border: #3D4F1B;
 
-    --gras-background: #3D4F1B;
+    --gras-background: #88A04C;
     --gras-color: #A3BA68;
+
+    --forst-fill: #274550;
+    --forst-border: #2A2F11;
 
     --border-radius: 12px;
 
