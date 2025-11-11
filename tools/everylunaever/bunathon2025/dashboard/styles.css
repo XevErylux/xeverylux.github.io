@@ -95,6 +95,7 @@ h2 {
 .leaderboard td {
     padding: 0.5rem;
     text-align: left;
+    height: 1rem;
     border-bottom: 1px solid #eee;
     font-weight: bold;
 }
@@ -142,11 +143,20 @@ h2 {
     display: table-row;
 }
 
+.events button {
+    margin-bottom: 0.5rem;
+}
+
 .events:not(.expanded) tbody tr:nth-child(n+11) {
     display: none;
 }
 
+.events.expanded button.fold-in {
+    margin-top: 0.5rem;
+}
+
 .events:not(.expanded) button.fold-in {
+
     display: none;
 }
 
