@@ -1,768 +1,762 @@
 {
-  "wheelSpins": 87,
-  "postcards": 31,
-  "namesOnArtwork": 13,
-  "keychains": 6,
-  "encryptedSupporters": "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",
+  "wheelSpins": 43,
+  "postcards": 30,
+  "namesOnArtwork": 16,
+  "keychains": 11,
+  "encryptedSupporters": "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",
   "supporters": {},
   "leaderboards": {
     "donators": {
       "top1": {
-        "supporter": "uFMoeInubOg=",
-        "points": 1.332
+        "supporter": "6mNlYL3dhVE=",
+        "points": 100
       },
-      "top2": {
-        "supporter": "x4SPF0zSCcU=",
-        "points": 0.222
-      },
-      "top3": {
-        "supporter": "iaTSHn4pFog=",
-        "points": 0.2
-      }
+      "top2": null,
+      "top3": null
     },
     "subGifters": {
       "top1": {
-        "supporter": "KWtPdihL3Ys=",
-        "points": 610
+        "supporter": "+tHiO2FlO4o=",
+        "points": 400
       },
       "top2": {
         "supporter": "C4QC1ELl1VU=",
-        "points": 534
+        "points": 400
       },
       "top3": {
         "supporter": "tslJMJV2c68=",
-        "points": 524
+        "points": 355
       }
     },
     "bitsCheers": {
       "top1": {
-        "supporter": "+tHiO2FlO4o=",
-        "points": 113.132
+        "supporter": "JN6z+ahn9FQ=",
+        "points": 11.61
       },
       "top2": {
-        "supporter": "6wNCSnY/wBw=",
-        "points": 97.96
+        "supporter": "LGC3xaxLTLE=",
+        "points": 10.25
       },
       "top3": {
-        "supporter": "6zJmUrWo2LQ=",
-        "points": 38.818
+        "supporter": "Q58Xqciqn5k=",
+        "points": 10
       }
     },
     "overallSupporters": {
       "top1": {
-        "supporter": "KWtPdihL3Ys=",
-        "points": 610
+        "supporter": "+tHiO2FlO4o=",
+        "points": 402.05
       },
       "top2": {
         "supporter": "C4QC1ELl1VU=",
-        "points": 549.15
+        "points": 400.5
       },
       "top3": {
         "supporter": "tslJMJV2c68=",
-        "points": 540.95
+        "points": 355.65
       }
     }
   },
   "events": [
     {
-      "timestamp": "2025-11-08T16:15:08.863628+01:00",
-      "supporter": "JulShLu187M=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T16:01:51.114719+01:00",
-      "supporter": "IoD7blVjqh0=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-08T15:25:39.19813+01:00",
-      "supporter": "+KxrCDAo13w=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T15:22:06.73019+01:00",
-      "supporter": "IqMiao+dngE=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T15:12:50.975+01:00",
-      "supporter": "o5CtX4tDiFs=",
-      "category": "DONATION",
-      "amount": 111,
-      "points": 0.222
-    },
-    {
-      "timestamp": "2025-11-08T14:57:25.992764+01:00",
-      "supporter": "+tHiO2FlO4o=",
+      "timestamp": "2025-11-11T21:43:53.934319+01:00",
+      "supporter": "nanO6Ae+8c4=",
       "category": "BITS",
       "amount": 125,
       "points": 0.25
     },
     {
-      "timestamp": "2025-11-08T14:29:37.292224+01:00",
-      "supporter": "Jhx0WHHz0Ik=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T14:02:49.657237+01:00",
-      "supporter": "ElW5jhHkCIM=",
-      "category": "SUBSCRIPTION1",
-      "amount": 5,
-      "points": 5
-    },
-    {
-      "timestamp": "2025-11-08T13:59:21.685301+01:00",
+      "timestamp": "2025-11-11T21:41:12.141777+01:00",
       "supporter": "6wNCSnY/wBw=",
       "category": "BITS",
       "amount": 50,
       "points": 0.1
     },
     {
-      "timestamp": "2025-11-08T13:24:41.320797+01:00",
-      "supporter": "1ORA/TxCQfU=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T13:24:24.043835+01:00",
-      "supporter": "rED5fWMak9U=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T13:20:14.001468+01:00",
-      "supporter": "vvBCeidSSsU=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T13:10:31.311655+01:00",
-      "supporter": "2DAFUuS6X5Y=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T13:00:44.754809+01:00",
+      "timestamp": "2025-11-11T21:34:42.109755+01:00",
       "supporter": "6wNCSnY/wBw=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T12:49:06.261103+01:00",
-      "supporter": "6wNCSnY/wBw=",
-      "category": "BITS",
-      "amount": 50,
-      "points": 0.1
-    },
-    {
-      "timestamp": "2025-11-08T12:48:16.451231+01:00",
-      "supporter": "mKLR9zO3oVc=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T12:39:14.911335+01:00",
-      "supporter": "fA0XpWwF3GE=",
-      "category": "BITS",
-      "amount": 50,
-      "points": 0.1
-    },
-    {
-      "timestamp": "2025-11-08T12:31:03.261475+01:00",
-      "supporter": "+tHiO2FlO4o=",
-      "category": "BITS",
-      "amount": 125,
-      "points": 0.25
-    },
-    {
-      "timestamp": "2025-11-08T12:29:18.049689+01:00",
-      "supporter": "LGC3xaxLTLE=",
       "category": "BITS",
       "amount": 450,
       "points": 0.9
     },
     {
-      "timestamp": "2025-11-08T12:27:59.229274+01:00",
-      "supporter": "AbOgVBCXXtM=",
+      "timestamp": "2025-11-11T21:23:31.279483+01:00",
+      "supporter": "0zzj0jmpEvw=",
       "category": "SUBSCRIPTION1",
       "amount": 1,
       "points": 1
     },
     {
-      "timestamp": "2025-11-08T12:26:57.733378+01:00",
-      "supporter": "IoD7blVjqh0=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-08T12:25:58.627069+01:00",
-      "supporter": "+tHiO2FlO4o=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-08T12:25:28.521555+01:00",
-      "supporter": "EtDXHN7GaNo=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T12:25:05.941297+01:00",
-      "supporter": "V2EjGrK+T8c=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-08T12:24:05.869807+01:00",
-      "supporter": "m+32Pj2qY5w=",
-      "category": "BITS",
-      "amount": 125,
-      "points": 0.25
-    },
-    {
-      "timestamp": "2025-11-08T12:24:05.599+01:00",
-      "supporter": "uFMoeInubOg=",
-      "category": "DONATION",
-      "amount": 111,
-      "points": 0.222
-    },
-    {
-      "timestamp": "2025-11-08T12:21:32.180062+01:00",
-      "supporter": "6wNCSnY/wBw=",
-      "category": "BITS",
-      "amount": 500,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T12:20:07.803109+01:00",
-      "supporter": "JN6z+ahn9FQ=",
-      "category": "BITS",
-      "amount": 125,
-      "points": 0.25
-    },
-    {
-      "timestamp": "2025-11-08T12:19:56.92556+01:00",
-      "supporter": "u2Zjh9KcDjI=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-08T12:18:27.013382+01:00",
-      "supporter": "V2EjGrK+T8c=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-08T12:17:54.066907+01:00",
-      "supporter": "MR64S4E175s=",
-      "category": "BITS",
-      "amount": 125,
-      "points": 0.25
-    },
-    {
-      "timestamp": "2025-11-08T12:16:22.832546+01:00",
-      "supporter": "V2EjGrK+T8c=",
-      "category": "BITS",
-      "amount": 200,
-      "points": 0.4
-    },
-    {
-      "timestamp": "2025-11-08T12:08:13.510147+01:00",
-      "supporter": "+tHiO2FlO4o=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-08T11:56:12.914662+01:00",
-      "supporter": "r5Jxh8N+4OM=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T11:54:37.070053+01:00",
-      "supporter": "r5Jxh8N+4OM=",
-      "category": "BITS",
-      "amount": 125,
-      "points": 0.25
-    },
-    {
-      "timestamp": "2025-11-08T11:42:15.241587+01:00",
-      "supporter": "Pq+YIebcLrg=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T11:41:09.556111+01:00",
-      "supporter": "CfD96ynvhG4=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T11:39:24.709998+01:00",
-      "supporter": "+tHiO2FlO4o=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-08T11:38:32.51704+01:00",
-      "supporter": "IsOAZmKm1u0=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T11:36:00.45287+01:00",
-      "supporter": "eI+fzcQo5Zo=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T11:27:37.012004+01:00",
-      "supporter": "LJ4BbFDwnnc=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T11:26:16.407+01:00",
-      "supporter": "uFMoeInubOg=",
-      "category": "DONATION",
-      "amount": 111,
-      "points": 0.222
-    },
-    {
-      "timestamp": "2025-11-08T11:22:30.969836+01:00",
-      "supporter": "IPEtJG1FhyY=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T11:16:01.364334+01:00",
-      "supporter": "V2EjGrK+T8c=",
+      "timestamp": "2025-11-11T21:22:21.885839+01:00",
+      "supporter": "Oyjzr7ldkEY=",
       "category": "BITS",
       "amount": 50,
       "points": 0.1
     },
     {
-      "timestamp": "2025-11-08T11:15:36.980093+01:00",
+      "timestamp": "2025-11-11T21:22:05.694167+01:00",
+      "supporter": "K9jmiE8scbw=",
+      "category": "SUBSCRIPTION1",
+      "amount": 1,
+      "points": 1
+    },
+    {
+      "timestamp": "2025-11-11T21:19:51.44195+01:00",
+      "supporter": "GkLRR+XemZQ=",
+      "category": "SUBSCRIPTION1",
+      "amount": 1,
+      "points": 1
+    },
+    {
+      "timestamp": "2025-11-11T21:04:20.900414+01:00",
+      "supporter": "6wNCSnY/wBw=",
+      "category": "BITS",
+      "amount": 50,
+      "points": 0.1
+    },
+    {
+      "timestamp": "2025-11-11T21:03:04.649576+01:00",
       "supporter": "MR64S4E175s=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-08T11:07:08.836225+01:00",
-      "supporter": "So9CbrZC6WA=",
       "category": "SUBSCRIPTION1",
       "amount": 1,
       "points": 1
     },
     {
-      "timestamp": "2025-11-08T11:06:54.844705+01:00",
-      "supporter": "JN6z+ahn9FQ=",
-      "category": "BITS",
-      "amount": 200,
-      "points": 0.4
-    },
-    {
-      "timestamp": "2025-11-08T11:06:51.612387+01:00",
-      "supporter": "MeJlxNTS9Z4=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-08T11:06:50.796651+01:00",
-      "supporter": "ty+BLYJ73L4=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-08T11:06:22.545858+01:00",
-      "supporter": "Kt2rgPFWMvM=",
-      "category": "BITS",
-      "amount": 200,
-      "points": 0.4
-    },
-    {
-      "timestamp": "2025-11-08T11:06:16.018916+01:00",
-      "supporter": "MR64S4E175s=",
-      "category": "BITS",
-      "amount": 500,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T11:04:24.807546+01:00",
-      "supporter": "h0yYr1Ftl0M=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T11:02:48.785176+01:00",
-      "supporter": "V2EjGrK+T8c=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-08T11:02:26.558578+01:00",
-      "supporter": "lYuiehqVRvE=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T11:02:10.350804+01:00",
-      "supporter": "e63f0dHQ9C8=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T11:01:31.49857+01:00",
-      "supporter": "uRmBcDSJBKY=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-08T11:01:25.852001+01:00",
-      "supporter": "Iy655kJsml0=",
+      "timestamp": "2025-11-11T21:02:03.13993+01:00",
+      "supporter": "G7i6FRreiaA=",
       "category": "SUBSCRIPTION3",
       "amount": 1,
       "points": 4
     },
     {
-      "timestamp": "2025-11-08T11:01:22.969099+01:00",
-      "supporter": "mF9Ozw+rKW4=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-06T23:10:42.937+01:00",
-      "supporter": "uFMoeInubOg=",
-      "category": "DONATION",
-      "amount": 111,
-      "points": 0.222
-    },
-    {
-      "timestamp": "2025-11-06T23:05:53.181818+01:00",
-      "supporter": "iaTSHn4pFog=",
-      "category": "SUBSCRIPTION1",
-      "amount": 10,
-      "points": 10
-    },
-    {
-      "timestamp": "2025-11-06T23:04:51.278911+01:00",
-      "supporter": "6zJmUrWo2LQ=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-06T23:01:48.182297+01:00",
-      "supporter": "iaTSHn4pFog=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-06T23:01:08.911213+01:00",
-      "supporter": "sXoxDE/wROA=",
-      "category": "SUBSCRIPTION1",
-      "amount": 10,
-      "points": 10
-    },
-    {
-      "timestamp": "2025-11-06T23:00:35.326076+01:00",
-      "supporter": "+ROvCpOEBvg=",
-      "category": "SUBSCRIPTION1",
-      "amount": 5,
-      "points": 5
-    },
-    {
-      "timestamp": "2025-11-06T23:00:30.390163+01:00",
-      "supporter": "C4QC1ELl1VU=",
-      "category": "SUBSCRIPTION1",
-      "amount": 5,
-      "points": 5
-    },
-    {
-      "timestamp": "2025-11-06T23:00:09.628689+01:00",
-      "supporter": "fA0XpWwF3GE=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-06T22:59:33.413741+01:00",
-      "supporter": "xDgSkV96JKw=",
-      "category": "BITS",
-      "amount": 108,
-      "points": 0.216
-    },
-    {
-      "timestamp": "2025-11-06T22:58:30.361113+01:00",
-      "supporter": "MR64S4E175s=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-06T22:55:03.458387+01:00",
-      "supporter": "J7zAjzpz78s=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-06T22:53:50.039113+01:00",
-      "supporter": "LhAuAnOlGZw=",
+      "timestamp": "2025-11-11T21:00:19.031181+01:00",
+      "supporter": "n2h8/zuJxZ8=",
       "category": "SUBSCRIPTION2",
       "amount": 1,
       "points": 2
     },
     {
-      "timestamp": "2025-11-06T22:36:21.766758+01:00",
-      "supporter": "OleS6VhIFdY=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-06T22:27:34.98245+01:00",
-      "supporter": "0F9qBEfxTik=",
-      "category": "SUBSCRIPTION1",
-      "amount": 5,
-      "points": 5
-    },
-    {
-      "timestamp": "2025-11-06T22:17:40.126545+01:00",
-      "supporter": "8KTkXtV3znM=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-06T22:01:13.822638+01:00",
-      "supporter": "Vhp5UR3KthQ=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-06T22:00:22.179548+01:00",
-      "supporter": "CONK6n5KW/k=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-06T21:49:07.607859+01:00",
-      "supporter": "ZtV2H1sKgGc=",
+      "timestamp": "2025-11-11T20:53:47.063839+01:00",
+      "supporter": "EiDZIqUU0TU=",
       "category": "BITS",
-      "amount": 30,
-      "points": 0.06
+      "amount": 100,
+      "points": 0.2
     },
     {
-      "timestamp": "2025-11-06T21:46:11.13427+01:00",
-      "supporter": "ZtV2H1sKgGc=",
-      "category": "BITS",
-      "amount": 37,
-      "points": 0.074
-    },
-    {
-      "timestamp": "2025-11-06T21:44:23.938862+01:00",
-      "supporter": "y7JXoFZBUBs=",
-      "category": "SUBSCRIPTION3",
-      "amount": 1,
-      "points": 4
-    },
-    {
-      "timestamp": "2025-11-06T21:43:27.2633+01:00",
-      "supporter": "JN6z+ahn9FQ=",
-      "category": "BITS",
-      "amount": 125,
-      "points": 0.25
-    },
-    {
-      "timestamp": "2025-11-06T21:43:06.877035+01:00",
-      "supporter": "tslJMJV2c68=",
-      "category": "BITS",
-      "amount": 125,
-      "points": 0.25
-    },
-    {
-      "timestamp": "2025-11-06T21:40:03.714564+01:00",
-      "supporter": "xDgSkV96JKw=",
-      "category": "BITS",
-      "amount": 42,
-      "points": 0.084
-    },
-    {
-      "timestamp": "2025-11-06T21:39:38.329431+01:00",
-      "supporter": "6eNUdetAIMg=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-06T21:35:58.537102+01:00",
-      "supporter": "xDgSkV96JKw=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-06T21:34:13.636029+01:00",
-      "supporter": "dgYlQQJvro8=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-06T21:31:43.607086+01:00",
+      "timestamp": "2025-11-11T20:49:32.577225+01:00",
       "supporter": "+tHiO2FlO4o=",
       "category": "BITS",
       "amount": 100,
       "points": 0.2
     },
     {
-      "timestamp": "2025-11-06T20:58:10.140663+01:00",
+      "timestamp": "2025-11-11T20:48:22.843989+01:00",
+      "supporter": "/cG61v6sZFI=",
+      "category": "BITS",
+      "amount": 100,
+      "points": 0.2
+    },
+    {
+      "timestamp": "2025-11-11T20:45:01.995698+01:00",
+      "supporter": "5bpbe09PMss=",
+      "category": "SUBSCRIPTION1",
+      "amount": 1,
+      "points": 1
+    },
+    {
+      "timestamp": "2025-11-11T20:43:59.26195+01:00",
+      "supporter": "5EoJA1anU2g=",
+      "category": "BITS",
+      "amount": 300,
+      "points": 0.6
+    },
+    {
+      "timestamp": "2025-11-11T20:42:57.214131+01:00",
+      "supporter": "bkGOHzsuDBI=",
+      "category": "SUBSCRIPTION1",
+      "amount": 5,
+      "points": 5
+    },
+    {
+      "timestamp": "2025-11-11T20:41:49.20812+01:00",
+      "supporter": "F7Zux+v9hYc=",
+      "category": "BITS",
+      "amount": 2000,
+      "points": 4
+    },
+    {
+      "timestamp": "2025-11-11T20:41:40.810716+01:00",
+      "supporter": "ziOmtLMlWqw=",
+      "category": "SUBSCRIPTION1",
+      "amount": 1,
+      "points": 1
+    },
+    {
+      "timestamp": "2025-11-11T20:41:22.624954+01:00",
+      "supporter": "CB0rhxxS5K4=",
+      "category": "SUBSCRIPTION1",
+      "amount": 5,
+      "points": 5
+    },
+    {
+      "timestamp": "2025-11-11T20:40:44.565021+01:00",
+      "supporter": "agrqqbJV+Lw=",
+      "category": "SUBSCRIPTION1",
+      "amount": 10,
+      "points": 10
+    },
+    {
+      "timestamp": "2025-11-11T20:39:55.54419+01:00",
+      "supporter": "tslJMJV2c68=",
+      "category": "BITS",
+      "amount": 200,
+      "points": 0.4
+    },
+    {
+      "timestamp": "2025-11-11T20:39:43.176528+01:00",
+      "supporter": "F7Zux+v9hYc=",
+      "category": "BITS",
+      "amount": 125,
+      "points": 0.25
+    },
+    {
+      "timestamp": "2025-11-11T20:39:17.300925+01:00",
+      "supporter": "bWhwIqvFjKo=",
+      "category": "BITS",
+      "amount": 125,
+      "points": 0.25
+    },
+    {
+      "timestamp": "2025-11-11T20:39:17.276483+01:00",
+      "supporter": "F7Zux+v9hYc=",
+      "category": "BITS",
+      "amount": 150,
+      "points": 0.3
+    },
+    {
+      "timestamp": "2025-11-11T20:39:02.932978+01:00",
+      "supporter": "975MJZjNcho=",
+      "category": "SUBSCRIPTION2",
+      "amount": 1,
+      "points": 2
+    },
+    {
+      "timestamp": "2025-11-11T20:39:01.053547+01:00",
+      "supporter": "XZ4xY14nuIw=",
+      "category": "SUBSCRIPTION1",
+      "amount": 20,
+      "points": 20
+    },
+    {
+      "timestamp": "2025-11-11T20:38:33.499332+01:00",
+      "supporter": "F7Zux+v9hYc=",
+      "category": "BITS",
+      "amount": 125,
+      "points": 0.25
+    },
+    {
+      "timestamp": "2025-11-11T20:38:28.925207+01:00",
+      "supporter": "tslJMJV2c68=",
+      "category": "SUBSCRIPTION1",
+      "amount": 50,
+      "points": 50
+    },
+    {
+      "timestamp": "2025-11-11T20:38:22.889038+01:00",
+      "supporter": "Agml4qqaGAM=",
+      "category": "BITS",
+      "amount": 100,
+      "points": 0.2
+    },
+    {
+      "timestamp": "2025-11-11T20:38:05.656284+01:00",
+      "supporter": "xDgSkV96JKw=",
+      "category": "SUBSCRIPTION1",
+      "amount": 50,
+      "points": 50
+    },
+    {
+      "timestamp": "2025-11-11T20:38:00.533803+01:00",
+      "supporter": "EiDZIqUU0TU=",
+      "category": "BITS",
+      "amount": 125,
+      "points": 0.25
+    },
+    {
+      "timestamp": "2025-11-11T20:37:42.894062+01:00",
+      "supporter": "Z+o4s+f5W5E=",
+      "category": "BITS",
+      "amount": 300,
+      "points": 0.6
+    },
+    {
+      "timestamp": "2025-11-11T20:37:36.313964+01:00",
+      "supporter": "6zJmUrWo2LQ=",
+      "category": "SUBSCRIPTION1",
+      "amount": 100,
+      "points": 100
+    },
+    {
+      "timestamp": "2025-11-11T20:37:29.817169+01:00",
+      "supporter": "F7Zux+v9hYc=",
+      "category": "BITS",
+      "amount": 125,
+      "points": 0.25
+    },
+    {
+      "timestamp": "2025-11-11T20:37:11.208112+01:00",
+      "supporter": "sXoxDE/wROA=",
+      "category": "BITS",
+      "amount": 1000,
+      "points": 2
+    },
+    {
+      "timestamp": "2025-11-11T20:37:03.058691+01:00",
+      "supporter": "Tw5aVtG74vs=",
+      "category": "SUBSCRIPTION1",
+      "amount": 50,
+      "points": 50
+    },
+    {
+      "timestamp": "2025-11-11T20:36:42.875723+01:00",
+      "supporter": "/7G8E2vIwCU=",
+      "category": "BITS",
+      "amount": 125,
+      "points": 0.25
+    },
+    {
+      "timestamp": "2025-11-11T20:36:41.942996+01:00",
+      "supporter": "+ROvCpOEBvg=",
+      "category": "BITS",
+      "amount": 100,
+      "points": 0.2
+    },
+    {
+      "timestamp": "2025-11-11T20:36:41.927855+01:00",
+      "supporter": "ciPISdWhbyU=",
+      "category": "SUBSCRIPTION1",
+      "amount": 1,
+      "points": 1
+    },
+    {
+      "timestamp": "2025-11-11T20:36:37.236485+01:00",
+      "supporter": "gwHq61usEU4=",
+      "category": "SUBSCRIPTION1",
+      "amount": 50,
+      "points": 50
+    },
+    {
+      "timestamp": "2025-11-11T20:36:35.976249+01:00",
+      "supporter": "F7Zux+v9hYc=",
+      "category": "SUBSCRIPTION1",
+      "amount": 10,
+      "points": 10
+    },
+    {
+      "timestamp": "2025-11-11T20:36:22.761562+01:00",
+      "supporter": "zf1ZLLZbFOQ=",
+      "category": "SUBSCRIPTION1",
+      "amount": 1,
+      "points": 1
+    },
+    {
+      "timestamp": "2025-11-11T20:35:50.057395+01:00",
+      "supporter": "F7Zux+v9hYc=",
+      "category": "BITS",
+      "amount": 500,
+      "points": 1
+    },
+    {
+      "timestamp": "2025-11-11T20:34:55.72233+01:00",
+      "supporter": "UxWpwJQeksQ=",
+      "category": "SUBSCRIPTION1",
+      "amount": 5,
+      "points": 5
+    },
+    {
+      "timestamp": "2025-11-11T20:34:50.161159+01:00",
+      "supporter": "+tHiO2FlO4o=",
+      "category": "BITS",
+      "amount": 100,
+      "points": 0.2
+    },
+    {
+      "timestamp": "2025-11-11T20:34:46.875492+01:00",
+      "supporter": "/cG61v6sZFI=",
+      "category": "BITS",
+      "amount": 650,
+      "points": 1.3
+    },
+    {
+      "timestamp": "2025-11-11T20:34:42.289108+01:00",
+      "supporter": "V2EjGrK+T8c=",
+      "category": "BITS",
+      "amount": 100,
+      "points": 0.2
+    },
+    {
+      "timestamp": "2025-11-11T20:34:31.279983+01:00",
       "supporter": "6wNCSnY/wBw=",
       "category": "BITS",
       "amount": 50,
       "points": 0.1
     },
     {
-      "timestamp": "2025-11-06T20:28:42.398707+01:00",
-      "supporter": "eZlzX4OKfvg=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-06T20:01:47.315049+01:00",
-      "supporter": "+tHiO2FlO4o=",
-      "category": "BITS",
-      "amount": 125,
-      "points": 0.25
-    },
-    {
-      "timestamp": "2025-11-06T20:01:14.517069+01:00",
-      "supporter": "GxL+w2DP1TU=",
-      "category": "SUBSCRIPTION1",
-      "amount": 1,
-      "points": 1
-    },
-    {
-      "timestamp": "2025-11-06T19:59:01.66732+01:00",
-      "supporter": "iaTSHn4pFog=",
+      "timestamp": "2025-11-11T20:34:30.287562+01:00",
+      "supporter": "tNLwMBfkuPI=",
       "category": "SUBSCRIPTION1",
       "amount": 5,
       "points": 5
     },
     {
-      "timestamp": "2025-11-06T19:57:37.83605+01:00",
-      "supporter": "atVntWqYYQE=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
-    },
-    {
-      "timestamp": "2025-11-06T19:54:51.97133+01:00",
+      "timestamp": "2025-11-11T20:34:21.700255+01:00",
       "supporter": "6zJmUrWo2LQ=",
       "category": "BITS",
-      "amount": 100,
-      "points": 0.2
+      "amount": 200,
+      "points": 0.4
     },
     {
-      "timestamp": "2025-11-06T19:51:31.595214+01:00",
-      "supporter": "+tHiO2FlO4o=",
+      "timestamp": "2025-11-11T20:34:19.950905+01:00",
+      "supporter": "zlX59K6eRjY=",
+      "category": "SUBSCRIPTION1",
+      "amount": 10,
+      "points": 10
+    },
+    {
+      "timestamp": "2025-11-11T20:33:59.747847+01:00",
+      "supporter": "orbU92JA/Ew=",
+      "category": "SUBSCRIPTION1",
+      "amount": 20,
+      "points": 20
+    },
+    {
+      "timestamp": "2025-11-11T20:33:56.739218+01:00",
+      "supporter": "EiDZIqUU0TU=",
       "category": "BITS",
       "amount": 100,
       "points": 0.2
     },
     {
-      "timestamp": "2025-11-06T19:49:58.879147+01:00",
-      "supporter": "MR64S4E175s=",
+      "timestamp": "2025-11-11T20:33:56.531056+01:00",
+      "supporter": "PmJk9bcRI3g=",
       "category": "SUBSCRIPTION1",
-      "amount": 1,
+      "amount": 7,
+      "points": 7
+    },
+    {
+      "timestamp": "2025-11-11T20:33:21.72157+01:00",
+      "supporter": "MR64S4E175s=",
+      "category": "BITS",
+      "amount": 500,
       "points": 1
     },
     {
-      "timestamp": "2025-11-06T19:38:06.659216+01:00",
-      "supporter": "l1oT9ZRVi68=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
+      "timestamp": "2025-11-11T20:32:52.221747+01:00",
+      "supporter": "/JCgv8w+DZw=",
+      "category": "SUBSCRIPTION1",
+      "amount": 5,
+      "points": 5
     },
     {
-      "timestamp": "2025-11-06T19:33:48.499617+01:00",
-      "supporter": "l1oT9ZRVi68=",
-      "category": "BITS",
-      "amount": 100,
-      "points": 0.2
+      "timestamp": "2025-11-11T20:32:50.936971+01:00",
+      "supporter": "Q6gEqB7kvt0=",
+      "category": "SUBSCRIPTION1",
+      "amount": 5,
+      "points": 5
     },
     {
-      "timestamp": "2025-11-06T19:24:12.64933+01:00",
-      "supporter": "+tHiO2FlO4o=",
-      "category": "BITS",
-      "amount": 125,
-      "points": 0.25
-    },
-    {
-      "timestamp": "2025-11-06T19:19:58.143039+01:00",
+      "timestamp": "2025-11-11T20:32:42.260278+01:00",
       "supporter": "LGC3xaxLTLE=",
       "category": "BITS",
       "amount": 125,
       "points": 0.25
     },
     {
-      "timestamp": "2025-11-06T19:15:53.213411+01:00",
-      "supporter": "JbixtXTGdzI=",
+      "timestamp": "2025-11-11T20:32:12.857403+01:00",
+      "supporter": "+tHiO2FlO4o=",
+      "category": "BITS",
+      "amount": 100,
+      "points": 0.2
+    },
+    {
+      "timestamp": "2025-11-11T20:32:02.668342+01:00",
+      "supporter": "tslJMJV2c68=",
+      "category": "SUBSCRIPTION1",
+      "amount": 200,
+      "points": 200
+    },
+    {
+      "timestamp": "2025-11-11T20:31:35.057438+01:00",
+      "supporter": "6wNCSnY/wBw=",
+      "category": "BITS",
+      "amount": 50,
+      "points": 0.1
+    },
+    {
+      "timestamp": "2025-11-11T20:30:24.336645+01:00",
+      "supporter": "46m8xwBZJ9c=",
+      "category": "SUBSCRIPTION1",
+      "amount": 5,
+      "points": 5
+    },
+    {
+      "timestamp": "2025-11-11T20:29:26.027858+01:00",
+      "supporter": "ghfYswTAv0g=",
       "category": "SUBSCRIPTION1",
       "amount": 1,
       "points": 1
     },
     {
-      "timestamp": "2025-11-06T19:12:49.625404+01:00",
+      "timestamp": "2025-11-11T20:28:36.740449+01:00",
+      "supporter": "OahOdS3QcOA=",
+      "category": "SUBSCRIPTION1",
+      "amount": 50,
+      "points": 50
+    },
+    {
+      "timestamp": "2025-11-11T20:28:12.944913+01:00",
+      "supporter": "tslJMJV2c68=",
+      "category": "SUBSCRIPTION1",
+      "amount": 5,
+      "points": 5
+    },
+    {
+      "timestamp": "2025-11-11T20:28:04.798467+01:00",
+      "supporter": "+ROvCpOEBvg=",
+      "category": "SUBSCRIPTION1",
+      "amount": 20,
+      "points": 20
+    },
+    {
+      "timestamp": "2025-11-11T20:27:44.785948+01:00",
+      "supporter": "xDgSkV96JKw=",
+      "category": "BITS",
+      "amount": 200,
+      "points": 0.4
+    },
+    {
+      "timestamp": "2025-11-11T20:25:26.792448+01:00",
+      "supporter": "HETDIshdOTo=",
+      "category": "SUBSCRIPTION1",
+      "amount": 3,
+      "points": 3
+    },
+    {
+      "timestamp": "2025-11-11T20:24:12.779462+01:00",
+      "supporter": "4QMDuQejMtY=",
+      "category": "BITS",
+      "amount": 200,
+      "points": 0.4
+    },
+    {
+      "timestamp": "2025-11-11T20:24:01.504124+01:00",
+      "supporter": "0Y8auWwwmw4=",
+      "category": "SUBSCRIPTION1",
+      "amount": 50,
+      "points": 50
+    },
+    {
+      "timestamp": "2025-11-11T20:24:00.528621+01:00",
+      "supporter": "LnfvtWtIFyM=",
+      "category": "SUBSCRIPTION1",
+      "amount": 10,
+      "points": 10
+    },
+    {
+      "timestamp": "2025-11-11T20:23:55.537416+01:00",
+      "supporter": "bkGOHzsuDBI=",
+      "category": "SUBSCRIPTION1",
+      "amount": 5,
+      "points": 5
+    },
+    {
+      "timestamp": "2025-11-11T20:23:29.508511+01:00",
+      "supporter": "hSoI5kdcoGY=",
+      "category": "SUBSCRIPTION1",
+      "amount": 200,
+      "points": 200
+    },
+    {
+      "timestamp": "2025-11-11T20:23:18.687029+01:00",
+      "supporter": "o8VArKsOMkw=",
+      "category": "BITS",
+      "amount": 250,
+      "points": 0.5
+    },
+    {
+      "timestamp": "2025-11-11T20:23:02.333033+01:00",
+      "supporter": "m+32Pj2qY5w=",
+      "category": "SUBSCRIPTION1",
+      "amount": 5,
+      "points": 5
+    },
+    {
+      "timestamp": "2025-11-11T20:22:47.764467+01:00",
       "supporter": "+tHiO2FlO4o=",
       "category": "BITS",
       "amount": 100,
       "points": 0.2
+    },
+    {
+      "timestamp": "2025-11-11T20:22:38.713661+01:00",
+      "supporter": "YPcrXCg7YT4=",
+      "category": "SUBSCRIPTION1",
+      "amount": 5,
+      "points": 5
+    },
+    {
+      "timestamp": "2025-11-11T20:22:36.774299+01:00",
+      "supporter": "JN6z+ahn9FQ=",
+      "category": "SUBSCRIPTION1",
+      "amount": 50,
+      "points": 50
+    },
+    {
+      "timestamp": "2025-11-11T20:22:18.373637+01:00",
+      "supporter": "F7Zux+v9hYc=",
+      "category": "SUBSCRIPTION1",
+      "amount": 26,
+      "points": 26
+    },
+    {
+      "timestamp": "2025-11-11T20:22:01.09385+01:00",
+      "supporter": "JIDRh4z6gtA=",
+      "category": "SUBSCRIPTION1",
+      "amount": 5,
+      "points": 5
+    },
+    {
+      "timestamp": "2025-11-11T20:21:50.429225+01:00",
+      "supporter": "WoRe+W5P2HM=",
+      "category": "SUBSCRIPTION1",
+      "amount": 5,
+      "points": 5
+    },
+    {
+      "timestamp": "2025-11-11T20:21:25.429331+01:00",
+      "supporter": "41ZgW9UUe3g=",
+      "category": "SUBSCRIPTION1",
+      "amount": 5,
+      "points": 5
+    },
+    {
+      "timestamp": "2025-11-11T20:21:20.971992+01:00",
+      "supporter": "Q6gEqB7kvt0=",
+      "category": "SUBSCRIPTION1",
+      "amount": 10,
+      "points": 10
+    },
+    {
+      "timestamp": "2025-11-11T20:20:54.521633+01:00",
+      "supporter": "TUHn3ot/sKo=",
+      "category": "SUBSCRIPTION1",
+      "amount": 1,
+      "points": 1
+    },
+    {
+      "timestamp": "2025-11-11T20:20:27.808342+01:00",
+      "supporter": "ZY3LTZieVCQ=",
+      "category": "SUBSCRIPTION1",
+      "amount": 5,
+      "points": 5
+    },
+    {
+      "timestamp": "2025-11-11T20:20:19.652882+01:00",
+      "supporter": "+tHiO2FlO4o=",
+      "category": "SUBSCRIPTION1",
+      "amount": 200,
+      "points": 200
+    },
+    {
+      "timestamp": "2025-11-11T20:19:43.939796+01:00",
+      "supporter": "/7G8E2vIwCU=",
+      "category": "SUBSCRIPTION1",
+      "amount": 10,
+      "points": 10
+    },
+    {
+      "timestamp": "2025-11-11T20:19:42.710125+01:00",
+      "supporter": "u2Zjh9KcDjI=",
+      "category": "SUBSCRIPTION1",
+      "amount": 5,
+      "points": 5
+    },
+    {
+      "timestamp": "2025-11-11T20:19:09.824152+01:00",
+      "supporter": "C4QC1ELl1VU=",
+      "category": "SUBSCRIPTION1",
+      "amount": 100,
+      "points": 100
+    },
+    {
+      "timestamp": "2025-11-11T20:19:07.233975+01:00",
+      "supporter": "MR64S4E175s=",
+      "category": "SUBSCRIPTION1",
+      "amount": 100,
+      "points": 100
+    },
+    {
+      "timestamp": "2025-11-11T20:18:24.388016+01:00",
+      "supporter": "+ROvCpOEBvg=",
+      "category": "SUBSCRIPTION1",
+      "amount": 200,
+      "points": 200
+    },
+    {
+      "timestamp": "2025-11-11T20:17:59.753484+01:00",
+      "supporter": "U8QG+6vhcbM=",
+      "category": "SUBSCRIPTION1",
+      "amount": 5,
+      "points": 5
+    },
+    {
+      "timestamp": "2025-11-11T20:17:30.642785+01:00",
+      "supporter": "eUAWBxMGeQ4=",
+      "category": "BITS",
+      "amount": 100,
+      "points": 0.2
+    },
+    {
+      "timestamp": "2025-11-11T20:17:26.75276+01:00",
+      "supporter": "a9uYPxLcBd8=",
+      "category": "SUBSCRIPTION1",
+      "amount": 50,
+      "points": 50
+    },
+    {
+      "timestamp": "2025-11-11T20:17:13.480943+01:00",
+      "supporter": "GvwmiZvV2ec=",
+      "category": "SUBSCRIPTION1",
+      "amount": 50,
+      "points": 50
+    },
+    {
+      "timestamp": "2025-11-11T20:16:24.358852+01:00",
+      "supporter": "+ROvCpOEBvg=",
+      "category": "BITS",
+      "amount": 100,
+      "points": 0.2
+    },
+    {
+      "timestamp": "2025-11-11T20:15:33.609878+01:00",
+      "supporter": "C4QC1ELl1VU=",
+      "category": "BITS",
+      "amount": 125,
+      "points": 0.25
+    },
+    {
+      "timestamp": "2025-11-11T20:14:48.251608+01:00",
+      "supporter": "cfdeM1Jb0mU=",
+      "category": "SUBSCRIPTION1",
+      "amount": 1,
+      "points": 1
+    },
+    {
+      "timestamp": "2025-11-11T20:10:11.32685+01:00",
+      "supporter": "GvwmiZvV2ec=",
+      "category": "SUBSCRIPTION1",
+      "amount": 1,
+      "points": 1
     }
   ]
 }

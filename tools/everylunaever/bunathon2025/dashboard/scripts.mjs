@@ -220,7 +220,7 @@ const app = await (async function () {
         if (today < date)
             return date.toLocaleTimeString();
 
-        return `${date.getDate().toLocaleString(undefined, {minimumIntegerDigits: 2})}.${date.getMonth() + 1}. ${date.toLocaleTimeString()}`;
+        return `${date.getDate().toLocaleString(undefined, { minimumIntegerDigits: 2 })}.${date.getMonth() + 1}. ${date.toLocaleTimeString()}`;
     }
 
     function formatCategory(/** @type {DashboardEvent['category']} */ category) {
@@ -360,7 +360,11 @@ const app = await (async function () {
 
             model.data = data;
 
-            render();
+            try {
+                render();
+            } catch (err) {
+                console.log("Render failed with an exception", err);
+            }
         }
 
         await fetchAndUpdate();
