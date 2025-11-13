@@ -4,6 +4,12 @@
     --font-family: Arial, sans-serif;
 }
 
+html:has(> head > link[href][data-loaded]) * {
+    transition-property: background, background-color, color, border-color;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+}
+
 body {
     font-family: var(--font-family);
     font-size: 1em;

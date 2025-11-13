@@ -26,8 +26,8 @@
     --gras-background: #88A04C;
     --gras-color: #A3BA68;
 
-    --forst-fill: #274550;
-    --forst-border: #2A2F11;
+    --forest-fill: #274550;
+    --forest-border: #2A2F11;
 
     --river-background: #458A9A;
     --river-stream-lines: #458A9A;
@@ -38,7 +38,7 @@
     --card-border: var(--sheet-border);
     --card-text: var(--sheet-text);
 
-    --header-background: var(--forst-fill);
+    --header-background: var(--forest-fill);
     --header-text: var(--lava-fill);
     --header-shadow: var(--lava-border);
 

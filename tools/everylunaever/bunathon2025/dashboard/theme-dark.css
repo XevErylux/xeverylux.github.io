@@ -1,0 +1,81 @@
+:root {
+  /* Grundfarben für Dark Theme */
+  --background-color: #1c1f14; /* sehr dunkles Grün/Schwarz */
+  --card-background: #2a2f1d;  /* dunkles Blattgrün */
+  --card-border: #3d4f1b;      /* Busch-Border */
+  --card-text: #d0d5c2;        /* helles Blattgrün für Text */
+
+  --button-background: #F87D51; /* Lava-Orange */
+  --button-hover: #A73D16;      /* dunkler Lava-Rot */
+  --button-text: #fff;
+
+  --table-header-bg: #274550;   /* Forst-Blaugrün */
+  --table-header-text: #DBCC65; /* Pflanzen-Gelb */
+  --table-row-bg: #352409;      /* Tier-Braun */
+  --table-row-border: #44402b;  /* Fels-Braun */
+  --table-text: #e0d9c7;        /* helles Beige */
+}
+
+/* Hintergrund und Text */
+body {
+  background-color: var(--background-color);
+  color: var(--card-text);
+}
+
+/* Header */
+header {
+  background-color: var(--header-background);
+  color: var(--header-text);
+}
+
+h2 {
+    text-shadow: initial;
+}
+
+h3 {
+    text-shadow: initial;
+}
+
+/* Karten */
+.card {
+  background-color: var(--card-background);
+  border: 2px solid var(--card-border);
+  color: var(--card-text);
+}
+
+/* Buttons */
+button {
+  background-color: var(--button-background);
+  color: var(--button-text);
+}
+
+button:hover {
+  background-color: var(--button-hover);
+}
+
+/* Tabellen */
+.leaderboard table,
+.events table {
+  background-color: var(--card-background);
+  color: var(--table-text);
+  border: 2px solid var(--card-border);
+}
+
+.leaderboard th,
+.events th {
+  background-color: var(--table-header-bg);
+  color: var(--table-header-text);
+}
+
+.leaderboard td,
+.events td {
+  background-color: var(--table-row-bg);
+  border-bottom: 1px solid var(--table-row-border);
+}
+
+/* Leaderboard Container */
+.leaderboard {
+  background-color: var(--card-background);
+  border: 2px solid var(--card-border);
+  color: var(--card-text);
+}
