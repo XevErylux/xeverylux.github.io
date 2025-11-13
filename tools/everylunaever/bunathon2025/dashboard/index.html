@@ -50,26 +50,83 @@
         <div class="card" id="wheel-spins-card">
             <h3>🎡 Rad drehen</h3>
             <p id="wheel-spins-count">0</p>
-            <button disabled onclick="openDialog('wheel')">Details</button>
+            <button onclick="openDialog('wheelSpins')">Details</button>
         </div>
         <div class="card" id="postcards-card">
             <h3>📮 Postkarten</h3>
             <p id="postcards-count">0</p>
-            <button disabled onclick="openDialog('postcards')">Details</button>
+            <button onclick="openDialog('postcards')">Details</button>
         </div>
         <div class="card" id="artwork-names-card">
             <h3>🎨 Namen auf Artwork</h3>
             <p id="artwork-names-count">0</p>
-            <button disabled onclick="openDialog('artwork')">Details</button>
+            <button onclick="openDialog('namesOnArtwork')">Details</button>
         </div>
         <div class="card" id="keychains-card">
             <h3>🔑 Keychains</h3>
             <p id="keychains-count">0</p>
-            <button disabled onclick="openDialog('keychains')">Details</button>
+            <button onclick="openDialog('keychains')">Details</button>
         </div>
+
+        <dialog id="wheel-spins-details" class="details">
+            <h3>🎡 Rad drehen</h3>
+            <table id="wheel-spins-details-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Zeitpunkt</th>
+                        <th>Stufe</th>
+                        <th>Menge</th>
+                        <th>Punkte</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <template id="wheel-spins-details-row-template">
+                <tr>
+                    <td class="viewer-name"></td>
+                    <td class="timestamp"></td>
+                    <td class="level"></td>
+                    <td class="amount"></td>
+                    <td class="points"></td>
+                </tr>
+            </template>
+        </dialog>
+
+        <dialog id="subgifts-details" class="details">
+            <h3 id="subgifts-details-title"></h3>
+            <table id="subgifts-details-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>T1</th>
+                        <th>T2</th>
+                        <th>T3</th>
+                        <th>Gesamt</th>
+                        <th>Punkte</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <template id="subgifts-details-row-template">
+                <tr>
+                    <td class="viewer-name"></td>
+                    <td class="t1"></td>
+                    <td class="t2"></td>
+                    <td class="t3"></td>
+                    <td class="amount"></td>
+                    <td class="points"></td>
+                </tr>
+            </template>
+        </dialog>
+
+
     </section>
 
-    <h2 class="leaderboards-header">🏆 Top Unterstützer</h2>
+    <div class="leaderboards-header-container">
+        <h2 class="leaderboards-header">🏆 Top Unterstützer</h2>
+        <button onclick="openDialog('all-supports')">Alle Unterstützungen</button>
+    </div>
     <section class="leaderboards">
         <div class="leaderboard">
             <h3>Direkte Spender</h3>
@@ -176,6 +233,31 @@
         </div>
     </section>
 
+    <dialog id="all-supports" class="details">
+        <h3 id="all-supports-title">Alle Unterstützungen</h3>
+        <table id="all-supports-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>T1</th>
+                    <th>T2</th>
+                    <th>T3</th>
+                    <th>Gesamt</th>
+                    <th>Punkte</th>
+                </tr>
+            </thead>
+        </table>
+        <template id="all-supports-row-template">
+            <tr>
+                <td class="viewer-name"></td>
+                <td class="t1"></td>
+                <td class="t2"></td>
+                <td class="t3"></td>
+                <td class="amount"></td>
+                <td class="points"></td>
+            </tr>
+        </template>
+    </dialog>
 
     <section class="events">
         <h2>📅 Ereignisse der letzten Stunde</h2>
@@ -212,8 +294,6 @@
             if (openDialogClicked) {
                 openDialogClicked(type);
             }
-
-            alert("Details für: " + type);
         }
 
         function toggleEvents() {

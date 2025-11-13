@@ -1,0 +1,1843 @@
+{
+  "hash": "qIzR9UCXv+ZmS55wKxULpg==",
+  "latestEventAt": "2025-11-13T21:48:13.649078+01:00",
+  "bitsPerUser": [
+    {
+      "amount": 222,
+      "points": 0.444,
+      "reachedAt": "2025-11-11T17:11:50.249964+01:00",
+      "supporter": "AZ6dj2oioyI="
+    },
+    {
+      "amount": 850,
+      "points": 1.7,
+      "reachedAt": "2025-11-11T20:39:17.300925+01:00",
+      "supporter": "qozFqyJwaG0="
+    },
+    {
+      "amount": 1061,
+      "points": 2.122,
+      "reachedAt": "2025-11-11T23:14:16.760643+01:00",
+      "supporter": "HMA/dkpCA+s="
+    },
+    {
+      "amount": 111,
+      "points": 0.222,
+      "reachedAt": "2025-11-11T17:21:47.687931+01:00",
+      "supporter": "xZp1g71F8Tc="
+    },
+    {
+      "amount": 100,
+      "points": 0.2,
+      "reachedAt": "2025-11-11T17:08:33.821395+01:00",
+      "supporter": "NSdI3U3EeHc="
+    },
+    {
+      "amount": 100,
+      "points": 0.2,
+      "reachedAt": "2025-11-13T19:06:45.53065+01:00",
+      "supporter": "ukH0ZcvFh1I="
+    },
+    {
+      "amount": 210,
+      "points": 0.42,
+      "reachedAt": "2025-11-11T17:12:59.735451+01:00",
+      "supporter": "3wXcEj+Y22s="
+    },
+    {
+      "amount": 200,
+      "points": 0.4,
+      "reachedAt": "2025-11-11T20:27:44.785948+01:00",
+      "supporter": "rCR6X5ESOMQ="
+    },
+    {
+      "amount": 100,
+      "points": 0.2,
+      "reachedAt": "2025-11-11T20:17:30.642785+01:00",
+      "supporter": "DnkGEwcWQHk="
+    },
+    {
+      "amount": 1000,
+      "points": 2,
+      "reachedAt": "2025-11-11T20:37:11.208112+01:00",
+      "supporter": "4ETwTwwxerE="
+    },
+    {
+      "amount": 575,
+      "points": 1.15,
+      "reachedAt": "2025-11-13T20:02:55.479167+01:00",
+      "supporter": "+AaEkwqvE/k="
+    },
+    {
+      "amount": 1222,
+      "points": 2.444,
+      "reachedAt": "2025-11-13T19:07:45.688576+01:00",
+      "supporter": "Wyx5kb5KgeI="
+    },
+    {
+      "amount": 100,
+      "points": 0.2,
+      "reachedAt": "2025-11-11T17:30:45.718092+01:00",
+      "supporter": "va1urAv4XK8="
+    },
+    {
+      "amount": 250,
+      "points": 0.5,
+      "reachedAt": "2025-11-11T17:19:22.974321+01:00",
+      "supporter": "Z4AKWx921WY="
+    },
+    {
+      "amount": 125,
+      "points": 0.25,
+      "reachedAt": "2025-11-11T17:14:27.100364+01:00",
+      "supporter": "9TPkm6/z/3g="
+    },
+    {
+      "amount": 100,
+      "points": 0.2,
+      "reachedAt": "2025-11-13T15:32:58.394478+01:00",
+      "supporter": "52b/IWrxoOA="
+    },
+    {
+      "amount": 200,
+      "points": 0.4,
+      "reachedAt": "2025-11-11T17:30:51.930846+01:00",
+      "supporter": "Lf2dO0w2NS8="
+    },
+    {
+      "amount": 100,
+      "points": 0.2,
+      "reachedAt": "2025-11-11T17:30:31.132547+01:00",
+      "supporter": "z7WSViNYr0w="
+    },
+    {
+      "amount": 100,
+      "points": 0.2,
+      "reachedAt": "2025-11-11T19:04:02.178477+01:00",
+      "supporter": "UFS8cjrq98I="
+    },
+    {
+      "amount": 12436,
+      "points": 24.872,
+      "reachedAt": "2025-11-13T20:41:14.620702+01:00",
+      "supporter": "ijtlYTvi0fo="
+    },
+    {
+      "amount": 550,
+      "points": 1.1,
+      "reachedAt": "2025-11-12T15:04:25.352689+01:00",
+      "supporter": "5yYGjBtcu8M="
+    },
+    {
+      "amount": 700,
+      "points": 1.4,
+      "reachedAt": "2025-11-13T15:21:42.878026+01:00",
+      "supporter": "8zJW8YCr3So="
+    },
+    {
+      "amount": 325,
+      "points": 0.65,
+      "reachedAt": "2025-11-11T20:53:47.063839+01:00",
+      "supporter": "NdEUpSLZIBI="
+    },
+    {
+      "amount": 5000,
+      "points": 10,
+      "reachedAt": "2025-11-11T18:48:24.578303+01:00",
+      "supporter": "mZ+qyKkXn0M="
+    },
+    {
+      "amount": 250,
+      "points": 0.5,
+      "reachedAt": "2025-11-11T20:15:33.609878+01:00",
+      "supporter": "VdXlQtQChAs="
+    },
+    {
+      "amount": 200,
+      "points": 0.4,
+      "reachedAt": "2025-11-12T15:03:26.816027+01:00",
+      "supporter": "75OtRgGC3gE="
+    },
+    {
+      "amount": 1020,
+      "points": 2.04,
+      "reachedAt": "2025-11-11T17:07:52.935944+01:00",
+      "supporter": "myxGwRpiabM="
+    },
+    {
+      "amount": 300,
+      "points": 0.6,
+      "reachedAt": "2025-11-11T20:43:59.26195+01:00",
+      "supporter": "aFOnVgMJSuQ="
+    },
+    {
+      "amount": 1200,
+      "points": 2.4,
+      "reachedAt": "2025-11-13T15:46:42.49594+01:00",
+      "supporter": "699kEuGyQPI="
+    },
+    {
+      "amount": 800,
+      "points": 1.6,
+      "reachedAt": "2025-11-13T20:27:48.253358+01:00",
+      "supporter": "tNiotVJmMus="
+    },
+    {
+      "amount": 200,
+      "points": 0.4,
+      "reachedAt": "2025-11-11T20:24:12.779462+01:00",
+      "supporter": "1jKjB7kDA+E="
+    },
+    {
+      "amount": 100,
+      "points": 0.2,
+      "reachedAt": "2025-11-11T18:42:27.203762+01:00",
+      "supporter": "8rjkFzDw0rQ="
+    },
+    {
+      "amount": 6005,
+      "points": 12.01,
+      "reachedAt": "2025-11-13T20:27:40.169013+01:00",
+      "supporter": "VPRnqPmz3iQ="
+    },
+    {
+      "amount": 250,
+      "points": 0.5,
+      "reachedAt": "2025-11-11T17:33:41.158666+01:00",
+      "supporter": "zBaVlqZij44="
+    },
+    {
+      "amount": 100,
+      "points": 0.2,
+      "reachedAt": "2025-11-11T17:13:49.768679+01:00",
+      "supporter": "HNkMIW2zz98="
+    },
+    {
+      "amount": 200,
+      "points": 0.4,
+      "reachedAt": "2025-11-11T22:09:12.817533+01:00",
+      "supporter": "PcM8XpOe9cY="
+    },
+    {
+      "amount": 50,
+      "points": 0.1,
+      "reachedAt": "2025-11-11T21:22:21.885839+01:00",
+      "supporter": "RpBdua/zKDs="
+    },
+    {
+      "amount": 1000,
+      "points": 2,
+      "reachedAt": "2025-11-11T20:23:18.687029+01:00",
+      "supporter": "TDIOq6xAxaM="
+    },
+    {
+      "amount": 100,
+      "points": 0.2,
+      "reachedAt": "2025-11-11T20:38:22.889038+01:00",
+      "supporter": "AxiaquKlCQI="
+    },
+    {
+      "amount": 100,
+      "points": 0.2,
+      "reachedAt": "2025-11-11T17:11:31.677699+01:00",
+      "supporter": "vtx7gi2BL7c="
+    },
+    {
+      "amount": 50,
+      "points": 0.1,
+      "reachedAt": "2025-11-11T21:56:24.160296+01:00",
+      "supporter": "nGOqPT727Zs="
+    },
+    {
+      "amount": 325,
+      "points": 0.65,
+      "reachedAt": "2025-11-11T20:39:55.54419+01:00",
+      "supporter": "r3N2lTBJybY="
+    },
+    {
+      "amount": 300,
+      "points": 0.6,
+      "reachedAt": "2025-11-11T20:37:42.894062+01:00",
+      "supporter": "kVv557M46mc="
+    },
+    {
+      "amount": 375,
+      "points": 0.75,
+      "reachedAt": "2025-11-11T21:43:53.934319+01:00",
+      "supporter": "zvG+B+jOqZ0="
+    },
+    {
+      "amount": 125,
+      "points": 0.25,
+      "reachedAt": "2025-11-11T17:25:11.023388+01:00",
+      "supporter": "g5SZCc7nDjY="
+    },
+    {
+      "amount": 100,
+      "points": 0.2,
+      "reachedAt": "2025-11-11T17:10:50.885472+01:00",
+      "supporter": "MB1b5+Lovw8="
+    },
+    {
+      "amount": 1350,
+      "points": 2.7,
+      "reachedAt": "2025-11-12T15:04:56.252642+01:00",
+      "supporter": "m+81gUu4HjE="
+    },
+    {
+      "amount": 26,
+      "points": 0.052,
+      "reachedAt": "2025-11-11T17:32:34.736698+01:00",
+      "supporter": "Mcr9CadrPNE="
+    },
+    {
+      "amount": 400,
+      "points": 0.8,
+      "reachedAt": "2025-11-12T15:54:28.543058+01:00",
+      "supporter": "AWGYarVn1Wo="
+    },
+    {
+      "amount": 575,
+      "points": 1.15,
+      "reachedAt": "2025-11-13T20:35:48.168611+01:00",
+      "supporter": "x0++shojYVc="
+    },
+    {
+      "amount": 250,
+      "points": 0.5,
+      "reachedAt": "2025-11-13T19:03:37.462626+01:00",
+      "supporter": "/6UX9wHEfBg="
+    },
+    {
+      "amount": 400,
+      "points": 0.8,
+      "reachedAt": "2025-11-12T18:00:20.260236+01:00",
+      "supporter": "HapjVW77gCI="
+    },
+    {
+      "amount": 950,
+      "points": 1.9,
+      "reachedAt": "2025-11-12T16:38:42.96603+01:00",
+      "supporter": "UmSs/ta6wf0="
+    },
+    {
+      "amount": 250,
+      "points": 0.5,
+      "reachedAt": "2025-11-11T17:59:31.028056+01:00",
+      "supporter": "HOfTGVNzXwo="
+    },
+    {
+      "amount": 125,
+      "points": 0.25,
+      "reachedAt": "2025-11-11T23:25:05.475756+01:00",
+      "supporter": "/2WVA2vVYHs="
+    },
+    {
+      "amount": 375,
+      "points": 0.75,
+      "reachedAt": "2025-11-11T20:36:42.875723+01:00",
+      "supporter": "JcDIaxO8sf8="
+    },
+    {
+      "amount": 100,
+      "points": 0.2,
+      "reachedAt": "2025-11-11T17:17:04.742494+01:00",
+      "supporter": "++ZSNeV2T+Y="
+    },
+    {
+      "amount": 100,
+      "points": 0.2,
+      "reachedAt": "2025-11-11T17:20:09.712231+01:00",
+      "supporter": "DnlMTOAefeI="
+    },
+    {
+      "amount": 200,
+      "points": 0.4,
+      "reachedAt": "2025-11-11T17:28:20.374717+01:00",
+      "supporter": "IHAvUtU4kqA="
+    },
+    {
+      "amount": 3525,
+      "points": 7.05,
+      "reachedAt": "2025-11-11T23:51:20.269046+01:00",
+      "supporter": "h4X968duthc="
+    },
+    {
+      "amount": 100,
+      "points": 0.2,
+      "reachedAt": "2025-11-11T17:23:36.22398+01:00",
+      "supporter": "iBYpfh7SpIk="
+    },
+    {
+      "amount": 5250,
+      "points": 10.5,
+      "reachedAt": "2025-11-12T18:09:23.033344+01:00",
+      "supporter": "sUxLrMW3YCw="
+    },
+    {
+      "amount": 500,
+      "points": 1,
+      "reachedAt": "2025-11-11T17:12:44.165263+01:00",
+      "supporter": "8MO0ndwjVr0="
+    },
+    {
+      "amount": 1333,
+      "points": 2.666,
+      "reachedAt": "2025-11-11T22:38:25.254473+01:00",
+      "supporter": "zd9uLim65cY="
+    }
+  ],
+  "subbombsPerUser": [
+    {
+      "tier": 1,
+      "points": 200,
+      "subcount": 200,
+      "supporter": "+VtKfupK4wg=",
+      "timestamp": "2025-11-11T17:29:18.609092+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "iKAolypq8mE=",
+      "timestamp": "2025-11-11T17:18:28.526933+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "3wXcEj+Y22s=",
+      "timestamp": "2025-11-11T20:17:26.75276+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "rCR6X5ESOMQ=",
+      "timestamp": "2025-11-11T20:38:05.656284+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 200,
+      "subcount": 200,
+      "supporter": "ThGsW+vqAYM=",
+      "timestamp": "2025-11-11T17:07:49.317912+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "ThGsW+vqAYM=",
+      "timestamp": "2025-11-11T20:36:37.236485+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 155,
+      "subcount": 155,
+      "supporter": "ThGsW+vqAYM=",
+      "timestamp": "2025-11-13T20:41:45.195796+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 200,
+      "subcount": 200,
+      "supporter": "+AaEkwqvE/k=",
+      "timestamp": "2025-11-11T20:18:24.388016+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 25,
+      "subcount": 25,
+      "supporter": "9TPkm6/z/3g=",
+      "timestamp": "2025-11-11T17:26:03.264857+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "4HDQLXVOqDk=",
+      "timestamp": "2025-11-11T20:28:36.740449+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "eHsU1VtgVuM=",
+      "timestamp": "2025-11-11T17:07:56.253382+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 200,
+      "subcount": 200,
+      "supporter": "ijtlYTvi0fo=",
+      "timestamp": "2025-11-11T17:08:09.629517+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 200,
+      "subcount": 200,
+      "supporter": "ijtlYTvi0fo=",
+      "timestamp": "2025-11-11T20:20:19.652882+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 38,
+      "subcount": 38,
+      "supporter": "ijtlYTvi0fo=",
+      "timestamp": "2025-11-13T20:40:53.595514+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 200,
+      "subcount": 200,
+      "supporter": "G1BBVqBXsss=",
+      "timestamp": "2025-11-11T17:24:48.829279+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "mHeI5oe23Ok=",
+      "timestamp": "2025-11-11T17:15:07.716291+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "59nVm4km/Bo=",
+      "timestamp": "2025-11-11T20:17:13.480943+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 200,
+      "subcount": 200,
+      "supporter": "VdXlQtQChAs=",
+      "timestamp": "2025-11-11T17:09:45.999113+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 100,
+      "subcount": 100,
+      "supporter": "VdXlQtQChAs=",
+      "timestamp": "2025-11-11T17:24:19.074037+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 100,
+      "subcount": 100,
+      "supporter": "VdXlQtQChAs=",
+      "timestamp": "2025-11-11T20:19:09.824152+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 100,
+      "subcount": 100,
+      "supporter": "tNiotVJmMus=",
+      "timestamp": "2025-11-11T20:37:36.313964+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 200,
+      "subcount": 200,
+      "supporter": "FLbKHVF5GlY=",
+      "timestamp": "2025-11-11T17:24:25.670307+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "DpswbLkaj9E=",
+      "timestamp": "2025-11-11T20:24:01.504124+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "VPRnqPmz3iQ=",
+      "timestamp": "2025-11-11T20:22:36.774299+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 25,
+      "subcount": 25,
+      "supporter": "JFSemE3LjWU=",
+      "timestamp": "2025-11-11T17:08:06.953181+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "TDIOq6xAxaM=",
+      "timestamp": "2025-11-11T17:11:50.05333+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 100,
+      "subcount": 100,
+      "supporter": "vtx7gi2BL7c=",
+      "timestamp": "2025-11-11T17:19:32.984127+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "IjIdw92pjDA=",
+      "timestamp": "2025-11-11T17:09:11.574904+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "IjIdw92pjDA=",
+      "timestamp": "2025-11-11T17:22:53.263975+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 200,
+      "subcount": 200,
+      "supporter": "ZqBcR+YIKoU=",
+      "timestamp": "2025-11-11T20:23:29.508511+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "r3N2lTBJybY=",
+      "timestamp": "2025-11-11T17:20:59.26098+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "r3N2lTBJybY=",
+      "timestamp": "2025-11-11T17:25:02.216427+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 200,
+      "subcount": 200,
+      "supporter": "r3N2lTBJybY=",
+      "timestamp": "2025-11-11T20:32:02.668342+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "r3N2lTBJybY=",
+      "timestamp": "2025-11-11T20:38:28.925207+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "JZA2MpB2J3A=",
+      "timestamp": "2025-11-11T17:09:28.041479+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 100,
+      "subcount": 100,
+      "supporter": "m+81gUu4HjE=",
+      "timestamp": "2025-11-11T20:19:07.233975+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 25,
+      "subcount": 25,
+      "supporter": "L/TQ0dHfrXs=",
+      "timestamp": "2025-11-11T17:09:13.677653+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 200,
+      "subcount": 200,
+      "supporter": "x0++shojYVc=",
+      "timestamp": "2025-11-11T17:22:08.442612+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 200,
+      "subcount": 200,
+      "supporter": "i91LKHZPayk=",
+      "timestamp": "2025-11-11T18:37:04.220161+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 200,
+      "subcount": 200,
+      "supporter": "i91LKHZPayk=",
+      "timestamp": "2025-11-13T15:24:07.166904+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "3RthKGXfV50=",
+      "timestamp": "2025-11-11T17:19:56.039836+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "3RthKGXfV50=",
+      "timestamp": "2025-11-11T18:44:10.750823+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "IYWf64AhtVs=",
+      "timestamp": "2025-11-11T17:24:06.082881+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "Q5dtUa+YTIc=",
+      "timestamp": "2025-11-11T17:32:37.861858+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 26,
+      "subcount": 26,
+      "supporter": "h4X968duthc=",
+      "timestamp": "2025-11-11T20:22:18.373637+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 50,
+      "subcount": 50,
+      "supporter": "++K70VZaDk8=",
+      "timestamp": "2025-11-11T20:37:03.058691+01:00"
+    },
+    {
+      "tier": 1,
+      "points": 25,
+      "subcount": 25,
+      "supporter": "zd9uLim65cY=",
+      "timestamp": "2025-11-11T22:07:43.667897+01:00"
+    }
+  ],
+  "subgiftsPerUser": [
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-12T15:06:20.485835+01:00",
+      "supporter": "qozFqyJwaG0="
+    },
+    {
+      "tier1": 1,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 1,
+      "points": 1,
+      "reachedAt": "2025-11-11T17:31:16.973057+01:00",
+      "supporter": "b0qn1TCsoUM="
+    },
+    {
+      "tier1": 1,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 1,
+      "points": 1,
+      "reachedAt": "2025-11-11T21:46:44.453011+01:00",
+      "supporter": "HMA/dkpCA+s="
+    },
+    {
+      "tier1": 20,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 20,
+      "points": 20,
+      "reachedAt": "2025-11-11T17:15:00.441846+01:00",
+      "supporter": "1hVIWOmSVzo="
+    },
+    {
+      "tier1": 3,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 3,
+      "points": 3,
+      "reachedAt": "2025-11-12T18:13:46.151061+01:00",
+      "supporter": "Gj/8lm972xs="
+    },
+    {
+      "tier1": 220,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 220,
+      "points": 220,
+      "reachedAt": "2025-11-11T17:29:18.609092+01:00",
+      "supporter": "+VtKfupK4wg="
+    },
+    {
+      "tier1": 20,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 20,
+      "points": 20,
+      "reachedAt": "2025-11-11T20:33:59.747847+01:00",
+      "supporter": "TPxAYvfUtqI="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T20:17:59.753484+01:00",
+      "supporter": "s3Hhq/sGxFM="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-13T15:28:25.363313+01:00",
+      "supporter": "ggVUfEPgBJs="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T20:22:38.713661+01:00",
+      "supporter": "PmE7KFwr92A="
+    },
+    {
+      "tier1": 25,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 25,
+      "points": 25,
+      "reachedAt": "2025-11-12T15:05:34.606874+01:00",
+      "supporter": "yCBA63VU4+k="
+    },
+    {
+      "tier1": 1,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 1,
+      "points": 1,
+      "reachedAt": "2025-11-11T21:22:05.694167+01:00",
+      "supporter": "vHEsT4jm2Cs="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T17:24:21.513573+01:00",
+      "supporter": "O16cB7sRz2o="
+    },
+    {
+      "tier1": 50,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 50,
+      "points": 50,
+      "reachedAt": "2025-11-11T17:18:28.526933+01:00",
+      "supporter": "iKAolypq8mE="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-11T17:10:04.999016+01:00",
+      "supporter": "kSL97OpUPus="
+    },
+    {
+      "tier1": 80,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 80,
+      "points": 80,
+      "reachedAt": "2025-11-11T20:17:26.75276+01:00",
+      "supporter": "3wXcEj+Y22s="
+    },
+    {
+      "tier1": 50,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 50,
+      "points": 50,
+      "reachedAt": "2025-11-11T20:38:05.656284+01:00",
+      "supporter": "rCR6X5ESOMQ="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T17:06:21.278321+01:00",
+      "supporter": "AvFdQNErOcc="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-11T17:43:21.323383+01:00",
+      "supporter": "Fxps6majYuI="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T18:46:13.924856+01:00",
+      "supporter": "cnqFwwDPlIA="
+    },
+    {
+      "tier1": 415,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 415,
+      "points": 415,
+      "reachedAt": "2025-11-13T20:41:45.195796+01:00",
+      "supporter": "ThGsW+vqAYM="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-11T23:33:14.310001+01:00",
+      "supporter": "RTzWhbrTQEk="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T20:19:42.710125+01:00",
+      "supporter": "Mg6c0odjZrs="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T17:05:34.739229+01:00",
+      "supporter": "LFKRoII1fhA="
+    },
+    {
+      "tier1": 1,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 1,
+      "points": 1,
+      "reachedAt": "2025-11-11T21:45:54.16739+01:00",
+      "supporter": "NntD83ZLp0Q="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-11T17:23:29.307325+01:00",
+      "supporter": "WoqZcHhlfWw="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-11T19:51:46.612651+01:00",
+      "supporter": "vfGfzFz1BT4="
+    },
+    {
+      "tier1": 220,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 220,
+      "points": 220,
+      "reachedAt": "2025-11-11T20:28:04.798467+01:00",
+      "supporter": "+AaEkwqvE/k="
+    },
+    {
+      "tier1": 2,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 2,
+      "points": 2,
+      "reachedAt": "2025-11-11T17:42:31.817894+01:00",
+      "supporter": "czNABzI/1vE="
+    },
+    {
+      "tier1": 1,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 1,
+      "points": 1,
+      "reachedAt": "2025-11-11T17:10:05.710079+01:00",
+      "supporter": "Z4AKWx921WY="
+    },
+    {
+      "tier1": 35,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 35,
+      "points": 35,
+      "reachedAt": "2025-11-11T17:26:03.264857+01:00",
+      "supporter": "9TPkm6/z/3g="
+    },
+    {
+      "tier1": 1,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 1,
+      "points": 1,
+      "reachedAt": "2025-11-11T17:09:59.542856+01:00",
+      "supporter": "Zgaqmb8iNhg="
+    },
+    {
+      "tier1": 20,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 20,
+      "points": 20,
+      "reachedAt": "2025-11-11T20:40:44.565021+01:00",
+      "supporter": "vPhVsqnqCmo="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T17:22:23.143762+01:00",
+      "supporter": "bimrD89OX5g="
+    },
+    {
+      "tier1": 50,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 50,
+      "points": 50,
+      "reachedAt": "2025-11-11T20:28:36.740449+01:00",
+      "supporter": "4HDQLXVOqDk="
+    },
+    {
+      "tier1": 60,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 60,
+      "points": 60,
+      "reachedAt": "2025-11-11T20:21:25.429331+01:00",
+      "supporter": "eHsU1VtgVuM="
+    },
+    {
+      "tier1": 438,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 438,
+      "points": 438,
+      "reachedAt": "2025-11-13T20:40:53.595514+01:00",
+      "supporter": "ijtlYTvi0fo="
+    },
+    {
+      "tier1": 200,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 200,
+      "points": 200,
+      "reachedAt": "2025-11-11T17:24:48.829279+01:00",
+      "supporter": "G1BBVqBXsss="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-11T20:34:19.950905+01:00",
+      "supporter": "NkaervT5Vc4="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-11T20:21:50.429225+01:00",
+      "supporter": "c9hPbvlehFo="
+    },
+    {
+      "tier1": 1,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 1,
+      "points": 1,
+      "reachedAt": "2025-11-11T18:44:25.89887+01:00",
+      "supporter": "oObiDojnpc8="
+    },
+    {
+      "tier1": 50,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 50,
+      "points": 50,
+      "reachedAt": "2025-11-11T17:15:07.716291+01:00",
+      "supporter": "mHeI5oe23Ok="
+    },
+    {
+      "tier1": 2,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 2,
+      "points": 2,
+      "reachedAt": "2025-11-11T17:21:20.458543+01:00",
+      "supporter": "5yYGjBtcu8M="
+    },
+    {
+      "tier1": 20,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 20,
+      "points": 20,
+      "reachedAt": "2025-11-11T17:16:19.335749+01:00",
+      "supporter": "YgBnQOPQj94="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T17:13:13.659946+01:00",
+      "supporter": "UUdqLRXzOeo="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T19:00:36.71148+01:00",
+      "supporter": "9JMSrcnEXIg="
+    },
+    {
+      "tier1": 1,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 1,
+      "points": 1,
+      "reachedAt": "2025-11-11T17:21:14.550683+01:00",
+      "supporter": "Y8Lf8UFJtug="
+    },
+    {
+      "tier1": 50,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 50,
+      "points": 50,
+      "reachedAt": "2025-11-11T20:17:13.480943+01:00",
+      "supporter": "59nVm4km/Bo="
+    },
+    {
+      "tier1": 20,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 20,
+      "points": 20,
+      "reachedAt": "2025-11-11T18:47:49.02149+01:00",
+      "supporter": "mZ+qyKkXn0M="
+    },
+    {
+      "tier1": 410,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 410,
+      "points": 410,
+      "reachedAt": "2025-11-12T15:07:04.241604+01:00",
+      "supporter": "VdXlQtQChAs="
+    },
+    {
+      "tier1": 16,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 16,
+      "points": 16,
+      "reachedAt": "2025-11-13T15:20:46.078675+01:00",
+      "supporter": "75OtRgGC3gE="
+    },
+    {
+      "tier1": 6,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 6,
+      "points": 6,
+      "reachedAt": "2025-11-11T20:41:22.624954+01:00",
+      "supporter": "ruRSHIcrHQg="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T23:35:30.787484+01:00",
+      "supporter": "/4zxlKLKqUQ="
+    },
+    {
+      "tier1": 129,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 129,
+      "points": 129,
+      "reachedAt": "2025-11-13T20:42:33.930643+01:00",
+      "supporter": "tNiotVJmMus="
+    },
+    {
+      "tier1": 11,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 11,
+      "points": 11,
+      "reachedAt": "2025-11-11T22:18:40.441944+01:00",
+      "supporter": "ppBBANdV3Os="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-11T20:42:57.214131+01:00",
+      "supporter": "EgwuOx+OQW4="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T20:32:52.221747+01:00",
+      "supporter": "nA0+zL+gkPw="
+    },
+    {
+      "tier1": 1,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 1,
+      "points": 1,
+      "reachedAt": "2025-11-11T17:07:26.309017+01:00",
+      "supporter": "/2dGInqZofM="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T17:12:08.146307+01:00",
+      "supporter": "DfMMZKSlamI="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T20:34:30.287562+01:00",
+      "supporter": "8rjkFzDw0rQ="
+    },
+    {
+      "tier1": 200,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 200,
+      "points": 200,
+      "reachedAt": "2025-11-11T17:24:25.670307+01:00",
+      "supporter": "FLbKHVF5GlY="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-11T17:24:26.879092+01:00",
+      "supporter": "B1XhatpmSMg="
+    },
+    {
+      "tier1": 35,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 35,
+      "points": 35,
+      "reachedAt": "2025-11-12T15:08:15.281352+01:00",
+      "supporter": "IxdIa7Xvdy4="
+    },
+    {
+      "tier1": 50,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 50,
+      "points": 50,
+      "reachedAt": "2025-11-11T20:24:01.504124+01:00",
+      "supporter": "DpswbLkaj9E="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T17:13:57.837587+01:00",
+      "supporter": "zgGoNfAu2os="
+    },
+    {
+      "tier1": 60,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 60,
+      "points": 60,
+      "reachedAt": "2025-11-11T20:22:36.774299+01:00",
+      "supporter": "VPRnqPmz3iQ="
+    },
+    {
+      "tier1": 35,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 35,
+      "points": 35,
+      "reachedAt": "2025-11-12T15:07:51.385828+01:00",
+      "supporter": "JFSemE3LjWU="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-13T20:36:17.550656+01:00",
+      "supporter": "btpcEnTnCug="
+    },
+    {
+      "tier1": 1,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 1,
+      "points": 1,
+      "reachedAt": "2025-11-11T17:09:49.612225+01:00",
+      "supporter": "LVxmZEWkPc8="
+    },
+    {
+      "tier1": 50,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 50,
+      "points": 50,
+      "reachedAt": "2025-11-11T17:11:50.05333+01:00",
+      "supporter": "TDIOq6xAxaM="
+    },
+    {
+      "tier1": 105,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 105,
+      "points": 105,
+      "reachedAt": "2025-11-11T17:19:32.984127+01:00",
+      "supporter": "vtx7gi2BL7c="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-11T20:22:01.09385+01:00",
+      "supporter": "0IL6jIfRgCQ="
+    },
+    {
+      "tier1": 15,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 15,
+      "points": 15,
+      "reachedAt": "2025-11-11T20:30:24.336645+01:00",
+      "supporter": "1ydZAMe8qeM="
+    },
+    {
+      "tier1": 100,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 100,
+      "points": 100,
+      "reachedAt": "2025-11-11T17:22:53.263975+01:00",
+      "supporter": "IjIdw92pjDA="
+    },
+    {
+      "tier1": 200,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 200,
+      "points": 200,
+      "reachedAt": "2025-11-11T20:23:29.508511+01:00",
+      "supporter": "ZqBcR+YIKoU="
+    },
+    {
+      "tier1": 11,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 11,
+      "points": 11,
+      "reachedAt": "2025-11-11T20:36:22.761562+01:00",
+      "supporter": "5BRbtixZ/c0="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T20:23:02.333033+01:00",
+      "supporter": "nGOqPT727Zs="
+    },
+    {
+      "tier1": 6,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 6,
+      "points": 6,
+      "reachedAt": "2025-11-11T17:22:28.364143+01:00",
+      "supporter": "MnfGdLWxuCU="
+    },
+    {
+      "tier1": 355,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 355,
+      "points": 355,
+      "reachedAt": "2025-11-11T20:38:28.925207+01:00",
+      "supporter": "r3N2lTBJybY="
+    },
+    {
+      "tier1": 50,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 50,
+      "points": 50,
+      "reachedAt": "2025-11-11T17:09:28.041479+01:00",
+      "supporter": "JZA2MpB2J3A="
+    },
+    {
+      "tier1": 20,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 20,
+      "points": 20,
+      "reachedAt": "2025-11-12T15:08:17.46229+01:00",
+      "supporter": "KUGme3B18Ag="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T17:09:05.808572+01:00",
+      "supporter": "gwjkEY65VRI="
+    },
+    {
+      "tier1": 20,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 20,
+      "points": 20,
+      "reachedAt": "2025-11-11T17:23:40.143222+01:00",
+      "supporter": "3B15rHUwG38="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-11T17:23:57.239956+01:00",
+      "supporter": "MB1b5+Lovw8="
+    },
+    {
+      "tier1": 6,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 6,
+      "points": 6,
+      "reachedAt": "2025-11-11T17:37:12.825929+01:00",
+      "supporter": "U8UuI9QEBJQ="
+    },
+    {
+      "tier1": 104,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 104,
+      "points": 104,
+      "reachedAt": "2025-11-12T15:29:59.261945+01:00",
+      "supporter": "m+81gUu4HjE="
+    },
+    {
+      "tier1": 33,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 33,
+      "points": 33,
+      "reachedAt": "2025-11-11T19:33:28.46792+01:00",
+      "supporter": "L/TQ0dHfrXs="
+    },
+    {
+      "tier1": 20,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 20,
+      "points": 20,
+      "reachedAt": "2025-11-11T18:41:31.071824+01:00",
+      "supporter": "fNcoMAhrrPg="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-11T17:10:38.302075+01:00",
+      "supporter": "AWGYarVn1Wo="
+    },
+    {
+      "tier1": 222,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 222,
+      "points": 222,
+      "reachedAt": "2025-11-11T17:23:24.993665+01:00",
+      "supporter": "x0++shojYVc="
+    },
+    {
+      "tier1": 20,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 20,
+      "points": 20,
+      "reachedAt": "2025-11-11T20:39:01.053547+01:00",
+      "supporter": "jLgnXmMxnl0="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-11T17:12:45.061405+01:00",
+      "supporter": "dnLZ7ovCJv8="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T20:34:55.72233+01:00",
+      "supporter": "xJIelMCpFVM="
+    },
+    {
+      "tier1": 7,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 7,
+      "points": 7,
+      "reachedAt": "2025-11-11T20:33:56.531056+01:00",
+      "supporter": "eCMRt/VkYj4="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-11T17:09:52.85548+01:00",
+      "supporter": "HapjVW77gCI="
+    },
+    {
+      "tier1": 15,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 15,
+      "points": 15,
+      "reachedAt": "2025-11-11T20:32:50.936971+01:00",
+      "supporter": "3b7kHqgEqEM="
+    },
+    {
+      "tier1": 400,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 400,
+      "points": 400,
+      "reachedAt": "2025-11-13T15:24:07.166904+01:00",
+      "supporter": "i91LKHZPayk="
+    },
+    {
+      "tier1": 3,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 3,
+      "points": 3,
+      "reachedAt": "2025-11-11T20:25:26.792448+01:00",
+      "supporter": "OjldyCLDRBw="
+    },
+    {
+      "tier1": 115,
+      "tier2": 10,
+      "tier3": 0,
+      "total": 125,
+      "points": 135,
+      "reachedAt": "2025-11-13T15:17:57.854065+01:00",
+      "supporter": "3RthKGXfV50="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-13T15:27:53.168118+01:00",
+      "supporter": "UmSs/ta6wf0="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T17:09:27.322263+01:00",
+      "supporter": "CEztaxWmXJU="
+    },
+    {
+      "tier1": 1,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 1,
+      "points": 1,
+      "reachedAt": "2025-11-11T17:07:48.416639+01:00",
+      "supporter": "yzzAKvs2Er0="
+    },
+    {
+      "tier1": 20,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 20,
+      "points": 20,
+      "reachedAt": "2025-11-11T20:19:43.939796+01:00",
+      "supporter": "JcDIaxO8sf8="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T22:15:50.906125+01:00",
+      "supporter": "04k+9tZUfys="
+    },
+    {
+      "tier1": 50,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 50,
+      "points": 50,
+      "reachedAt": "2025-11-11T17:24:06.082881+01:00",
+      "supporter": "IYWf64AhtVs="
+    },
+    {
+      "tier1": 55,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 55,
+      "points": 55,
+      "reachedAt": "2025-11-11T17:32:37.861858+01:00",
+      "supporter": "Q5dtUa+YTIc="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T17:13:52.986247+01:00",
+      "supporter": "IHAvUtU4kqA="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-11T18:40:32.839499+01:00",
+      "supporter": "+y2DS+PBf94="
+    },
+    {
+      "tier1": 41,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 41,
+      "points": 41,
+      "reachedAt": "2025-11-12T00:01:44.249607+01:00",
+      "supporter": "h4X968duthc="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-11T17:22:00.37645+01:00",
+      "supporter": "i1kgykFvqo8="
+    },
+    {
+      "tier1": 50,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 50,
+      "points": 50,
+      "reachedAt": "2025-11-11T20:37:03.058691+01:00",
+      "supporter": "++K70VZaDk8="
+    },
+    {
+      "tier1": 0,
+      "tier2": 10,
+      "tier3": 0,
+      "total": 10,
+      "points": 20,
+      "reachedAt": "2025-11-11T17:30:38.925901+01:00",
+      "supporter": "iBYpfh7SpIk="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T17:11:05.934876+01:00",
+      "supporter": "ZBjivLUhnSo="
+    },
+    {
+      "tier1": 10,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 10,
+      "points": 10,
+      "reachedAt": "2025-11-11T18:44:25.400571+01:00",
+      "supporter": "nK9RGCe8uRc="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T17:10:09.495794+01:00",
+      "supporter": "upg0LTSoKqQ="
+    },
+    {
+      "tier1": 1,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 1,
+      "points": 1,
+      "reachedAt": "2025-11-13T18:38:11.074381+01:00",
+      "supporter": "Iv/PNoZ7nZs="
+    },
+    {
+      "tier1": 5,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 5,
+      "points": 5,
+      "reachedAt": "2025-11-11T17:20:52.106384+01:00",
+      "supporter": "8MO0ndwjVr0="
+    },
+    {
+      "tier1": 25,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 25,
+      "points": 25,
+      "reachedAt": "2025-11-11T22:07:43.667897+01:00",
+      "supporter": "zd9uLim65cY="
+    },
+    {
+      "tier1": 1,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 1,
+      "points": 1,
+      "reachedAt": "2025-11-11T17:15:39.881899+01:00",
+      "supporter": "R3X7NlZ61sE="
+    },
+    {
+      "tier1": 26,
+      "tier2": 0,
+      "tier3": 0,
+      "total": 26,
+      "points": 26,
+      "reachedAt": "2025-11-11T17:44:51.916839+01:00",
+      "supporter": "KU7xRwRqX9A="
+    }
+  ],
+  "donationsPerUser": [
+    {
+      "amount": 3.5,
+      "points": 0.7,
+      "reachedAt": "2025-11-12T19:00:47.675+01:00",
+      "supporter": "ZWYdDn4gDy4="
+    },
+    {
+      "amount": 11.11,
+      "points": 2.222,
+      "reachedAt": "2025-11-11T22:18:25.096+01:00",
+      "supporter": "RPDi3HB6wxw="
+    },
+    {
+      "amount": 2.22,
+      "points": 0.444,
+      "reachedAt": "2025-11-12T22:45:58.865+01:00",
+      "supporter": "6GzuiXgoU7g="
+    },
+    {
+      "amount": 50,
+      "points": 10,
+      "reachedAt": "2025-11-12T17:25:33.163+01:00",
+      "supporter": "E/Ddv9WYNyE="
+    },
+    {
+      "amount": 500,
+      "points": 100,
+      "reachedAt": "2025-11-11T18:17:04.32+01:00",
+      "supporter": "UYXdvWBlY+o="
+    },
+    {
+      "amount": 55,
+      "points": 11,
+      "reachedAt": "2025-11-13T19:07:17.097+01:00",
+      "supporter": "m90WfLiqJxU="
+    }
+  ],
+  "encryptedSupporters": "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",
+  "supporters": {}
+}

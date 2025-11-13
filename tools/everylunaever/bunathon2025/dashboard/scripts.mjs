@@ -94,20 +94,22 @@ async function tryLoadKeyFromSearch() {
     }
 }
 
-async function createStateLoader(/** @type {CryptoKey} */ key) {
-    // We don't want to have the bucket url public for everyone, because they could mess with our data.
+/** @returns {Promise<Record<string, string>>} */
+async function decryptSupporters(
+        /** @type {CryptoKey} */ key,
+        /** @type {string} */ encryptedSupporters) {
+    const plaintext = await crypto.decrypt(encryptedSupporters, key);
+    return /** @type {Record<string, string>} */(JSON.parse(plaintext));
+}
+
+async function createLiveStateLoader(/** @type {CryptoKey} */ key) {
+    // We don't want to have the basket url public for everyone, because they could mess with our data.
     // So we protect it with a symmetric key, so only a limited group of user can access it.
     // This was created together with the key via crypto.initialize.
-    const encryptedBucketUrl = config.encryptedBucketUrl;
+    const encryptedBasketUrl = config.encryptedLiveBasketUrl;
 
     const url = isDevelopment ? './debug-dashboard-live.json'
-        : await crypto.decrypt(encryptedBucketUrl, key);
-
-    /** @returns {Promise<Record<string, string>>} */
-    async function decryptSupporters(/** @type {string} */ encryptedSupporters) {
-        const plaintext = await crypto.decrypt(encryptedSupporters, key);
-        return /** @type {Record<string, string>} */(JSON.parse(plaintext));
-    }
+        : await crypto.decrypt(encryptedBasketUrl, key);
 
     function applySupporters(
         /** @type {Record<string, string>} */ supporters,
@@ -132,8 +134,55 @@ async function createStateLoader(/** @type {CryptoKey} */ key) {
 
             const encrypted = /** @type {EncryptedDashboardLiveJson} */(await response.json());
 
-            const supporters = await decryptSupporters(encrypted.encryptedSupporters);
+            const supporters = await decryptSupporters(key, encrypted.encryptedSupporters);
             const result = /** @type {DecryptedDashboardLiveJson} */(encrypted);
+            delete /** @type {Record<string, unknown>} */(result)['encryptedSupporters'];
+            delete /** @type {Record<string, unknown>} */(result)['supporters'];
+            applySupporters(supporters, result);
+            return result;
+        } catch (err) {
+            console.error("Failed to fetch state", err);
+            return null;
+        }
+    };
+}
+
+async function createDetailsStateLoader(/** @type {CryptoKey} */ key) {
+    // We don't want to have the basket url public for everyone, because they could mess with our data.
+    // So we protect it with a symmetric key, so only a limited group of user can access it.
+    // This was created together with the key via crypto.initialize.
+    const encryptedBasketUrl = config.encryptedDetailsBasketUrl;
+
+    const url = isDevelopment ? './debug-dashboard-details.json'
+        : await crypto.decrypt(encryptedBasketUrl, key);
+
+    function applySupporters(
+        /** @type {Record<string, string>} */ supporters,
+        /** @type {DecryptedDashboardDetailsJson} */ json) {
+        for (const entry of json.subbombsPerUser) {
+            entry.supporter = supporters[entry.supporter] || '';
+        }
+        for (const entry of json.subgiftsPerUser) {
+            entry.supporter = supporters[entry.supporter] || '';
+        }
+        for (const event of json.bitsPerUser) {
+            event.supporter = supporters[event.supporter] || '';
+        }
+        for (const event of json.donationsPerUser) {
+            event.supporter = supporters[event.supporter] || '';
+        }
+    }
+
+    return /** @returns {Promise<DecryptedDashboardDetailsJson | null>} */ async function () {
+        try {
+            const response = await fetch(url);
+            if (!response.ok)
+                return null;
+
+            const encrypted = /** @type {EncryptedDashboardDetailsJson} */(await response.json());
+
+            const supporters = await decryptSupporters(key, encrypted.encryptedSupporters);
+            const result = /** @type {DecryptedDashboardDetailsJson} */(encrypted);
             delete /** @type {Record<string, unknown>} */(result)['encryptedSupporters'];
             delete /** @type {Record<string, unknown>} */(result)['supporters'];
             applySupporters(supporters, result);
@@ -172,6 +221,50 @@ const settings = {
     fetchInterval: isDevelopment ? 1000 : 15000,
 };
 
+/** @type {(<TItem extends { supporter: string }>(array: TItem[], item: TItem) => void)} */
+function addSortedBySupporter(array, item) {
+    let low = 0;
+    let high = array.length;
+
+    while (low < high) {
+        const mid = Math.floor((low + high) / 2);
+        const cmp = array[mid].supporter.localeCompare(item.supporter);
+
+        if (cmp <= 0) {
+            // <= means, we will go right ways and this causes to exit after existing entries
+            low = mid + 1;
+        } else {
+            high = mid;
+        }
+    }
+
+    array.splice(low, 0, item);
+}
+
+/**
+ * @param {"SUBSCRIPTION1" | "SUBSCRIPTION2" | "SUBSCRIPTION3"} type
+ */
+function subscriptionToTier(type) {
+    switch (type) {
+        case "SUBSCRIPTION1": return "tier1";
+        case "SUBSCRIPTION2": return "tier2";
+        case "SUBSCRIPTION3": return "tier3";
+        default: throw unreachable(type);
+    }
+};
+
+/**
+ * @param {"SUBSCRIPTION1" | "SUBSCRIPTION2" | "SUBSCRIPTION3"} type
+ */
+function subscriptionToTierNumber(type) {
+    switch (type) {
+        case "SUBSCRIPTION1": return 1;
+        case "SUBSCRIPTION2": return 2;
+        case "SUBSCRIPTION3": return 3;
+        default: throw unreachable(type);
+    }
+};
+
 const app = await (async function () {
 
     const key = await tryLoadKeyFromSearch();
@@ -180,17 +273,22 @@ const app = await (async function () {
         return;
     }
 
-    const fetchState = await createStateLoader(key);
-    if (!fetchState) {
+    const fetchLive = await createLiveStateLoader(key);
+    if (!fetchLive) {
         loadingState.innerText = "Invalid key";
         return;
     }
 
-
+    const fetchDetails = await createDetailsStateLoader(key);
+    if (!fetchDetails) {
+        loadingState.innerText = "Invalid key";
+        return;
+    }
 
     let model = (/** @returns {UIModel} */ function () {
         return {
-            data: null,
+            live: null,
+            details: null,
         };
     })();
 
@@ -207,7 +305,7 @@ const app = await (async function () {
         return {
             "donators": buildGroup('donor'),
             "subGifters": buildGroup('gifter'),
-            "bitsCheers": buildGroup('cheerer'),
+            "bitsCheers": buildGroup('bits'),
             "overallSupporters": buildGroup('supporter'),
         };
     })();
@@ -309,7 +407,7 @@ const app = await (async function () {
     }
 
     function render() {
-        const data = model.data;
+        const data = model.live;
         if (!data) {
             trySetTextContentIfChanged(loadingState,
                 'Fetching data...');
@@ -354,11 +452,129 @@ const app = await (async function () {
 
     render();
 
+    function updateDetailsWithLive() {
+        const live = model.live;
+        const details = model.details;
+        if (!live || !details)
+            return;
+
+        const latestLiveEvent = live.events[0];
+        if (!latestLiveEvent
+            || details.latestEventAt === latestLiveEvent.timestamp)
+            return;
+
+        const detailsLatestEventAtDate = new Date(details.latestEventAt);
+        for (const liveEvent of live.events.toReversed()) {
+            const liveEventDate = new Date(liveEvent.timestamp);
+            if (liveEventDate <= detailsLatestEventAtDate)
+                continue;
+
+            switch (liveEvent.category) {
+                case "BITS":
+                    {
+                        const entry = details.bitsPerUser.find(x => x.supporter === liveEvent.supporter);
+                        if (entry) {
+                            entry.amount += liveEvent.amount;
+                            entry.points += liveEvent.points;
+                            entry.reachedAt = liveEvent.timestamp;
+                        } else {
+                            addSortedBySupporter(details.bitsPerUser, {
+                                supporter: liveEvent.supporter,
+                                amount: liveEvent.amount,
+                                points: liveEvent.points,
+                                reachedAt: liveEvent.timestamp,
+                            });
+                        }
+                    }
+                    break;
+
+                case "DONATION":
+                    {
+                        const entry = details.donationsPerUser.find(x => x.supporter === liveEvent.supporter);
+                        if (entry) {
+                            entry.amount += liveEvent.amount;
+                            entry.points += liveEvent.points;
+                            entry.reachedAt = liveEvent.timestamp;
+                        } else {
+                            addSortedBySupporter(details.donationsPerUser, {
+                                supporter: liveEvent.supporter,
+                                amount: liveEvent.amount,
+                                points: liveEvent.points,
+                                reachedAt: liveEvent.timestamp,
+                            });
+                        }
+                    }
+                    break;
+
+                case "SUBSCRIPTION1":
+                case "SUBSCRIPTION2":
+                case "SUBSCRIPTION3":
+                    {
+                        {
+                            const tier = subscriptionToTier(liveEvent.category);
+                            const entry = details.subgiftsPerUser.find(x => x.supporter === liveEvent.supporter);
+                            if (entry) {
+                                entry[tier] += liveEvent.amount;
+                                entry.total += liveEvent.amount;
+                                entry.points += liveEvent.points;
+                                entry.reachedAt = liveEvent.timestamp;
+                            } else {
+                                /** @type {typeof details.subgiftsPerUser[0]} */
+                                const newEntry = {
+                                    supporter: liveEvent.supporter,
+                                    points: liveEvent.points,
+                                    total: liveEvent.amount,
+                                    tier1: 0,
+                                    tier2: 0,
+                                    tier3: 0,
+                                    reachedAt: liveEvent.timestamp,
+                                };
+                                newEntry[tier] += liveEvent.amount;
+                                addSortedBySupporter(details.subgiftsPerUser, newEntry);
+                            }
+                        }
+
+                        if (liveEvent.amount >= 25) {
+                            const tier = subscriptionToTierNumber(liveEvent.category);
+                            addSortedBySupporter(details.subbombsPerUser, {
+                                supporter: liveEvent.supporter,
+                                tier,
+                                points: liveEvent.points,
+                                subcount: liveEvent.amount,
+                                timestamp: liveEvent.timestamp,
+                            });
+                        }
+                    }
+                    break;
+
+                default:
+                    throw unreachable(liveEvent.category);
+            }
+        }
+
+        details.latestEventAt = live.events[0].timestamp;
+    }
+
     async function main() {
         const fetchAndUpdate = async () => {
-            const data = await fetchState();
+            let isChanged = false;
 
-            model.data = data;
+            const live = await fetchLive();
+            isChanged ||= !!live && live.events != model.live?.events;
+            model.live = live;
+
+            if (true || model.dialog) {
+                const details = await fetchDetails();
+                if (details?.hash !== model.details?.hash) {
+                    isChanged = true;
+                    model.details = details;
+                }
+            }
+
+            if (!isChanged)
+                return;
+
+            updateDetailsWithLive();
 
             try {
                 render();
@@ -371,6 +587,10 @@ const app = await (async function () {
 
         setInterval(fetchAndUpdate, settings.fetchInterval);
     }
+
+    openDialogClicked = (function (type) {
+        alert("Details für: " + type);
+    });
 
     return {
         main,

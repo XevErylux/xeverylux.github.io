@@ -94,20 +94,23 @@ button:hover:not(:disabled) {
 
 /* Tabellen */
 .leaderboard table,
-.events table {
+.events table,
+.details table {
     background-color: var(--card-background);
     color: var(--table-text);
     border: 2px solid var(--card-border);
 }
 
 .leaderboard th,
-.events th {
+.events th,
+.details th {
     background-color: var(--table-header-bg);
     color: var(--table-header-text);
 }
 
 .leaderboard td,
-.events td {
+.events td,
+.details td {
     background-color: var(--table-row-bg);
     border-bottom: 1px solid var(--table-row-border);
 }
