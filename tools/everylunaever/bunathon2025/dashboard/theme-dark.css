@@ -48,7 +48,8 @@ h3 {
 }
 
 /* Karten */
-.card {
+.card,
+.details {
     background-color: var(--card-background);
     border: 2px solid var(--card-border);
     color: var(--card-text);

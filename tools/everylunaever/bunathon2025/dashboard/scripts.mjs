@@ -217,6 +217,26 @@ function getElementById(elementId, qualifiedName) {
     return /** @type {HTMLElementTagNameMap[typeof qualifiedName]} */(element);
 }
 
+/** @param {PointerEvent} e */
+function dialogClickHandler(e) {
+    if (e.target && e.target instanceof HTMLDialogElement) {
+        const rect = e.target.getBoundingClientRect();
+
+        const clickedInDialog = (
+            rect.top <= e.clientY &&
+            e.clientY <= rect.top + rect.height &&
+            rect.left <= e.clientX &&
+            e.clientX <= rect.left + rect.width
+        );
+
+        if (clickedInDialog)
+            return;
+
+        e.target.close();
+    }
+}
+
+
 const settings = {
     fetchInterval: isDevelopment ? 1000 : 15000,
 };
@@ -264,6 +284,22 @@ function subscriptionToTierNumber(type) {
         default: throw unreachable(type);
     }
 };
+
+function flipSortDirection(/** @type {SortDirection} */ dir) {
+    switch (dir) {
+        case "ASC": return "DESC";
+        case "DESC": return "ASC";
+        default: throw unreachable(dir);
+    }
+}
+
+/** @returns {HTMLTableCellElement | null} */
+function getTableCell(
+    /** @type {HTMLTableRowElement} */ row,
+    /** @type {string} */ className
+) {
+    return row.querySelector(`td.${className}`);
+}
 
 const app = await (async function () {
 
@@ -340,6 +376,105 @@ const app = await (async function () {
         return points?.toLocaleString(undefined, { minimumFractionDigits: 3 }) ?? ''
     }
 
+    function buildTableColumnSorter(
+        /** @type {SortColumn[]} */ sortings
+    ) {
+        return function (
+            /** @type {{ rowCells: { [x: string]: { sortValue: any; }; }; }} */ a,
+            /** @type {{ rowCells: { [x: string]: { sortValue: any; }; }; }} */ b) {
+            for (const { name, direction } of sortings) {
+                const aVal = a.rowCells[name]?.sortValue;
+                const bVal = b.rowCells[name]?.sortValue;
+
+                // Missing values are always smaller
+                if (aVal == null && bVal == null) continue;
+                if (aVal == null) return direction === 'ASC' ? -1 : 1;
+                if (bVal == null) return direction === 'ASC' ? 1 : -1;
+
+                // Compare: numbers or strings
+                let cmp = 0;
+                if (typeof aVal === 'number' && typeof bVal === 'number') {
+                    cmp = aVal - bVal;
+                } else {
+                    cmp = String(aVal).localeCompare(String(bVal));
+                }
+
+                if (cmp !== 0) {
+                    return direction === 'ASC' ? cmp : -cmp;
+                }
+            }
+            return 0; // all columns are same
+        };
+    }
+
+    /**
+     * @template T
+     * @param {SortColumn[] | undefined} sortings
+     * @param {T[]} rows
+     * @param {{ (row: T): string; }} buildKey
+     * @param {HTMLTemplateElement} rowTemplate
+     * @param {HTMLTableSectionElement} targetTableBody
+     * @param {(row: T) => Record<string, { text: string | ((index: number) => string), sortValue: string | number }>} buildRowCells
+     */
+    function renderTable(
+        sortings,
+        rows,
+        buildKey,
+        rowTemplate,
+        targetTableBody,
+        buildRowCells
+    ) {
+        let entries = rows.map((row) => ({
+            rowCells: buildRowCells(row),
+            key: buildKey(row),
+        }));
+        if (sortings) {
+            entries.sort(
+                buildTableColumnSorter(sortings)
+            );
+        }
+
+        for (let i = 0; i < entries.length; i++) {
+            const entry = entries[i];
+            const key = entry.key;
+            let element = /** @type {HTMLTableRowElement | undefined} */(targetTableBody.children[i]);
+            if (!element) {
+                const result = /** @type {Element} */(rowTemplate.content.cloneNode(true));
+                if (!(result.firstElementChild instanceof HTMLTableRowElement))
+                    continue;
+
+                element = result.firstElementChild;
+                targetTableBody.appendChild(element);
+                element.setAttribute('data-key', key);
+            }
+            else if (element.getAttribute('data-key') !== key) {
+                const result = /** @type {Element} */(rowTemplate.content.cloneNode(true));
+                if (!(result.firstElementChild instanceof HTMLTableRowElement))
+                    continue;
+
+                const newElement = result.firstElementChild;
+                targetTableBody.insertBefore(newElement, element);
+                element = newElement;
+                element.setAttribute('data-key', key);
+            }
+
+            const rowCells = entry.rowCells;
+            for (const rowCellName of Object.keys(rowCells)) {
+                const rowCellValue = rowCells[rowCellName];
+                trySetTextContentIfChanged(
+                    getTableCell(element, rowCellName),
+                    typeof rowCellValue.text === "function"
+                        ? rowCellValue.text(i)
+                        : rowCellValue.text
+                );
+            }
+        }
+
+        for (let i = targetTableBody.children.length - 1; i >= rows.length; i--) {
+            targetTableBody.removeChild(targetTableBody.children[i]);
+        }
+    }
+
     function renderEvents(/** @type {DashboardEvents} */ events) {
         const eventRowTemplate = getElementById('event-row-template', 'template');
         if (!eventRowTemplate)
@@ -352,57 +487,424 @@ const app = await (async function () {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        /** @returns {HTMLTableCellElement | null} */
-        function getTableCell(
-            /** @type {HTMLTableRowElement} */ row,
-            /** @type {string} */ className
-        ) {
-            return row.querySelector(`td.${className}`);
+        renderTable(
+            undefined,
+            events,
+            event => `${event.timestamp}-${event.supporter}-${event.category}`,
+            eventRowTemplate,
+            eventsTableBody,
+            event => ({
+                'timestamp': {
+                    text: formatTimestamp(today, event.timestamp),
+                    sortValue: new Date(event.timestamp).getTime(),
+                },
+                'supporter': {
+                    text: event.supporter,
+                    sortValue: event.supporter,
+                },
+                'category': {
+                    text: formatCategory(event.category),
+                    sortValue: formatCategory(event.category),
+                },
+                'amount': {
+                    text: `${event.amount}`,
+                    sortValue: event.amount,
+                },
+                'points': {
+                    text: formatPoints(event.points),
+                    sortValue: event.points,
+                },
+            })
+        );
+    }
+
+    function handleModalClose(/** @type {Event} */ ev) {
+        if (model.dialog) {
+            if (model.dialog.element === ev.target) {
+                model.dialog = undefined;
+            }
+        }
+    }
+
+    /** 
+     *  @this {GlobalEventHandlers}
+     *  @param {PointerEvent} ev
+     */
+    function tableClickHandler(ev) {
+        if (ev.target && ev.target instanceof HTMLTableCellElement && ev.target.tagName === 'TH') {
+            const className = ev.target.className;
+            if (className === 'rownum')
+                return;
+
+            const dialog = model.dialog;
+            if (!dialog)
+                return;
+
+            const index = dialog.sortBy.findIndex(x => x.name === className);
+            if (index === 0) {
+                const element = dialog.sortBy[0];
+                element.direction = flipSortDirection(element.direction);
+            } else {
+                if (index > -1) {
+                    dialog.sortBy.splice(index, 1);
+                }
+
+                dialog.sortBy.splice(0, 0, {
+                    name: className,
+                    direction: 'DESC',
+                });
+            }
+
+            renderDialog();
+        }
+    }
+
+    function directionToSymbol(/** @type {SortDirection} */ direction) {
+        switch (direction) {
+            case 'ASC': return '▲';
+            case 'DESC': return '▼';
+            default: throw unreachable(direction);
+        }
+    }
+
+    function openDialog(/** @type {string} */ id) {
+        const dialog = model.dialog;
+        if (!dialog)
+            return;
+
+        const dialogElement = getElementById(id, 'dialog');
+        if (!dialogElement)
+            return;
+
+        if (dialog.element && dialog.element !== dialogElement) {
+            dialog.element.requestClose();
         }
 
-        for (let i = 0; i < events.length; i++) {
-            const event = events[i];
-            const key = `${event.timestamp}-${event.supporter}-${event.category}`;
-            let element = /** @type {HTMLTableRowElement | undefined} */(eventsTableBody.children[i]);
-            if (!element) {
-                const result = /** @type {Element} */(eventRowTemplate.content.cloneNode(true));
-                element = /** @type {HTMLTableRowElement} */(result.firstElementChild);
-                eventsTableBody.appendChild(element);
-                element.setAttribute('data-key', key);
-            }
-            else if (element.getAttribute('data-key') !== key) {
-                // Probably an old event, create a new entry and move it above
-                const result = /** @type {Element} */(eventRowTemplate.content.cloneNode(true));
-                const newElement = /** @type {HTMLTableRowElement} */(result.firstElementChild);
-                eventsTableBody.insertBefore(newElement, element);
-                element = newElement;
-                element.setAttribute('data-key', key);
-            }
+        if (!dialogElement.open) {
+            dialogElement.showModal();
+            dialogElement.onclick = dialogClickHandler;
+            dialogElement.onclose = handleModalClose;
 
-            trySetTextContentIfChanged(
-                getTableCell(element, 'timestamp'),
-                formatTimestamp(today, event.timestamp)
-            );
-            trySetTextContentIfChanged(
-                getTableCell(element, 'viewer-name'),
-                event.supporter
-            );
-            trySetTextContentIfChanged(
-                getTableCell(element, 'category'),
-                formatCategory(event.category)
-            );
-            trySetTextContentIfChanged(
-                getTableCell(element, 'amount'),
-                `${event.amount}`
-            );
-            trySetTextContentIfChanged(
-                getTableCell(element, 'points'),
-                formatPoints(event.points)
-            );
+            const tableElement = dialogElement.querySelector("table");
+            if (tableElement) {
+                tableElement.onclick = tableClickHandler;
+            }
         }
 
-        for (let i = eventsTableBody.children.length - 1; i >= events.length; i--) {
-            eventsTableBody.removeChild(eventsTableBody.children[i]);
+        dialog.element = dialogElement;
+
+        const activeSortingElement = dialogElement.querySelector("span.active-sorting");
+        if (activeSortingElement) {
+            /** @type {Record<string, string>} */
+            const columnHeaders = {};
+            for (const th of
+                [.../** @type {NodeListOf<HTMLTableCellElement>} */(
+                    dialogElement.querySelectorAll("table thead tr th")
+                )]) {
+                columnHeaders[th.className] = th.textContent;
+            }
+            const sortString = dialog.sortBy
+                .map(c => {
+                    const textContent = columnHeaders[c.name];
+                    return `${textContent ?? name} ${directionToSymbol(c.direction)}`;
+                })
+                .join(", ");
+            trySetTextContentIfChanged(activeSortingElement, sortString);
+        }
+
+        return dialogElement;
+    }
+
+    function buildAllSupports(
+        /** @type {DecryptedDashboardDetailsJson} */ data
+    ) {
+        /** @type {(AllSupportsPerUserEntry)[]} */
+        const allSupports = [];
+        for (const subgift of data.subgiftsPerUser) {
+            const entry = allSupports.find(x => x.supporter === subgift.supporter);
+            if (entry) {
+                entry.tier1 += subgift.tier1;
+                entry.tier2 += subgift.tier2;
+                entry.tier3 += subgift.tier3;
+                entry.total += subgift.total;
+                entry.points += subgift.points;
+                if (new Date(entry.reachedAt) < new Date(subgift.reachedAt)) {
+                    entry.reachedAt = subgift.reachedAt;
+                }
+            } else {
+                addSortedBySupporter(allSupports, {
+                    supporter: subgift.supporter,
+                    bits: 0,
+                    donations: 0,
+                    tier1: subgift.tier1,
+                    tier2: subgift.tier2,
+                    tier3: subgift.tier3,
+                    total: subgift.total,
+                    points: subgift.points,
+                    reachedAt: subgift.reachedAt,
+                });
+            }
+        }
+
+        for (const bits of data.bitsPerUser) {
+            const entry = allSupports.find(x => x.supporter === bits.supporter);
+            if (entry) {
+                entry.bits += bits.amount;
+                entry.points += bits.points;
+                if (new Date(entry.reachedAt) < new Date(bits.reachedAt)) {
+                    entry.reachedAt = bits.reachedAt;
+                }
+            } else {
+                addSortedBySupporter(allSupports, {
+                    supporter: bits.supporter,
+                    bits: bits.amount,
+                    donations: 0,
+                    tier1: 0,
+                    tier2: 0,
+                    tier3: 0,
+                    total: 0,
+                    points: bits.points,
+                    reachedAt: bits.reachedAt,
+                });
+            }
+        }
+
+        for (const donation of data.donationsPerUser) {
+            const entry = allSupports.find(x => x.supporter === donation.supporter);
+            if (entry) {
+                entry.donations += donation.amount;
+                entry.points += donation.points;
+                if (new Date(entry.reachedAt) < new Date(donation.reachedAt)) {
+                    entry.reachedAt = donation.reachedAt;
+                }
+            } else {
+                addSortedBySupporter(allSupports, {
+                    supporter: donation.supporter,
+                    bits: 0,
+                    donations: donation.amount,
+                    tier1: 0,
+                    tier2: 0,
+                    tier3: 0,
+                    total: 0,
+                    points: donation.points,
+                    reachedAt: donation.reachedAt,
+                });
+            }
+        }
+
+        return allSupports;
+    }
+
+    function renderDialog() {
+        const dialog = model.dialog;
+        if (!dialog)
+            return;
+
+        const data = model.details;
+        if (!data)
+            return;
+
+        dialog.isDirty = false;
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        switch (dialog.type) {
+            case "wheelSpins":
+                {
+                    const dialogElement = openDialog('wheel-spins-details');
+                    if (!dialogElement)
+                        return;
+
+                    const rowTemplate = getElementById('wheel-spins-details-row-template', 'template');
+                    if (!rowTemplate)
+                        return;
+
+                    const tableBody = dialogElement.querySelector('tbody');
+                    if (!tableBody)
+                        return;
+
+                    renderTable(
+                        dialog.sortBy,
+                        data.subbombsPerUser,
+                        bomb => `${bomb.supporter}-${bomb.timestamp}-tier${bomb.tier}-${bomb.subcount}`,
+                        rowTemplate,
+                        tableBody,
+                        (bomb) => ({
+                            'rownum': {
+                                text: index => `${index + 1}`,
+                                sortValue: 0,
+                            },
+                            'supporter': {
+                                text: bomb.supporter,
+                                sortValue: bomb.supporter,
+                            },
+                            'timestamp': {
+                                text: formatTimestamp(today, bomb.timestamp),
+                                sortValue: new Date(bomb.timestamp).getTime(),
+                            },
+                            'level': {
+                                text: `${bomb.tier}`,
+                                sortValue: bomb.tier,
+                            },
+                            'amount': {
+                                text: `${bomb.subcount}`,
+                                sortValue: bomb.subcount,
+                            },
+                            'points': {
+                                text: formatPoints(bomb.points),
+                                sortValue: bomb.points,
+                            },
+                        }),
+                    );
+                }
+                break;
+
+            case "keychains":
+            case "namesOnArtwork":
+            case "postcards":
+                {
+                    const dialogElement = openDialog('subgifts-details');
+                    if (!dialogElement)
+                        return;
+
+                    const [elementIdPrefix, minCount] = (function (type) {
+                        switch (type) {
+                            case "postcards": return ["postcards", 50];
+                            case "namesOnArtwork": return ["artwork-names", 100];
+                            case "keychains": return ["keychains", 200];
+                            default: throw unreachable(type);
+                        }
+                    })(dialog.type);
+
+                    const cardHeaderText = document.querySelector(`.summary .card#${elementIdPrefix}-card > h3`)?.textContent ?? '<unknown>';
+                    const subgiftsDetailsTitle = getElementById('subgifts-details-title', 'h2');
+                    if (subgiftsDetailsTitle) {
+                        subgiftsDetailsTitle.textContent = cardHeaderText;
+                    }
+
+                    const rowTemplate = getElementById('subgifts-details-row-template', 'template');
+                    if (!rowTemplate)
+                        return;
+
+                    const tableBody = dialogElement.querySelector('tbody');
+                    if (!tableBody)
+                        return;
+
+                    renderTable(
+                        dialog.sortBy,
+                        data.subgiftsPerUser.filter(x => x.total >= minCount),
+                        bomb => `${bomb.supporter}`,
+                        rowTemplate,
+                        tableBody,
+                        (bomb) => ({
+                            'rownum': {
+                                text: index => `${index + 1}`,
+                                sortValue: 0,
+                            },
+                            'reached-at': {
+                                text: formatTimestamp(today, bomb.reachedAt),
+                                sortValue: new Date(bomb.reachedAt).getTime(),
+                            },
+                            'supporter': {
+                                text: bomb.supporter,
+                                sortValue: bomb.supporter,
+                            },
+                            't1': {
+                                text: `${bomb.tier1}`,
+                                sortValue: bomb.tier1,
+                            },
+                            't2': {
+                                text: `${bomb.tier2}`,
+                                sortValue: bomb.tier2,
+                            },
+                            't3': {
+                                text: `${bomb.tier3}`,
+                                sortValue: bomb.tier3,
+                            },
+                            'amount': {
+                                text: `${bomb.total}`,
+                                sortValue: bomb.total,
+                            },
+                            'points': {
+                                text: formatPoints(bomb.points),
+                                sortValue: bomb.points,
+                            },
+                        }),
+                    );
+                }
+                break;
+
+            case "allSupports":
+                {
+                    const dialogElement = openDialog('all-supports');
+                    if (!dialogElement)
+                        return;
+
+                    const rowTemplate = getElementById('all-supports-row-template', 'template');
+                    if (!rowTemplate)
+                        return;
+
+                    const tableBody = dialogElement.querySelector('tbody');
+                    if (!tableBody)
+                        return;
+
+                    const allSupports = buildAllSupports(data);
+
+                    renderTable(
+                        dialog.sortBy,
+                        allSupports,
+                        entry => `${entry.supporter}`,
+                        rowTemplate,
+                        tableBody,
+                        (entry) => ({
+                            'rownum': {
+                                text: index => `${index + 1}`,
+                                sortValue: 0,
+                            },
+                            'reached-at': {
+                                text: formatTimestamp(today, entry.reachedAt),
+                                sortValue: new Date(entry.reachedAt).getTime(),
+                            },
+                            'supporter': {
+                                text: entry.supporter,
+                                sortValue: entry.supporter,
+                            },
+                            'subs': {
+                                text: `${entry.total}`,
+                                sortValue: entry.total,
+                            },
+                            't1': {
+                                text: `${entry.tier1}`,
+                                sortValue: entry.tier1,
+                            },
+                            't2': {
+                                text: `${entry.tier2}`,
+                                sortValue: entry.tier2,
+                            },
+                            't3': {
+                                text: `${entry.tier3}`,
+                                sortValue: entry.tier3,
+                            },
+                            'bits': {
+                                text: `${entry.bits}`,
+                                sortValue: entry.bits,
+                            },
+                            'donations': {
+                                text: entry.donations.toLocaleString(undefined, { minimumFractionDigits: 2 }),
+                                sortValue: entry.donations,
+                            },
+                            'points': {
+                                text: formatPoints(entry.points),
+                                sortValue: entry.points,
+                            },
+                        }),
+                    );
+                }
+                break;
+
+            default:
+                throw unreachable(dialog.type);
         }
     }
 
@@ -448,6 +950,9 @@ const app = await (async function () {
 
         // Fülle die Ereignisliste effizient mit Schlüssel
         renderEvents(data.events);
+
+        // Fülle die Dialoge, falls geöffnet
+        renderDialog();
     }
 
     render();
@@ -492,13 +997,13 @@ const app = await (async function () {
                     {
                         const entry = details.donationsPerUser.find(x => x.supporter === liveEvent.supporter);
                         if (entry) {
-                            entry.amount += liveEvent.amount;
+                            entry.amount += liveEvent.amount / 100;
                             entry.points += liveEvent.points;
                             entry.reachedAt = liveEvent.timestamp;
                         } else {
                             addSortedBySupporter(details.donationsPerUser, {
                                 supporter: liveEvent.supporter,
-                                amount: liveEvent.amount,
+                                amount: liveEvent.amount / 100,
                                 points: liveEvent.points,
                                 reachedAt: liveEvent.timestamp,
                             });
@@ -555,41 +1060,69 @@ const app = await (async function () {
         details.latestEventAt = live.events[0].timestamp;
     }
 
-    async function main() {
-        const fetchAndUpdate = async () => {
-            let isChanged = false;
+    const fetchAndUpdate = async () => {
+        let isChanged = false;
 
-            const live = await fetchLive();
-            isChanged ||= !!live && live.events != model.live?.events;
-            model.live = live;
+        const live = await fetchLive();
+        isChanged ||= !!live && live.hash != model.live?.hash;
+        model.live = live;
 
-            if (true || model.dialog) {
-                const details = await fetchDetails();
-                if (details?.hash !== model.details?.hash) {
-                    isChanged = true;
-                    model.details = details;
-                }
-            }
-
-            if (!isChanged)
-                return;
-
-            updateDetailsWithLive();
-
-            try {
-                render();
-            } catch (err) {
-                console.log("Render failed with an exception", err);
-            }
+        if (isChanged) {
+            // Reset details, in case we revert the live data for some reason
+            model.details = null;
         }
 
+        if (model.dialog) {
+            const details = await fetchDetails();
+            if (details?.hash !== model.details?.hash) {
+                isChanged = true;
+                model.details = details;
+            }
+
+            isChanged ||= model.dialog.isDirty;
+        }
+
+        if (!isChanged)
+            return;
+
+        updateDetailsWithLive();
+
+        try {
+            render();
+        } catch (err) {
+            console.log("Render failed with an exception", err);
+        }
+    }
+
+    async function main() {
         await fetchAndUpdate();
 
         setInterval(fetchAndUpdate, settings.fetchInterval);
     }
 
+    /** @returns {SortColumn[]} */
+    function defaultDialogSorting(/** @type {UIDialogType} */ type) {
+        switch (type) {
+            case "allSupports": return [
+                { name: "points", direction: 'DESC' },
+                { name: 'supporter', direction: 'ASC' },
+            ];
+            case "keychains": return [{ name: "supporter", direction: 'DESC' }];
+            case "namesOnArtwork": return [{ name: "supporter", direction: 'DESC' }];
+            case "postcards": return [{ name: "supporter", direction: 'DESC' }];
+            case "wheelSpins": return [{ name: "supporter", direction: 'DESC' }];
+            default: throw unreachable(type);
+        }
+    }
+
     openDialogClicked = (function (type) {
-        alert("Details für: " + type);
+        model.dialog = {
+            isDirty: true,
+            type: type,
+            sortBy: defaultDialogSorting(type),
+        };
+
+        fetchAndUpdate();
     });
 
     return {

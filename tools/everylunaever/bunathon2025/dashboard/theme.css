@@ -76,10 +76,16 @@ h3 {
 }
 
 /* Karten */
-.card {
+.card,
+.details {
     background-color: var(--card-background);
     border: 2px solid var(--card-border);
     color: var(--card-text);
+}
+
+/* Dialoge */
+dialog.details:focus {
+    outline: none;
 }
 
 /* Buttons */
@@ -88,8 +94,13 @@ button {
     color: var(--button-text);
 }
 
-button:hover:not(:disabled) {
+button:hover:not(:disabled),
+button:focus:not(:disabled) {
     background-color: var(--button-hover);
+}
+
+button:focus {
+    outline: none;
 }
 
 /* Tabellen */

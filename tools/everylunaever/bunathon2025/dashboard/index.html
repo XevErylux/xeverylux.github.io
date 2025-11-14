@@ -69,23 +69,29 @@
         </div>
 
         <dialog id="wheel-spins-details" class="details">
-            <h3>🎡 Rad drehen</h3>
+            <h2>🎡 Rad drehen</h2>
+            <p>Listet alle Abo-Bomben mit der Größe von mindestens 25 Abos sortiert nach Name und Zeitpunkt.</p>
+            <p>Klicke auf die Spaltenüberschrift um zwischen ab-/aufsteigend zu wechseln.</p>
+            <p>Aktive Sortierung: <span class="active-sorting"></span></p>
             <table id="wheel-spins-details-table">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Zeitpunkt</th>
-                        <th>Stufe</th>
-                        <th>Menge</th>
-                        <th>Punkte</th>
+                        <th class="rownum">#</th>
+                        <th class="timestamp">Zeitpunkt</th>
+                        <th class="supporter">Name</th>
+                        <th class="level">Stufe</th>
+                        <th class="amount">Menge</th>
+                        <th class="points">Punkte</th>
                     </tr>
                 </thead>
+                <tbody></tbody>
             </table>
 
             <template id="wheel-spins-details-row-template">
                 <tr>
-                    <td class="viewer-name"></td>
+                    <td class="rownum"></td>
                     <td class="timestamp"></td>
+                    <td class="supporter"></td>
                     <td class="level"></td>
                     <td class="amount"></td>
                     <td class="points"></td>
@@ -94,23 +100,31 @@
         </dialog>
 
         <dialog id="subgifts-details" class="details">
-            <h3 id="subgifts-details-title"></h3>
+            <h2 id="subgifts-details-title"></h2>
+            <p>Listet alle Unterstützer auf, die genug für diesen Anreiz (Insentive) gesammelt haben.</p>
+            <p>Klicke auf die Spaltenüberschrift um zwischen ab-/aufsteigend zu wechseln.</p>
+            <p>Aktive Sortierung: <span class="active-sorting"></span></p>
             <table id="subgifts-details-table">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>T1</th>
-                        <th>T2</th>
-                        <th>T3</th>
-                        <th>Gesamt</th>
-                        <th>Punkte</th>
+                        <th class="rownum">#</th>
+                        <th class="reached-at">Zuletzt am</th>
+                        <th class="supporter">Name</th>
+                        <th class="t1">T1</th>
+                        <th class="t2">T2</th>
+                        <th class="t3">T3</th>
+                        <th class="amount">Gesamt</th>
+                        <th class="points">Punkte</th>
                     </tr>
                 </thead>
+                <tbody></tbody>
             </table>
 
             <template id="subgifts-details-row-template">
                 <tr>
-                    <td class="viewer-name"></td>
+                    <td class="rownum"></td>
+                    <td class="reached-at"></td>
+                    <td class="supporter"></td>
                     <td class="t1"></td>
                     <td class="t2"></td>
                     <td class="t3"></td>
@@ -125,7 +139,7 @@
 
     <div class="leaderboards-header-container">
         <h2 class="leaderboards-header">🏆 Top Unterstützer</h2>
-        <button onclick="openDialog('all-supports')">Alle Unterstützungen</button>
+        <button onclick="openDialog('allSupports')">Alle Unterstützungen</button>
     </div>
     <section class="leaderboards">
         <div class="leaderboard">
@@ -234,26 +248,37 @@
     </section>
 
     <dialog id="all-supports" class="details">
-        <h3 id="all-supports-title">Alle Unterstützungen</h3>
+        <h2 id="all-supports-title">💰 Alle Unterstützungen</h2>
+        <p>Klicke auf die Spaltenüberschrift um zwischen ab-/aufsteigend zu wechseln.</p>
+        <p>Aktive Sortierung: <span class="active-sorting"></span></p>
         <table id="all-supports-table">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>T1</th>
-                    <th>T2</th>
-                    <th>T3</th>
-                    <th>Gesamt</th>
-                    <th>Punkte</th>
+                    <th class="rownum">#</th>
+                    <th class="reached-at">Zuletzt am</th>
+                    <th class="supporter">Name</th>
+                    <th class="subs">Abos</th>
+                    <th class="t1">T1</th>
+                    <th class="t2">T2</th>
+                    <th class="t3">T3</th>
+                    <th class="bits">Bits</th>
+                    <th class="donations">Spenden</th>
+                    <th class="points">Punkte</th>
                 </tr>
             </thead>
+            <tbody></tbody>
         </table>
         <template id="all-supports-row-template">
             <tr>
-                <td class="viewer-name"></td>
+                <td class="rownum"></td>
+                <td class="reached-at"></td>
+                <td class="supporter"></td>
+                <td class="subs"></td>
                 <td class="t1"></td>
                 <td class="t2"></td>
                 <td class="t3"></td>
-                <td class="amount"></td>
+                <td class="bits"></td>
+                <td class="donations"></td>
                 <td class="points"></td>
             </tr>
         </template>
@@ -266,7 +291,7 @@
             <thead>
                 <tr>
                     <th class="timestamp">Zeitpunkt</th>
-                    <th class="viewer-name">Zuschauer</th>
+                    <th class="supporter">Zuschauer</th>
                     <th class="category">Kategorie</th>
                     <th class="amount">Menge</th>
                     <th class="points">Punkte</th>
@@ -279,7 +304,7 @@
         <template id="event-row-template">
             <tr>
                 <td class="timestamp"></td>
-                <td class="viewer-name"></td>
+                <td class="supporter"></td>
                 <td class="category"></td>
                 <td class="amount"></td>
                 <td class="points"></td>

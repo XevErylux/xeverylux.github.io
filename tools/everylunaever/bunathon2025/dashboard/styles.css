@@ -20,6 +20,15 @@ body {
     color: #333;
 }
 
+dialog {
+    font-family: var(--font-family);
+    font-size: 1em;
+}
+
+body:has(dialog[open]) {
+    overflow: hidden;
+}
+
 header {
     background: #6441a5;
     color: white;
@@ -45,13 +54,93 @@ h2 {
     justify-content: center;
 }
 
-.card {
+.card,
+.details {
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 1rem;
     width: 220px;
+}
+
+.card {
     text-align: center;
+}
+
+.details {
+    width: 550px;
+    height: 650px;
+}
+
+.details#subgifts-details {
+    width: 650px;
+}
+
+.details#all-supports {
+    width: 800px;
+}
+
+dialog.details::backdrop {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.details {
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+}
+
+.details h2 {
+    text-align: center;
+}
+
+.details table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.details th,
+.details td {
+    padding: 0.5rem;
+    text-align: left;
+    height: 1rem;
+    border-bottom: 1px solid #eee;
+    font-weight: bold;
+}
+
+.details table th.rownum,
+.details table td.rownum,
+.details table th.amount,
+.details table td.amount,
+.details table th.t1,
+.details table td.t1,
+.details table th.t2,
+.details table td.t2,
+.details table th.t3,
+.details table td.t3,
+.details table th.subs,
+.details table td.subs,
+.details table th.bits,
+.details table td.bits,
+.details table th.donations,
+.details table td.donations,
+.details table th.points,
+.details table td.points,
+.details table td.reached-at {
+    text-align: right;
+}
+
+.details table th.rownum {
+    cursor: not-allowed;
+}
+
+.details table th {
+    cursor: pointer;
+    user-select: none;
+}
+
+.details tbody tr:last-child td {
+    border-bottom: none;
 }
 
 .card h3 {

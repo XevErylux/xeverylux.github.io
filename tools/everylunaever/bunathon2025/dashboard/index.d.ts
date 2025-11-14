@@ -71,6 +71,13 @@ type DonationsPerUserEntry = {
     reachedAt: string;
 };
 
+type AllSupportsPerUserEntry =
+    SubgiftsPerUserEntry &
+    {
+        'bits': number,
+        'donations': number,
+    };
+
 type EncryptedDashboardDetailsJsonRaw = typeof import('./debug-dashboard-details.json');
 type DashboardDetailsPerUserFields = 'bitsPerUser' | 'subbombsPerUser' | 'subgiftsPerUser' | 'donationsPerUser';
 type DashboardDetailsEntries<
@@ -86,14 +93,24 @@ type EncryptedDashboardDetailsJson = Omit<Omit<EncryptedDashboardDetailsJsonRaw,
 type DecryptedDashboardDetailsJson = Omit<EncryptedDashboardDetailsJson, "encryptedSupporters" | "supporters">;
 
 type UIDialogType = keyof DecryptedDashboardLiveJson & (
-    'wheelSpins' | 
-    'postcards' | 
-    'namesOnArtwork' | 
+    'wheelSpins' |
+    'postcards' |
+    'namesOnArtwork' |
     'keychains'
-)
+) | 'allSupports';
+
+type SortDirection = 'ASC' | 'DESC';
+
+type SortColumn = {
+    name: string,
+    direction: SortDirection,
+};
 
 type UIDialog = {
+    isDirty: boolean;
     type: UIDialogType;
+    sortBy: SortColumn[];
+    element?: HTMLDialogElement;
 };
 
 type UIModel = {
