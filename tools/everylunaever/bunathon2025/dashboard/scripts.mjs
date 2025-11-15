@@ -700,10 +700,6 @@ const app = await (async function () {
         if (!dialog)
             return;
 
-        const data = model.details;
-        if (!data)
-            return;
-
         dialog.isDirty = false;
 
         const today = new Date();
@@ -715,6 +711,14 @@ const app = await (async function () {
                     const dialogElement = openDialog('wheel-spins-details');
                     if (!dialogElement)
                         return;
+
+                    const data = model.details;
+                    if (!data) {
+                        dialogElement.setAttribute('data-loading', '');
+                        return;
+                    } else {
+                        dialogElement.removeAttribute('data-loading');
+                    }
 
                     const rowTemplate = getElementById('wheel-spins-details-row-template', 'template');
                     if (!rowTemplate)
@@ -767,6 +771,14 @@ const app = await (async function () {
                     const dialogElement = openDialog('subgifts-details');
                     if (!dialogElement)
                         return;
+
+                    const data = model.details;
+                    if (!data) {
+                        dialogElement.setAttribute('data-loading', '');
+                        return;
+                    } else {
+                        dialogElement.removeAttribute('data-loading');
+                    }
 
                     const [elementIdPrefix, minCount] = (function (type) {
                         switch (type) {
@@ -840,6 +852,14 @@ const app = await (async function () {
                     const dialogElement = openDialog('all-supports');
                     if (!dialogElement)
                         return;
+
+                    const data = model.details;
+                    if (!data) {
+                        dialogElement.setAttribute('data-loading', '');
+                        return;
+                    } else {
+                        dialogElement.removeAttribute('data-loading');
+                    }
 
                     const rowTemplate = getElementById('all-supports-row-template', 'template');
                     if (!rowTemplate)
@@ -1074,14 +1094,14 @@ const app = await (async function () {
 
         if (model.dialog) {
             // Wait 2000ms, because some API servers do not like two requests in same second
-            await wait(2000);
+            isChanged ||= model.dialog.isDirty;
+            await wait(isDevelopment ? 0 : 2000);
             const details = await fetchDetails();
             if (details?.hash !== model.details?.hash) {
                 isChanged = true;
                 model.details = details;
             }
 
-            isChanged ||= model.dialog.isDirty;
         }
 
         if (!isChanged)
@@ -1125,6 +1145,8 @@ const app = await (async function () {
         };
 
         if (!model.details) {
+            renderDialog();
+
             fetchAndUpdate();
         } else {
             renderDialog();

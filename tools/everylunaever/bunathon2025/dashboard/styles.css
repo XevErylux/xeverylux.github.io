@@ -143,6 +143,19 @@ dialog.details::backdrop {
     border-bottom: none;
 }
 
+.details span.table-loading
+{
+display: none;
+}
+
+.details[data-loading] span.table-loading {
+    display: inline-block;
+    width: calc(100% - 2rem);
+    font-size: 2rem;
+    text-align: center;
+    padding: 1rem;
+}
+
 .card h3 {
     margin-top: 0;
     margin-bottom: 0;
