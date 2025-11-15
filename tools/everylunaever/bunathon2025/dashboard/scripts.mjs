@@ -1124,7 +1124,7 @@ const app = await (async function () {
             sortBy: defaultDialogSorting(type),
         };
 
-        if (!model.dialog) {
+        if (!model.details) {
             fetchAndUpdate();
         } else {
             renderDialog();
