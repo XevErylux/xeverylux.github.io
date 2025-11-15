@@ -323,6 +323,7 @@ const app = await (async function () {
 
     let model = (/** @returns {UIModel} */ function () {
         return {
+            lastFetch: null,
             live: null,
             details: null,
         };
@@ -928,7 +929,7 @@ const app = await (async function () {
         }
     }
 
-    function render() {
+    function renderImpl() {
         const data = model.live;
         if (!data) {
             trySetTextContentIfChanged(loadingState,
@@ -973,6 +974,14 @@ const app = await (async function () {
 
         // Fülle die Dialoge, falls geöffnet
         renderDialog();
+    }
+
+    function render() {
+        try {
+            renderImpl();
+        } catch (err) {
+            console.log("Render failed with an exception", err);
+        }
     }
 
     render();
@@ -1080,39 +1089,57 @@ const app = await (async function () {
         details.latestEventAt = live.events[0].timestamp;
     }
 
-    const fetchAndUpdate = async () => {
-        let isChanged = false;
+    const fetchDetailsAndUpdate = async function () {
+        if (!model.dialog)
+            return false;
 
-        const live = await fetchLive();
-        isChanged ||= !!live && live.hash != model.live?.hash;
-        model.live = live;
-
-        if (isChanged) {
-            // Reset details, in case we revert the live data for some reason
-            model.details = null;
-        }
-
-        if (model.dialog) {
-            // Wait 2000ms, because some API servers do not like two requests in same second
-            isChanged ||= model.dialog.isDirty;
-            await wait(isDevelopment ? 0 : 2000);
-            const details = await fetchDetails();
-            if (details?.hash !== model.details?.hash) {
-                isChanged = true;
-                model.details = details;
-            }
-
+        let isChanged = model.dialog.isDirty;
+        const details = await fetchDetails();
+        if (details?.hash !== model.details?.hash) {
+            isChanged = true;
+            model.details = details;
         }
 
         if (!isChanged)
-            return;
+            return false;
 
         updateDetailsWithLive();
 
-        try {
-            render();
-        } catch (err) {
-            console.log("Render failed with an exception", err);
+        render();
+        return true;
+    };
+
+    const fetchAndUpdate = async () => {
+        // Alternate between live and details, to prevent getting a 429 status code from API.
+        switch (model.lastFetch) {
+            case null:
+            case 'details':
+                model.lastFetch = 'live';
+
+                const live = await fetchLive();
+                if (!!live && live.hash != model.live?.hash) {
+
+                    // Only change value, if we got a valid object, otherwise
+                    // we will clear UI when loosing connection.
+                    model.live = live;
+                    // Reset details, in case we revert the live data for some reason
+                    model.details = null;
+
+                    updateDetailsWithLive();
+
+                    render();
+
+                }
+                break;
+
+            case 'live':
+                model.lastFetch = 'details';
+
+                await fetchDetailsAndUpdate();
+                break;
+
+            default:
+                throw unreachable(model.lastFetch);
         }
     }
 
@@ -1147,7 +1174,7 @@ const app = await (async function () {
         if (!model.details) {
             renderDialog();
 
-            fetchAndUpdate();
+            fetchDetailsAndUpdate();
         } else {
             renderDialog();
         }

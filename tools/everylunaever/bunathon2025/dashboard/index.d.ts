@@ -114,6 +114,7 @@ type UIDialog = {
 };
 
 type UIModel = {
+    lastFetch: 'live' | 'details' | null,
     live: DecryptedDashboardLiveJson | null,
     details: DecryptedDashboardDetailsJson | null,
     dialog?: UIDialog,
