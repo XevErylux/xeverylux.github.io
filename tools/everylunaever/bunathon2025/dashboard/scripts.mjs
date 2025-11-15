@@ -162,6 +162,12 @@ async function createDetailsStateLoader(/** @type {CryptoKey} */ key) {
         for (const entry of json.subbombsPerUser) {
             entry.supporter = supporters[entry.supporter] || '';
         }
+        for (const entry of json.selfsubsPerUser) {
+            entry.supporter = supporters[entry.supporter] || '';
+        }
+        for (const entry of json.individualsubsPerUser) {
+            entry.supporter = supporters[entry.supporter] || '';
+        }
         for (const entry of json.subgiftsPerUser) {
             entry.supporter = supporters[entry.supporter] || '';
         }
@@ -595,29 +601,35 @@ const app = await (async function () {
     ) {
         /** @type {(AllSupportsPerUserEntry)[]} */
         const allSupports = [];
-        for (const subgift of data.subgiftsPerUser) {
-            const entry = allSupports.find(x => x.supporter === subgift.supporter);
-            if (entry) {
-                entry.tier1 += subgift.tier1;
-                entry.tier2 += subgift.tier2;
-                entry.tier3 += subgift.tier3;
-                entry.total += subgift.total;
-                entry.points += subgift.points;
-                if (new Date(entry.reachedAt) < new Date(subgift.reachedAt)) {
-                    entry.reachedAt = subgift.reachedAt;
+        for (const subgifts of [
+            data.selfsubsPerUser,
+            data.individualsubsPerUser,
+            data.subgiftsPerUser
+        ]) {
+            for (const subgift of subgifts) {
+                const entry = allSupports.find(x => x.supporter === subgift.supporter);
+                if (entry) {
+                    entry.tier1 += subgift.tier1;
+                    entry.tier2 += subgift.tier2;
+                    entry.tier3 += subgift.tier3;
+                    entry.total += subgift.total;
+                    entry.points += subgift.points;
+                    if (new Date(entry.reachedAt) < new Date(subgift.reachedAt)) {
+                        entry.reachedAt = subgift.reachedAt;
+                    }
+                } else {
+                    addSortedBySupporter(allSupports, {
+                        supporter: subgift.supporter,
+                        bits: 0,
+                        donations: 0,
+                        tier1: subgift.tier1,
+                        tier2: subgift.tier2,
+                        tier3: subgift.tier3,
+                        total: subgift.total,
+                        points: subgift.points,
+                        reachedAt: subgift.reachedAt,
+                    });
                 }
-            } else {
-                addSortedBySupporter(allSupports, {
-                    supporter: subgift.supporter,
-                    bits: 0,
-                    donations: 0,
-                    tier1: subgift.tier1,
-                    tier2: subgift.tier2,
-                    tier3: subgift.tier3,
-                    total: subgift.total,
-                    points: subgift.points,
-                    reachedAt: subgift.reachedAt,
-                });
             }
         }
 

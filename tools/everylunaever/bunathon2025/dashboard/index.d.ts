@@ -55,7 +55,7 @@ type SubbombsPerUserEntry = {
     subcount: number;
     points: number;
 };
-type SubgiftsPerUserEntry = {
+type SubsPerUserEntry = {
     supporter: string;
     tier1: number;
     tier2: number;
@@ -72,14 +72,14 @@ type DonationsPerUserEntry = {
 };
 
 type AllSupportsPerUserEntry =
-    SubgiftsPerUserEntry &
+    SubsPerUserEntry &
     {
         'bits': number,
         'donations': number,
     };
 
 type EncryptedDashboardDetailsJsonRaw = typeof import('./debug-dashboard-details.json');
-type DashboardDetailsPerUserFields = 'bitsPerUser' | 'subbombsPerUser' | 'subgiftsPerUser' | 'donationsPerUser';
+type DashboardDetailsPerUserFields = 'bitsPerUser' | 'subbombsPerUser' | 'individualsubsPerUser' | 'selfsubsPerUser' | 'subgiftsPerUser' | 'donationsPerUser';
 type DashboardDetailsEntries<
     TKey extends DashboardDetailsPerUserFields,
     TEntry> = EncryptedDashboardDetailsJsonRaw[TKey][0] extends TEntry ? TEntry[] : never;
@@ -87,7 +87,9 @@ type DashboardDetailsEntries<
 type EncryptedDashboardDetailsJson = Omit<Omit<EncryptedDashboardDetailsJsonRaw, DashboardDetailsPerUserFields> & {
     bitsPerUser: DashboardDetailsEntries<'bitsPerUser', BitsPerUserEntry>;
     subbombsPerUser: DashboardDetailsEntries<'subbombsPerUser', SubbombsPerUserEntry>;
-    subgiftsPerUser: DashboardDetailsEntries<'subgiftsPerUser', SubgiftsPerUserEntry>;
+    individualsubsPerUser: DashboardDetailsEntries<'individualsubsPerUser', SubsPerUserEntry>;
+    selfsubsPerUser: DashboardDetailsEntries<'selfsubsPerUser', SubsPerUserEntry>;
+    subgiftsPerUser: DashboardDetailsEntries<'subgiftsPerUser', SubsPerUserEntry>;
     donationsPerUser: DashboardDetailsEntries<'donationsPerUser', DonationsPerUserEntry>;
 }, ''>;
 type DecryptedDashboardDetailsJson = Omit<EncryptedDashboardDetailsJson, "encryptedSupporters" | "supporters">;
