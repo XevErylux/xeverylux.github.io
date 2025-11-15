@@ -702,8 +702,6 @@ const app = await (async function () {
         if (!dialog)
             return;
 
-        dialog.isDirty = false;
-
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
@@ -1115,13 +1113,13 @@ const app = await (async function () {
 
         const now = new Date();
         const nextDetailsUpdate = model.nextDetailsUpdate;
-        if (nextDetailsUpdate && nextDetailsUpdate > now) {
+        if (model.details && nextDetailsUpdate && nextDetailsUpdate > now) {
             return;
         }
 
         model.nextDetailsUpdate = new Date(now.getTime() + 10 * 60000);
 
-        let isChanged = model.dialog.isDirty;
+        let isChanged = false;
         const details = await fetchDetails();
         if (details?.hash !== model.details?.hash) {
             isChanged = true;
@@ -1182,7 +1180,6 @@ const app = await (async function () {
 
     openDialogClicked = (function (type) {
         model.dialog = {
-            isDirty: true,
             type: type,
             sortBy: defaultDialogSorting(type),
         };

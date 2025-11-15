@@ -107,7 +107,6 @@ type SortColumn = {
 };
 
 type UIDialog = {
-    isDirty: boolean;
     type: UIDialogType;
     sortBy: SortColumn[];
     element?: HTMLDialogElement;
@@ -117,5 +116,6 @@ type UIModel = {
     lastFetch: 'live' | 'details' | null,
     live: DecryptedDashboardLiveJson | null,
     details: DecryptedDashboardDetailsJson | null,
+    nextDetailsUpdate: Date | null,
     dialog?: UIDialog,
 };
