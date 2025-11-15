@@ -324,6 +324,7 @@ const app = await (async function () {
     let model = (/** @returns {UIModel} */ function () {
         return {
             lastFetch: null,
+            nextDetailsUpdate: null,
             live: null,
             details: null,
         };
@@ -1089,9 +1090,36 @@ const app = await (async function () {
         details.latestEventAt = live.events[0].timestamp;
     }
 
+    const fetchLiveAndUpdate = async function () {
+        model.lastFetch = 'live';
+
+        const live = await fetchLive();
+        if (!!live && live.hash != model.live?.hash) {
+
+            // Only change value, if we got a valid object, otherwise
+            // we will clear UI when loosing connection.
+            model.live = live;
+            // Reset details, in case we revert the live data for some reason
+            model.details = null;
+
+            updateDetailsWithLive();
+
+            render();
+
+        }
+    };
+
     const fetchDetailsAndUpdate = async function () {
         if (!model.dialog)
-            return false;
+            return;
+
+        const now = new Date();
+        const nextDetailsUpdate = model.nextDetailsUpdate;
+        if (nextDetailsUpdate && nextDetailsUpdate > now) {
+            return;
+        }
+
+        model.nextDetailsUpdate = new Date(now.getTime() + 10 * 60000);
 
         let isChanged = model.dialog.isDirty;
         const details = await fetchDetails();
@@ -1114,28 +1142,16 @@ const app = await (async function () {
         switch (model.lastFetch) {
             case null:
             case 'details':
-                model.lastFetch = 'live';
-
-                const live = await fetchLive();
-                if (!!live && live.hash != model.live?.hash) {
-
-                    // Only change value, if we got a valid object, otherwise
-                    // we will clear UI when loosing connection.
-                    model.live = live;
-                    // Reset details, in case we revert the live data for some reason
-                    model.details = null;
-
-                    updateDetailsWithLive();
-
-                    render();
-
-                }
+                await fetchLiveAndUpdate();
                 break;
 
             case 'live':
                 model.lastFetch = 'details';
 
-                await fetchDetailsAndUpdate();
+                if (await fetchDetailsAndUpdate() === undefined) {
+                    // There was no fetch, so immediately go to the other resource.
+                    await fetchAndUpdate();
+                }
                 break;
 
             default:
