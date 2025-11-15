@@ -1073,6 +1073,8 @@ const app = await (async function () {
         }
 
         if (model.dialog) {
+            // Wait 2000ms, because some API servers do not like two requests in same second
+            await wait(2000);
             const details = await fetchDetails();
             if (details?.hash !== model.details?.hash) {
                 isChanged = true;
@@ -1122,7 +1124,11 @@ const app = await (async function () {
             sortBy: defaultDialogSorting(type),
         };
 
-        fetchAndUpdate();
+        if (!model.dialog) {
+            fetchAndUpdate();
+        } else {
+            renderDialog();
+        }
     });
 
     return {
