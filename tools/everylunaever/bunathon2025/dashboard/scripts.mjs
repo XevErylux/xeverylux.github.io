@@ -1109,10 +1109,10 @@ const app = await (async function () {
                 { name: "points", direction: 'DESC' },
                 { name: 'supporter', direction: 'ASC' },
             ];
-            case "keychains": return [{ name: "supporter", direction: 'DESC' }];
-            case "namesOnArtwork": return [{ name: "supporter", direction: 'DESC' }];
-            case "postcards": return [{ name: "supporter", direction: 'DESC' }];
-            case "wheelSpins": return [{ name: "supporter", direction: 'DESC' }];
+            case "keychains": return [{ name: "supporter", direction: 'ASC' }];
+            case "namesOnArtwork": return [{ name: "supporter", direction: 'ASC' }];
+            case "postcards": return [{ name: "supporter", direction: 'ASC' }];
+            case "wheelSpins": return [{ name: "supporter", direction: 'ASC' }];
             default: throw unreachable(type);
         }
     }
