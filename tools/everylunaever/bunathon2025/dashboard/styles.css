@@ -20,15 +20,6 @@ body {
     color: #333;
 }
 
-dialog {
-    font-family: var(--font-family);
-    font-size: 1em;
-}
-
-body:has(dialog[open]) {
-    overflow: hidden;
-}
-
 header {
     background: #6441a5;
     color: white;
@@ -41,7 +32,6 @@ header {
 }
 
 h2 {
-    text-shadow: gray 0px 0px 4px, gray 2px 2px;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
@@ -54,8 +44,7 @@ h2 {
     justify-content: center;
 }
 
-.card,
-.details {
+.card {
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -63,35 +52,21 @@ h2 {
     width: 220px;
 }
 
+div[subpage]>div.info {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
 .card {
     text-align: center;
 }
 
 .details {
-    width: 550px;
-    height: 650px;
-}
-
-.details#subgifts-details {
-    width: 650px;
-}
-
-.details#all-supports {
-    width: 800px;
-}
-
-dialog.details::backdrop {
-    background: rgba(0, 0, 0, 0.3);
-}
-
-.details {
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: calc(100% - 2rem);
     padding: 1rem;
-}
-
-.details h2 {
-    text-align: center;
 }
 
 .details table {
@@ -143,9 +118,8 @@ dialog.details::backdrop {
     border-bottom: none;
 }
 
-.details span.table-loading
-{
-display: none;
+.details span.table-loading {
+    display: none;
 }
 
 .details[data-loading] span.table-loading {
@@ -168,19 +142,30 @@ display: none;
     margin-bottom: 0.5rem;
 }
 
-.leaderboards-header-container {
+.h2-container {
     display: flex;
     flex-direction: row;
     width: 100%;
 }
 
-.leaderboards-header {
-    padding-left: 1rem;
-    padding-right: 1rem;
+.h2-container h2 {
     flex-grow: 1;
 }
 
-.leaderboards-header-container button {
+
+
+.h2-container button,
+.h2-container a[role=button] {
+    margin: 0rem 0rem 0.5rem 0rem;
+}
+
+.h2-container:has(> .leaderboards-header) h2 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.h2-container:has(> .leaderboards-header) button,
+.h2-container:has(> .leaderboards-header) a[role=button] {
     margin: 0rem 1rem 0.5rem 0rem;
 }
 
@@ -234,12 +219,12 @@ display: none;
     padding: 1rem;
 }
 
-.events table {
+.events table,
+div[subpage] table {
     width: 100%;
     border-collapse: collapse;
     background: white;
     border-radius: 8px;
-    overflow: hidden;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -262,24 +247,32 @@ display: none;
     display: table-row;
 }
 
-.events button {
+.events button,
+.events a[role=button] {
     margin-bottom: 0.5rem;
+}
+
+.events:not(.expanded) table {
+    overflow: hidden;
 }
 
 .events:not(.expanded) tbody tr:nth-child(n+11) {
     display: none;
 }
 
-.events.expanded button.fold-in {
+.events.expanded button.fold-in,
+.events.expanded a[role=button].fold-in {
     margin-top: 0.5rem;
 }
 
-.events:not(.expanded) button.fold-in {
+.events:not(.expanded) button.fold-in,
+.events:not(.expanded) a[role=button].fold-in {
 
     display: none;
 }
 
-button {
+button,
+a[role=button] {
     background: #6441a5;
     color: white;
     border: none;
@@ -290,11 +283,23 @@ button {
     font-family: var(--font-family);
 }
 
-button:hover:not(:disabled) {
+a[role=button] {
+    text-decoration: none;
+    padding-top: 0.75rem;
+}
+
+button:hover:not(:disabled),
+a[role=button]:hover:not(:disabled) {
     background: #4b2c91;
 }
 
-button:disabled {
+button:disabled,
+a[role=button]:disabled {
     filter: grayscale();
     cursor: not-allowed;
+}
+
+table thead {
+    position: sticky;
+    top: -1px;
 }

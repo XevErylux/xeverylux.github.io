@@ -86,7 +86,7 @@ async function tryLoadKeyFromSearch() {
         localStorage.setItem('bunathon2025-dashboard-key', base64);
         if (location.search !== '') {
             const url = location.toString();
-            location.replace(url.substring(0, url.indexOf('?')));
+            location.replace(url.substring(0, url.indexOf('?')) + location.hash);
         }
         return imported;
     } catch {
@@ -216,26 +216,6 @@ function getElementById(elementId, qualifiedName) {
 
     return /** @type {HTMLElementTagNameMap[typeof qualifiedName]} */(element);
 }
-
-/** @param {PointerEvent} e */
-function dialogClickHandler(e) {
-    if (e.target && e.target instanceof HTMLDialogElement) {
-        const rect = e.target.getBoundingClientRect();
-
-        const clickedInDialog = (
-            rect.top <= e.clientY &&
-            e.clientY <= rect.top + rect.height &&
-            rect.left <= e.clientX &&
-            e.clientX <= rect.left + rect.width
-        );
-
-        if (clickedInDialog)
-            return;
-
-        e.target.close();
-    }
-}
-
 
 const settings = {
     fetchInterval: isDevelopment ? 1000 : 15000,
@@ -520,14 +500,6 @@ const app = await (async function () {
         );
     }
 
-    function handleModalClose(/** @type {Event} */ ev) {
-        if (model.dialog) {
-            if (model.dialog.element === ev.target) {
-                model.dialog = undefined;
-            }
-        }
-    }
-
     /** 
      *  @this {GlobalEventHandlers}
      *  @param {PointerEvent} ev
@@ -538,26 +510,26 @@ const app = await (async function () {
             if (className === 'rownum')
                 return;
 
-            const dialog = model.dialog;
-            if (!dialog)
+            const subpage = model.subpage;
+            if (!subpage)
                 return;
 
-            const index = dialog.sortBy.findIndex(x => x.name === className);
+            const index = subpage.sortBy.findIndex(x => x.name === className);
             if (index === 0) {
-                const element = dialog.sortBy[0];
+                const element = subpage.sortBy[0];
                 element.direction = flipSortDirection(element.direction);
             } else {
                 if (index > -1) {
-                    dialog.sortBy.splice(index, 1);
+                    subpage.sortBy.splice(index, 1);
                 }
 
-                dialog.sortBy.splice(0, 0, {
+                subpage.sortBy.splice(0, 0, {
                     name: className,
                     direction: 'DESC',
                 });
             }
 
-            renderDialog();
+            renderSubpage();
         }
     }
 
@@ -569,43 +541,44 @@ const app = await (async function () {
         }
     }
 
-    function openDialog(/** @type {string} */ id) {
-        const dialog = model.dialog;
-        if (!dialog)
+    function openSubpage(/** @type {string} */ id) {
+        const subpage = model.subpage;
+        if (!subpage)
             return;
 
-        const dialogElement = getElementById(id, 'dialog');
-        if (!dialogElement)
+        const subpageElement = getElementById(id, 'div');
+        if (!subpageElement)
             return;
 
-        if (dialog.element && dialog.element !== dialogElement) {
-            dialog.element.requestClose();
+        if (subpage.element && subpage.element !== subpageElement) {
+            subpage.element.removeAttribute('open');
+            subpage.element = undefined;
+            location.hash = '';
         }
 
-        if (!dialogElement.open) {
-            dialogElement.showModal();
-            dialogElement.onclick = dialogClickHandler;
-            dialogElement.onclose = handleModalClose;
+        if (!subpageElement.hasAttribute('open')) {
+            subpageElement.setAttribute('open', '');
+            location.hash = subpage.type;
 
-            const tableElement = dialogElement.querySelector("table");
+            const tableElement = subpageElement.querySelector("table");
             if (tableElement) {
                 tableElement.onclick = tableClickHandler;
             }
         }
 
-        dialog.element = dialogElement;
+        subpage.element = subpageElement;
 
-        const activeSortingElement = dialogElement.querySelector("span.active-sorting");
+        const activeSortingElement = subpageElement.querySelector("span.active-sorting");
         if (activeSortingElement) {
             /** @type {Record<string, string>} */
             const columnHeaders = {};
             for (const th of
                 [.../** @type {NodeListOf<HTMLTableCellElement>} */(
-                    dialogElement.querySelectorAll("table thead tr th")
+                    subpageElement.querySelectorAll("table thead tr th")
                 )]) {
                 columnHeaders[th.className] = th.textContent;
             }
-            const sortString = dialog.sortBy
+            const sortString = subpage.sortBy
                 .map(c => {
                     const textContent = columnHeaders[c.name];
                     return `${textContent ?? name} ${directionToSymbol(c.direction)}`;
@@ -614,7 +587,7 @@ const app = await (async function () {
             trySetTextContentIfChanged(activeSortingElement, sortString);
         }
 
-        return dialogElement;
+        return subpageElement;
     }
 
     function buildAllSupports(
@@ -697,39 +670,39 @@ const app = await (async function () {
         return allSupports;
     }
 
-    function renderDialog() {
-        const dialog = model.dialog;
-        if (!dialog)
+    function renderSubpage() {
+        const subpage = model.subpage;
+        if (!subpage)
             return;
 
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        switch (dialog.type) {
+        switch (subpage.type) {
             case "wheelSpins":
                 {
-                    const dialogElement = openDialog('wheel-spins-details');
-                    if (!dialogElement)
+                    const subpageElement = openSubpage('wheel-spins-details');
+                    if (!subpageElement)
                         return;
 
                     const data = model.details;
                     if (!data) {
-                        dialogElement.setAttribute('data-loading', '');
+                        subpageElement.setAttribute('data-loading', '');
                         return;
                     } else {
-                        dialogElement.removeAttribute('data-loading');
+                        subpageElement.removeAttribute('data-loading');
                     }
 
                     const rowTemplate = getElementById('wheel-spins-details-row-template', 'template');
                     if (!rowTemplate)
                         return;
 
-                    const tableBody = dialogElement.querySelector('tbody');
+                    const tableBody = subpageElement.querySelector('tbody');
                     if (!tableBody)
                         return;
 
                     renderTable(
-                        dialog.sortBy,
+                        subpage.sortBy,
                         data.subbombsPerUser,
                         bomb => `${bomb.supporter}-${bomb.timestamp}-tier${bomb.tier}-${bomb.subcount}`,
                         rowTemplate,
@@ -768,16 +741,16 @@ const app = await (async function () {
             case "namesOnArtwork":
             case "postcards":
                 {
-                    const dialogElement = openDialog('subgifts-details');
-                    if (!dialogElement)
+                    const subpageElement = openSubpage('subgifts-details');
+                    if (!subpageElement)
                         return;
 
                     const data = model.details;
                     if (!data) {
-                        dialogElement.setAttribute('data-loading', '');
+                        subpageElement.setAttribute('data-loading', '');
                         return;
                     } else {
-                        dialogElement.removeAttribute('data-loading');
+                        subpageElement.removeAttribute('data-loading');
                     }
 
                     const [elementIdPrefix, minCount] = (function (type) {
@@ -787,7 +760,7 @@ const app = await (async function () {
                             case "keychains": return ["keychains", 200];
                             default: throw unreachable(type);
                         }
-                    })(dialog.type);
+                    })(subpage.type);
 
                     const cardHeaderText = document.querySelector(`.summary .card#${elementIdPrefix}-card > h3`)?.textContent ?? '<unknown>';
                     const subgiftsDetailsTitle = getElementById('subgifts-details-title', 'h2');
@@ -799,12 +772,12 @@ const app = await (async function () {
                     if (!rowTemplate)
                         return;
 
-                    const tableBody = dialogElement.querySelector('tbody');
+                    const tableBody = subpageElement.querySelector('tbody');
                     if (!tableBody)
                         return;
 
                     renderTable(
-                        dialog.sortBy,
+                        subpage.sortBy,
                         data.subgiftsPerUser.filter(x => x.total >= minCount),
                         bomb => `${bomb.supporter}`,
                         rowTemplate,
@@ -849,30 +822,30 @@ const app = await (async function () {
 
             case "allSupports":
                 {
-                    const dialogElement = openDialog('all-supports');
-                    if (!dialogElement)
+                    const subpageElement = openSubpage('all-supports');
+                    if (!subpageElement)
                         return;
 
                     const data = model.details;
                     if (!data) {
-                        dialogElement.setAttribute('data-loading', '');
+                        subpageElement.setAttribute('data-loading', '');
                         return;
                     } else {
-                        dialogElement.removeAttribute('data-loading');
+                        subpageElement.removeAttribute('data-loading');
                     }
 
                     const rowTemplate = getElementById('all-supports-row-template', 'template');
                     if (!rowTemplate)
                         return;
 
-                    const tableBody = dialogElement.querySelector('tbody');
+                    const tableBody = subpageElement.querySelector('tbody');
                     if (!tableBody)
                         return;
 
                     const allSupports = buildAllSupports(data);
 
                     renderTable(
-                        dialog.sortBy,
+                        subpage.sortBy,
                         allSupports,
                         entry => `${entry.supporter}`,
                         rowTemplate,
@@ -924,7 +897,7 @@ const app = await (async function () {
                 break;
 
             default:
-                throw unreachable(dialog.type);
+                throw unreachable(subpage.type);
         }
     }
 
@@ -971,8 +944,8 @@ const app = await (async function () {
         // Fülle die Ereignisliste effizient mit Schlüssel
         renderEvents(data.events);
 
-        // Fülle die Dialoge, falls geöffnet
-        renderDialog();
+        // Fülle die Unterseiten, falls geöffnet
+        renderSubpage();
     }
 
     function render() {
@@ -1108,7 +1081,7 @@ const app = await (async function () {
     };
 
     const fetchDetailsAndUpdate = async function () {
-        if (!model.dialog)
+        if (!model.subpage)
             return;
 
         const now = new Date();
@@ -1164,7 +1137,7 @@ const app = await (async function () {
     }
 
     /** @returns {SortColumn[]} */
-    function defaultDialogSorting(/** @type {UIDialogType} */ type) {
+    function defaultSubpageSorting(/** @type {UISubpageType} */ type) {
         switch (type) {
             case "allSupports": return [
                 { name: "points", direction: 'DESC' },
@@ -1178,20 +1151,49 @@ const app = await (async function () {
         }
     }
 
-    openDialogClicked = (function (type) {
-        model.dialog = {
+    openSubpageClicked = (function (type) {
+        model.subpage = {
             type: type,
-            sortBy: defaultDialogSorting(type),
+            sortBy: defaultSubpageSorting(type),
         };
 
         if (!model.details) {
-            renderDialog();
+            renderSubpage();
 
             fetchDetailsAndUpdate();
         } else {
-            renderDialog();
+            renderSubpage();
         }
     });
+
+    function openPageByHash(/** @type {UISubpageType | ''} */ hash) {
+        if (!openSubpageClicked)
+            return;
+
+        switch (hash) {
+            case 'allSupports':
+            case 'keychains':
+            case 'namesOnArtwork':
+            case 'postcards':
+            case 'wheelSpins':
+                openSubpageClicked(hash);
+                break;
+
+            case '':
+                document.querySelectorAll("[subpage][open]").forEach(subpage => {
+                    model.subpage = undefined;
+                    subpage.removeAttribute('open');
+                });
+                break;
+        }
+    }
+
+    window.onhashchange = function () {
+        const hash = /** @type {UISubpageType | ''} */(location.hash.substring(1));
+        openPageByHash(hash);
+    };
+
+    openPageByHash(/** @type {UISubpageType | ''} */(location.hash.substring(1)));
 
     return {
         main,

@@ -22,8 +22,18 @@
         });
     </script>
     <style>
-        body:not([data-has-key]):has(> #loadingState:not(:empty))> :not(#loadingState) {
+        body:not([data-has-key]):has(> #loadingState:not(:empty))> :not(#loadingState),
+        body:has(div.details[subpage][open])>*:not(header):not([subpage]),
+        body>div.details[subpage]:not([open]) {
             display: none;
+        }
+
+        body:has(#loadingState:not(:empty)):has(div.details[subpage][open])>div.details[subpage] {
+            display: none;
+        }
+
+        body:has(#loadingState:not(:empty)):has(div.details[subpage])>div.details[subpage][open] {
+            display: initial;
         }
 
         #loadingState:not(:empty) {
@@ -50,102 +60,28 @@
         <div class="card" id="wheel-spins-card">
             <h3>🎡 Rad drehen</h3>
             <p id="wheel-spins-count">0</p>
-            <button onclick="openDialog('wheelSpins')">Details</button>
+            <button onclick="openSubpage('wheelSpins')">Details</button>
         </div>
         <div class="card" id="postcards-card">
             <h3>📮 Postkarten</h3>
             <p id="postcards-count">0</p>
-            <button onclick="openDialog('postcards')">Details</button>
+            <button onclick="openSubpage('postcards')">Details</button>
         </div>
         <div class="card" id="artwork-names-card">
             <h3>🎨 Namen auf Artwork</h3>
             <p id="artwork-names-count">0</p>
-            <button onclick="openDialog('namesOnArtwork')">Details</button>
+            <button onclick="openSubpage('namesOnArtwork')">Details</button>
         </div>
         <div class="card" id="keychains-card">
             <h3>🔑 Keychains</h3>
             <p id="keychains-count">0</p>
-            <button onclick="openDialog('keychains')">Details</button>
+            <button onclick="openSubpage('keychains')">Details</button>
         </div>
-
-        <dialog id="wheel-spins-details" class="details">
-            <h2>🎡 Rad drehen</h2>
-            <p>Listet alle Abo-Bomben mit der Größe von mindestens 25 Abos sortiert nach Name und Zeitpunkt.</p>
-            <p>Klicke auf die Spaltenüberschrift um zwischen ab-/aufsteigend zu wechseln.</p>
-            <p>Aktive Sortierung: <span class="active-sorting"></span></p>
-            <table id="wheel-spins-details-table">
-                <thead>
-                    <tr>
-                        <th class="rownum">#</th>
-                        <th class="timestamp">Zeitpunkt</th>
-                        <th class="supporter">Name</th>
-                        <th class="level">Stufe</th>
-                        <th class="amount">Menge</th>
-                        <th class="points">Punkte</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-            <span class="table-loading">
-                Einträge werden abgerufen...
-            </span>
-
-            <template id="wheel-spins-details-row-template">
-                <tr>
-                    <td class="rownum"></td>
-                    <td class="timestamp"></td>
-                    <td class="supporter"></td>
-                    <td class="level"></td>
-                    <td class="amount"></td>
-                    <td class="points"></td>
-                </tr>
-            </template>
-        </dialog>
-
-        <dialog id="subgifts-details" class="details">
-            <h2 id="subgifts-details-title"></h2>
-            <p>Listet alle Unterstützer auf, die genug für diesen Anreiz (Insentive) gesammelt haben.</p>
-            <p>Klicke auf die Spaltenüberschrift um zwischen ab-/aufsteigend zu wechseln.</p>
-            <p>Aktive Sortierung: <span class="active-sorting"></span></p>
-            <table id="subgifts-details-table">
-                <thead>
-                    <tr>
-                        <th class="rownum">#</th>
-                        <th class="reached-at">Zuletzt am</th>
-                        <th class="supporter">Name</th>
-                        <th class="t1">T1</th>
-                        <th class="t2">T2</th>
-                        <th class="t3">T3</th>
-                        <th class="amount">Gesamt</th>
-                        <th class="points">Punkte</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-            <span class="table-loading">
-                Einträge werden abgerufen...
-            </span>
-
-            <template id="subgifts-details-row-template">
-                <tr>
-                    <td class="rownum"></td>
-                    <td class="reached-at"></td>
-                    <td class="supporter"></td>
-                    <td class="t1"></td>
-                    <td class="t2"></td>
-                    <td class="t3"></td>
-                    <td class="amount"></td>
-                    <td class="points"></td>
-                </tr>
-            </template>
-        </dialog>
-
-
     </section>
 
-    <div class="leaderboards-header-container">
+    <div class="h2-container">
         <h2 class="leaderboards-header">🏆 Top Unterstützer</h2>
-        <button onclick="openDialog('allSupports')">Alle Unterstützungen</button>
+        <button onclick="openSubpage('allSupports')">Alle Unterstützungen</button>
     </div>
     <section class="leaderboards">
         <div class="leaderboard">
@@ -253,46 +189,6 @@
         </div>
     </section>
 
-    <dialog id="all-supports" class="details">
-        <h2 id="all-supports-title">💰 Alle Unterstützungen</h2>
-        <p>Klicke auf die Spaltenüberschrift um zwischen ab-/aufsteigend zu wechseln.</p>
-        <p>Aktive Sortierung: <span class="active-sorting"></span></p>
-        <table id="all-supports-table">
-            <thead>
-                <tr>
-                    <th class="rownum">#</th>
-                    <th class="reached-at">Zuletzt am</th>
-                    <th class="supporter">Name</th>
-                    <th class="subs">Abos</th>
-                    <th class="t1">T1</th>
-                    <th class="t2">T2</th>
-                    <th class="t3">T3</th>
-                    <th class="bits">Bits</th>
-                    <th class="donations">Spenden</th>
-                    <th class="points">Punkte</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <span class="table-loading">
-                Einträge werden abgerufen...
-            </span>
-        <template id="all-supports-row-template">
-            <tr>
-                <td class="rownum"></td>
-                <td class="reached-at"></td>
-                <td class="supporter"></td>
-                <td class="subs"></td>
-                <td class="t1"></td>
-                <td class="t2"></td>
-                <td class="t3"></td>
-                <td class="bits"></td>
-                <td class="donations"></td>
-                <td class="points"></td>
-            </tr>
-        </template>
-    </dialog>
-
     <section class="events">
         <h2>📅 Ereignisse der letzten Stunde</h2>
         <button onclick="toggleEvents()">Ein-/Ausklappen</button>
@@ -321,12 +217,141 @@
         </template>
     </section>
 
-    <script>
-        var openDialogClicked = undefined;
 
-        function openDialog(type) {
-            if (openDialogClicked) {
-                openDialogClicked(type);
+    <div id="all-supports" subpage class="details">
+        <div class="h2-container">
+            <h2 id="all-supports-title">💰 Alle Unterstützungen</h2>
+            <a role="button" href="#">Zurück</a>
+        </div>
+        <div class="info">
+            <p>Klicke auf die Spaltenüberschrift um zwischen ab-/aufsteigend zu wechseln.</p>
+            <p>Aktive Sortierung: <span class="active-sorting"></span></p>
+        </div>
+        <table id="all-supports-table">
+            <thead>
+                <tr>
+                    <th class="rownum">#</th>
+                    <th class="reached-at">Zuletzt am</th>
+                    <th class="supporter">Name</th>
+                    <th class="subs">Abos</th>
+                    <th class="t1">T1</th>
+                    <th class="t2">T2</th>
+                    <th class="t3">T3</th>
+                    <th class="bits">Bits</th>
+                    <th class="donations">Spenden</th>
+                    <th class="points">Punkte</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <span class="table-loading">
+            Einträge werden abgerufen...
+        </span>
+        <template id="all-supports-row-template">
+            <tr>
+                <td class="rownum"></td>
+                <td class="reached-at"></td>
+                <td class="supporter"></td>
+                <td class="subs"></td>
+                <td class="t1"></td>
+                <td class="t2"></td>
+                <td class="t3"></td>
+                <td class="bits"></td>
+                <td class="donations"></td>
+                <td class="points"></td>
+            </tr>
+        </template>
+    </div>
+
+
+    <div id="wheel-spins-details" subpage class="details">
+        <div class="h2-container">
+            <h2>🎡 Rad drehen</h2>
+            <a role="button" href="#">Zurück</a>
+        </div>
+        <div class="info">
+            <p>Listet alle Abo-Bomben mit der Größe von mindestens 25 Abos sortiert nach Name und Zeitpunkt.</p>
+            <p>Klicke auf die Spaltenüberschrift um zwischen ab-/aufsteigend zu wechseln.</p>
+            <p>Aktive Sortierung: <span class="active-sorting"></span></p>
+        </div>
+        <table id="wheel-spins-details-table">
+            <thead>
+                <tr>
+                    <th class="rownum">#</th>
+                    <th class="timestamp">Zeitpunkt</th>
+                    <th class="supporter">Name</th>
+                    <th class="level">Stufe</th>
+                    <th class="amount">Menge</th>
+                    <th class="points">Punkte</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <span class="table-loading">
+            Einträge werden abgerufen...
+        </span>
+
+        <template id="wheel-spins-details-row-template">
+            <tr>
+                <td class="rownum"></td>
+                <td class="timestamp"></td>
+                <td class="supporter"></td>
+                <td class="level"></td>
+                <td class="amount"></td>
+                <td class="points"></td>
+            </tr>
+        </template>
+    </div>
+
+    <div id="subgifts-details" subpage class="details">
+        <div class="h2-container">
+            <h2 id="subgifts-details-title"></h2>
+            <a role="button" href="#">Zurück</a>
+        </div>
+        <div class="info">
+            <p>Listet alle Unterstützer auf, die genug für diesen Anreiz (Insentive) gesammelt haben.</p>
+            <p>Klicke auf die Spaltenüberschrift um zwischen ab-/aufsteigend zu wechseln.</p>
+            <p>Aktive Sortierung: <span class="active-sorting"></span></p>
+        </div>
+        <table id="subgifts-details-table">
+            <thead>
+                <tr>
+                    <th class="rownum">#</th>
+                    <th class="reached-at">Zuletzt am</th>
+                    <th class="supporter">Name</th>
+                    <th class="t1">T1</th>
+                    <th class="t2">T2</th>
+                    <th class="t3">T3</th>
+                    <th class="amount">Gesamt</th>
+                    <th class="points">Punkte</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <span class="table-loading">
+            Einträge werden abgerufen...
+        </span>
+
+        <template id="subgifts-details-row-template">
+            <tr>
+                <td class="rownum"></td>
+                <td class="reached-at"></td>
+                <td class="supporter"></td>
+                <td class="t1"></td>
+                <td class="t2"></td>
+                <td class="t3"></td>
+                <td class="amount"></td>
+                <td class="points"></td>
+            </tr>
+        </template>
+    </div>
+
+    <script>
+        var openSubpageClicked = undefined;
+
+        function openSubpage(type) {
+            if (openSubpageClicked) {
+                openSubpageClicked(type);
             }
         }
 

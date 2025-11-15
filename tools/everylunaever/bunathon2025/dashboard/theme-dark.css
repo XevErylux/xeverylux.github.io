@@ -48,20 +48,28 @@ h3 {
 }
 
 /* Karten */
-.card,
-.details {
+.card {
     background-color: var(--card-background);
     border: 2px solid var(--card-border);
     color: var(--card-text);
 }
 
+div[subpage]>div.info {
+    background-color: var(--card-background);
+    border: 2px solid var(--card-border);
+    color: var(--card-text);
+    border-radius: 8px;
+}
+
 /* Buttons */
-button {
+button,
+a[role=button] {
     background-color: var(--button-background);
     color: var(--button-text);
 }
 
-button:not(:disabled):hover {
+button:not(:disabled):hover,
+a[role=button]:not(:disabled):hover {
     background-color: var(--button-hover);
 }
 

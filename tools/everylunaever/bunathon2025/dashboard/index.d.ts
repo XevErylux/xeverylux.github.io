@@ -1,6 +1,6 @@
 declare var loadingState: HTMLSpanElement;
 
-declare var openDialogClicked: ((type: UIDialogType) => void) | undefined;
+declare var openSubpageClicked: ((type: UISubpageType) => void) | undefined;
 
 type TakeIfMatch<ToTake, TActual> = TActual extends ToTake ? ToTake : never;
 
@@ -92,7 +92,7 @@ type EncryptedDashboardDetailsJson = Omit<Omit<EncryptedDashboardDetailsJsonRaw,
 }, ''>;
 type DecryptedDashboardDetailsJson = Omit<EncryptedDashboardDetailsJson, "encryptedSupporters" | "supporters">;
 
-type UIDialogType = keyof DecryptedDashboardLiveJson & (
+type UISubpageType = keyof DecryptedDashboardLiveJson & (
     'wheelSpins' |
     'postcards' |
     'namesOnArtwork' |
@@ -106,10 +106,10 @@ type SortColumn = {
     direction: SortDirection,
 };
 
-type UIDialog = {
-    type: UIDialogType;
+type UISubpage = {
+    type: UISubpageType;
     sortBy: SortColumn[];
-    element?: HTMLDialogElement;
+    element?: HTMLDivElement;
 };
 
 type UIModel = {
@@ -117,5 +117,5 @@ type UIModel = {
     live: DecryptedDashboardLiveJson | null,
     details: DecryptedDashboardDetailsJson | null,
     nextDetailsUpdate: Date | null,
-    dialog?: UIDialog,
+    subpage?: UISubpage,
 };

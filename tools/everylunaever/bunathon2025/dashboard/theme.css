@@ -76,30 +76,36 @@ h3 {
 }
 
 /* Karten */
-.card,
-.details {
+.card {
     background-color: var(--card-background);
     border: 2px solid var(--card-border);
     color: var(--card-text);
 }
 
-/* Dialoge */
-dialog.details:focus {
-    outline: none;
+div[subpage]>div.info {
+    background-color: var(--card-background);
+    border: 2px solid var(--card-border);
+    color: var(--card-text);
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 /* Buttons */
-button {
+button,
+a[role=button] {
     background-color: var(--button-background);
     color: var(--button-text);
 }
 
 button:hover:not(:disabled),
-button:focus:not(:disabled) {
+button:focus:not(:disabled),
+a[role=button]:hover:not(:disabled),
+a[role=button]:focus:not(:disabled) {
     background-color: var(--button-hover);
 }
 
-button:focus {
+button:focus,
+a[role=button]:focus {
     outline: none;
 }
 
