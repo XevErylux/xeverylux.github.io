@@ -189,7 +189,7 @@ const ui = (function () {
     const maximum = Math.max(...config.goals.map(x => x.points));
 
     let model = (/** @returns {UIModel} */ function () {
-        const initialTotalPoints = isDevelopment ? 0 : 0;
+        const initialTotalPoints = isDevelopment ? 0 : 9444;
         return {
             totalPoints: initialTotalPoints,
             goals: loadGoalsFromConfig(),
