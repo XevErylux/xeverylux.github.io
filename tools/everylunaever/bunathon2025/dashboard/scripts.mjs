@@ -603,7 +603,6 @@ const app = await (async function () {
         const allSupports = [];
         for (const subgifts of [
             data.selfsubsPerUser,
-            data.individualsubsPerUser,
             data.subgiftsPerUser
         ]) {
             for (const subgift of subgifts) {
@@ -788,44 +787,54 @@ const app = await (async function () {
                     if (!tableBody)
                         return;
 
+                    const allSupports = buildAllSupports(data);
+
                     renderTable(
                         subpage.sortBy,
-                        data.subgiftsPerUser.filter(x => x.total >= minCount),
-                        bomb => `${bomb.supporter}`,
+                        allSupports.filter(x => x.points >= minCount),
+                        entry => `${entry.supporter}`,
                         rowTemplate,
                         tableBody,
-                        (bomb) => ({
+                        (entry) => ({
                             'rownum': {
                                 text: index => `${index + 1}`,
                                 sortValue: 0,
                             },
                             'reached-at': {
-                                text: formatTimestamp(today, bomb.reachedAt),
-                                sortValue: new Date(bomb.reachedAt).getTime(),
+                                text: formatTimestamp(today, entry.reachedAt),
+                                sortValue: new Date(entry.reachedAt).getTime(),
                             },
                             'supporter': {
-                                text: bomb.supporter,
-                                sortValue: bomb.supporter,
+                                text: entry.supporter,
+                                sortValue: entry.supporter,
+                            },
+                            'subs': {
+                                text: `${entry.total}`,
+                                sortValue: entry.total,
                             },
                             't1': {
-                                text: `${bomb.tier1}`,
-                                sortValue: bomb.tier1,
+                                text: `${entry.tier1}`,
+                                sortValue: entry.tier1,
                             },
                             't2': {
-                                text: `${bomb.tier2}`,
-                                sortValue: bomb.tier2,
+                                text: `${entry.tier2}`,
+                                sortValue: entry.tier2,
                             },
                             't3': {
-                                text: `${bomb.tier3}`,
-                                sortValue: bomb.tier3,
+                                text: `${entry.tier3}`,
+                                sortValue: entry.tier3,
                             },
-                            'amount': {
-                                text: `${bomb.total}`,
-                                sortValue: bomb.total,
+                            'bits': {
+                                text: `${entry.bits}`,
+                                sortValue: entry.bits,
+                            },
+                            'donations': {
+                                text: entry.donations.toLocaleString(undefined, { minimumFractionDigits: 2 }),
+                                sortValue: entry.donations,
                             },
                             'points': {
-                                text: formatPoints(bomb.points),
-                                sortValue: bomb.points,
+                                text: formatPoints(entry.points),
+                                sortValue: entry.points,
                             },
                         }),
                     );
