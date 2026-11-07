@@ -1230,8 +1230,8 @@ const app = await (async function () {
         refreshGoalEditor();
 
         try {
-            // 1) Read the table again: everything that happened since the list was shown
-            //    (including our own minute poll) is compared against the editor's baseline.
+            // Read the table again: everything that happened since the list was shown
+            // (including our own minute poll) is compared against the editor's baseline.
             const current = await data.readGoalsNow();
             const external = findExternalGoalChanges(current);
             if (external.lines.length > 0) {
@@ -1240,18 +1240,24 @@ const app = await (async function () {
                 return;
             }
 
-            // 2) Write. Every statement carries the written_at seen at read time as a
-            //    guard, written_at itself always comes from the database clock.
+            // Write. Every statement carries the written_at seen at read time as a
+            // guard, written_at itself always comes from the database clock.
             const currentById = new Map(current.map(goal => /** @type {[number, Goal]} */([goal.id, goal])));
             /** @type {TursoStatement[]} */
             const statements = [];
             /** @type {string[]} */
             const statementLabels = [];
+            
+            // Both counters are used to detect a "DELETE ONLY" save.
+            // These would not update MAX(written_at) which bump the latest existing row instead.
+            let bumpsWrittenAt = 0;
+            let deleteStatements = 0;
 
             for (const draft of editor.drafts) {
                 const intended = buildIntendedGoalContent(draft);
                 if (!intended)
-                    continue; // cannot happen, validateGoalDrafts checked it
+                    // cannot happen, validateGoalDrafts checked it
+                    continue; 
 
                 if (draft.id === null) {
                     statements.push({
@@ -1260,12 +1266,14 @@ const app = await (async function () {
                         wantRows: false,
                     });
                     statementLabels.push(`Ziel „${intended.title}“ (${formatPointsValue(intended.points)} Punkte) anlegen`);
+                    bumpsWrittenAt++;
                     continue;
                 }
 
                 const row = currentById.get(draft.id);
                 if (!row || sameGoalContent(row, intended))
-                    continue; // unchanged, or the table already holds our new state
+                    // unchanged, or the table already holds our new state
+                    continue; 
 
                 statements.push({
                     sql: "UPDATE goals SET points = ?, title = ?, description = ?, written_at = strftime('%Y-%m-%dT%H:%M:%fZ', 'now') WHERE id = ? AND written_at = ?",
@@ -1273,12 +1281,14 @@ const app = await (async function () {
                     wantRows: false,
                 });
                 statementLabels.push(`Ziel „${intended.title}“ (#${draft.id}) ändern`);
+                bumpsWrittenAt++;
             }
 
             for (const goal of editor.removed) {
                 const row = currentById.get(goal.id);
                 if (!row)
-                    continue; // already gone elsewhere: the wanted state exists
+                    // already gone elsewhere: the wanted state exists
+                    continue; 
 
                 statements.push({
                     sql: 'DELETE FROM goals WHERE id = ? AND written_at = ?',
@@ -1286,6 +1296,7 @@ const app = await (async function () {
                     wantRows: false,
                 });
                 statementLabels.push(`Ziel „${goal.title}“ (#${goal.id}) entfernen`);
+                deleteStatements++;
             }
 
             if (statements.length === 0) {
@@ -1297,11 +1308,33 @@ const app = await (async function () {
                 return;
             }
 
+            let markedByIndex = -1;
+            if (deleteStatements > 0 && bumpsWrittenAt === 0) {
+                markedByIndex = statements.length;
+                // We only want to detect a goals refresh via MAX(written_at) in the
+                // goals widget. If we only delete a statement, there is no row with
+                // updated written_at. So we just bump the one with highest id.
+                // If we delete all rows, the MAX(written_at) turns NULL.
+                // This gives the needed notice to change detection and our regular
+                // check only consumes one row read from contigent.
+                // A very simple solution to make DELETE ONLY saves possible with
+                // only one timestamp index.
+                statements.push({
+                    sql: "UPDATE goals SET written_at = strftime('%Y-%m-%dT%H:%M:%fZ', 'now') WHERE id = (SELECT MAX(id) FROM goals)",
+                    wantRows: false,
+                });
+                statementLabels.push('Löschung als Änderung markiert (ohne diesen Satz bliebe das entfernte Ziel im Widget stehen)');
+            }
+
+            const changeStatements = statements.length - (markedByIndex >= 0 ? 1 : 0);
+
             const results = await data.turso.pipeline(statements);
 
             /** @type {string[]} */
             const rejected = [];
             for (let index = 0; index < results.length; index++) {
+                if (index === markedByIndex)
+                    continue;                
                 if (results[index].affectedRowCount > 0)
                     continue;
                 // An UPDATE that would write exactly the same values also reports 0, but
@@ -1309,7 +1342,7 @@ const app = await (async function () {
                 rejected.push(`${statementLabels[index]}: das Ziel wurde zwischenzeitlich geändert.`);
             }
 
-            // 3) Check what the table contains now.
+            // Check what the table contains now.
             const after = await data.readGoalsNow();
             const verification = verifyGoalWrites(editor.drafts, after);
 
@@ -1332,7 +1365,7 @@ const app = await (async function () {
 
             editor.notice = {
                 kind: 'saved',
-                text: `${statements.length} Änderung${statements.length === 1 ? '' : 'en'} gespeichert.`,
+                text: `${changeStatements} Änderung${changeStatements === 1 ? '' : 'en'} gespeichert.`,
                 lines: statementLabels,
             };
             // New baseline: what we just wrote is what the next save compares against.

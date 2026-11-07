@@ -2,9 +2,6 @@
 /// <reference path="./index.d.ts" />
 //
 // Turso Cloud access shared by the webapps (dashboard, goal widget).
-// Everything below was measured against the running bunathon2026 database -
-// the surprises are documented in docs/Turso/queries.sql (section 5) and
-// docs/Turso/Datenbank.md.
 
 'use strict';
 
@@ -27,9 +24,6 @@ export class TursoError extends Error {
 /**
  * Turso Cloud - "SQL over HTTP": one POST /v2/pipeline batches several SQLite queries
  * together. All values travel as typed placeholders, never as a concatenated SQL string.
- * Which statements the token allows is decided by its Fine-Grained Permissions
- * (docs/Turso/token-*.sh): the goal widget's token may only read json_basket and goals,
- * the dashboard's token may change the goals table completely.
  *
  * @param {DbConnectionInfo} connectionInfo
  * @returns {TursoClient}
@@ -46,14 +40,18 @@ export function createTursoClient(connectionInfo) {
         if (typeof value === 'boolean')
             return { type: /** @type {const} */('integer'), value: value ? '1' : '0' };
         if (typeof value === 'number')
-            // Measured against the running server (docs/Turso/queries.sql, section 5):
-            // an integer value has to travel as a string ({"value":41} gives HTTP 400
-            // "expected a borrowed string"), a float value has to travel as a JSON number
-            // ({"value":"41.25"} gives "expected f64"). Exactly the other way round than
-            // one would guess - and the reason why goals with fractional points work.
-            return Number.isInteger(value)
-                ? { type: /** @type {const} */('integer'), value: `${value}` }
-                : { type: /** @type {const} */('float'), value };
+        {
+            if (Number.isInteger(value)) {
+                // Turso stores integers as Int64, but JSON only uses double, which
+                // can't fit full range. So the API decided, to give an HTTP 400 for
+                // integer numbers and force the caller to use string for integers.
+                // The string can hold the full Int64 range, so nothing gets lost.
+                return { type: /** @type {const} */('integer'), value: `${value}` };
+            }
+
+            // Turso float == JSON double. So we can encode them as is.
+            return { type: /** @type {const} */('float'), value };
+        }
         return { type: /** @type {const} */('text'), value };
     }
 
@@ -156,10 +154,9 @@ export function createTursoClient(connectionInfo) {
  * Reads one key from the json_basket table.
  *
  * The heavy content value (the details basket is well over 100 KB) is only transferred if
- * written_at or hash changed since the last call; that comparison runs over the index
- * json_basket_key_written_at_hash so that no content has to be read for it (see
- * docs/Turso/queries.sql, "change check"). written_at is ISO-8601 in
- * UTC, which is why comparing it textually is fine.
+ * written_at or hash changed since the last call. That comparison runs over the index
+ * json_basket_key_written_at_hash so that no content has to be read for it.
+ * The written_at is ISO-8601 in UTC, which is why comparing it textually is fine.
  *
  * @param {TursoClient} turso
  * @param {BasketKey} basketKey
@@ -181,7 +178,8 @@ export function createBasketReader(turso, basketKey) {
             );
 
             if (!row)
-                return null; // unchanged
+                // unchanged
+                return null; 
 
             last = {
                 writtenAt: String(row.written_at),
@@ -202,31 +200,28 @@ export function createBasketReader(turso, basketKey) {
 
 /**
  * Reads the goals table.
- *
- * Same idea as the basket reader: before the list is transferred, a cheap probe asks
- * whether anything changed at all. COUNT(*), MAX(written_at) and SUM(id) together see
- * INSERT, UPDATE and DELETE, and they return zero rows when the table is untouched.
- * That only works because every write sets written_at from the database clock
- * (strftime(...,'now')) instead of the client clock - a device with a wrong clock would
- * silently break MAX(written_at) as a version marker.
- *
  * @param {TursoClient} turso
  * @returns {GoalsReader}
  */
 export function createGoalsReader(turso) {
-    const probeSql = 'WITH state AS (SELECT COUNT(*) AS n, COALESCE(MAX(written_at), \'\') AS last_written_at, COALESCE(SUM(id), 0) AS id_sum FROM goals) SELECT n, last_written_at, id_sum FROM state WHERE n <> ? OR last_written_at <> ? OR id_sum <> ?';
+    // The dashboard goals editor is the only place to change the goals.
+    // For INSERT and UPDATE the written_at column gets updated for the affected rows by the editor.
+    // But for DELETE we normally had a problem, because a vanished row can not bump written_at.
+    // So the dashboard goals editor is updating written_at of the row with highest id, if the
+    // save is only deleting rows. This simplifies the versionSql a lot and only causes one
+    // row read per check. Normally you would have to check count(*) and max(id) too, if
+    // there would be no other marker for "updated only by delete".
+    const versionSql = 'SELECT MAX(written_at) AS last_written_at FROM goals';
+
     const selectSql = 'SELECT id, points, title, description, written_at FROM goals ORDER BY points, written_at';
 
-    /** @type {GoalsFingerprint | null} */
-    let last = null;
+    // null = never read yet, '' = the table was empty (MAX() over no rows is NULL).
+    /** @type {string | null} */
+    let lastWrittenAt = null;
 
     /** @param {Goal[]} goals */
-    function fingerprintOf(goals) {
-        return /** @type {GoalsFingerprint} */({
-            count: goals.length,
-            lastWrittenAt: goals.reduce((max, goal) => goal.written_at > max ? goal.written_at : max, ''),
-            idSum: goals.reduce((sum, goal) => sum + goal.id, 0),
-        });
+    function versionOf(goals) {
+        return goals.reduce((max, goal) => goal.written_at > max ? goal.written_at : max, '');
     }
 
     /** @param {TursoRow[]} rows */
@@ -243,32 +238,33 @@ export function createGoalsReader(turso) {
         }));
     }
 
+    /** @returns {Promise<Goal[]>} */
+    async function readNow() {
+        const goals = toGoals(await turso.query(selectSql));
+        lastWrittenAt = versionOf(goals);
+        return goals;
+    }
+
     return {
         /** @returns {Promise<Goal[] | null>} null if unchanged */
         async read() {
-            const [probe] = await turso.query(
-                probeSql,
-                last?.count ?? -1,
-                last?.lastWrittenAt ?? '',
-                last?.idSum ?? -1);
-
+            const [probe] = await turso.query(versionSql);
             if (!probe)
-                return null; // unchanged
+                return null;
 
-            const goals = toGoals(await turso.query(selectSql));
-            last = fingerprintOf(goals);
-            return goals;
+            const version = String(probe.last_written_at ?? '');
+            if (lastWrittenAt !== null && version === lastWrittenAt)
+                // unchanged
+                return null;
+
+            return readNow();
         },
 
         /** @returns {Promise<Goal[]>} */
-        async readNow() {
-            const goals = toGoals(await turso.query(selectSql));
-            last = fingerprintOf(goals);
-            return goals;
-        },
+        readNow,
 
         invalidate() {
-            last = null;
+            lastWrittenAt = null;
         },
     };
 }

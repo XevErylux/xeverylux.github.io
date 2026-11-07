@@ -109,12 +109,6 @@ type GoalContent = {
     description: string,
 };
 
-type GoalsFingerprint = {
-    count: number,
-    lastWrittenAt: string,
-    idSum: number,
-};
-
 type GoalsReader = {
     /** null if the goals table has not changed since the previous call. */
     read(): Promise<Goal[] | null>,
