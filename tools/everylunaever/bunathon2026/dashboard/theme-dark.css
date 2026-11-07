@@ -1,0 +1,270 @@
+:root {
+    color-scheme: dark;
+
+    /* Rohpalette */
+    --mint-glow: #46F0BC; /* hellstes Leuchten */
+    --mint-mid: #1F9E7C;
+    --mint-deep: #0C4A3C;
+
+    --panel-900: #081419; /* Schatten zwischen den Panels */
+    --panel-800: #0D1F26;
+    --panel-700: #122C35;
+    --panel-line: #2C5A5A;
+
+    --amber: #E9BE4E;
+    --pink: #F291B8;
+    --violet: #8D7BDA;
+
+    --background-color: #061016;
+    --grid-line: #1e4a4a4d;
+    /* Feste Höhe des Hintergrund-Glows: bewusst in px, damit es nicht mit der Dokumenthöhe skaliert */
+    --bg-glow-height: 620px;
+
+    --card-background: linear-gradient(165deg, #10252e 0%, #0b1a21 100%);
+    --card-border: #2f6a63;
+    --card-accent: var(--mint-glow);
+    --card-text: #d6efea;
+    --card-text-soft: #9fbdbd;
+    --card-glow: 0 0 0 1px #46f0bc1f, 0 10px 30px #00000066, 0 0 26px #46f0bc1a;
+
+    --header-background: linear-gradient(160deg, #0b2229 0%, #10333a 55%, #0a2a2c 100%);
+    --header-text: #6ff5c9;
+    --header-shadow: var(--mint-glow);
+
+    --button-background: linear-gradient(180deg, #2fdcae, #10836a);
+    --button-hover: linear-gradient(180deg, #57f7c8, #15a37f);
+    --button-text: #04211a;
+
+    --table-header-bg: linear-gradient(180deg, #14343d, #0b2028);
+    --table-header-text: #7bf3cd;
+    --table-row-bg: #0d1f26;
+    --table-row-alt: #11262e;
+    --table-row-border: #24484e;
+    --table-text: #cfe9e4;
+
+    --font-family-head: 'Chakra Petch', 'Segoe UI', Arial, sans-serif;
+    --font-family-mono: 'Share Tech Mono', ui-monospace, 'Consolas', monospace;
+}
+
+/* Body */
+body {
+    background-color: var(--background-color);
+    background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+        radial-gradient(130% 100% at 50% 0%, #46f0bc1f, transparent 100%);
+    background-size: 44px 44px, 44px 44px, 100% var(--bg-glow-height);
+    background-position: 0 0, 0 0, top center;
+    background-repeat: repeat, repeat, no-repeat;
+    color: var(--card-text);
+}
+
+/* Header */
+header {
+    background: var(--header-background);
+    color: var(--header-text);
+    font-family: var(--font-family-head);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-shadow: 0 0 16px #46f0bc9c;
+    border-bottom: 2px solid var(--mint-glow);
+    box-shadow: 0 0 26px #46f0bc4d, inset 0 -24px 36px #46f0bc1a;
+}
+
+header h1 {
+    margin: 0;
+    font-weight: 600;
+}
+
+h2 {
+    font-family: var(--font-family-head);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #8ff6d6;
+    text-shadow: 0 0 12px #46f0bc59;
+}
+
+h3 {
+    font-family: var(--font-family-head);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: #bceee0;
+    text-shadow: 0 0 10px #46f0bc3d;
+}
+
+/* Karten */
+.card {
+    background: var(--card-background);
+    border: 1px solid var(--card-border);
+    border-top: 2px solid var(--card-accent);
+    border-radius: 12px;
+    box-shadow: var(--card-glow);
+    color: var(--card-text);
+}
+
+/* Akzent-Kanten der Summary-Karten: Mint, Amber, Pink, Violett */
+.summary .card:nth-child(4n+1) {
+    border-top-color: var(--mint-glow);
+}
+
+.summary .card:nth-child(4n+2) {
+    border-top-color: var(--amber);
+}
+
+.summary .card:nth-child(4n+3) {
+    border-top-color: var(--pink);
+}
+
+.summary .card:nth-child(4n) {
+    border-top-color: var(--violet);
+}
+
+.card h3 {
+    color: #79e9c6;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+}
+
+.card p {
+    font-family: var(--font-family-mono);
+    color: #eafff8;
+    text-shadow: 0 0 14px #46f0bc80;
+}
+
+div[subpage]>div.info {
+    background: var(--card-background);
+    border: 1px solid var(--card-border);
+    border-left: 3px solid var(--amber);
+    border-radius: 10px;
+    color: var(--card-text-soft);
+}
+
+/* Buttons */
+button,
+a[role=button] {
+    background: var(--button-background);
+    color: var(--button-text);
+    font-family: var(--font-family-head);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    border: 1px solid #1b6f5a;
+    box-shadow: 0 0 0 1px #46f0bc26, 0 4px 14px #00000059;
+}
+
+button:not(:disabled):hover,
+button:not(:disabled):focus,
+a[role=button]:not(:disabled):hover,
+a[role=button]:not(:disabled):focus {
+    background: var(--button-hover);
+    box-shadow: 0 0 0 1px #46f0bc40, 0 0 18px #46f0bc80;
+}
+
+button:focus,
+a[role=button]:focus {
+    outline: none;
+}
+
+/* Tabellen */
+.leaderboard table,
+.events table,
+.details table {
+    background: var(--card-background);
+    color: var(--table-text);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    box-shadow: var(--card-glow);
+    overflow: hidden;
+}
+
+.leaderboard th,
+.events th,
+.details th {
+    background: var(--table-header-bg);
+    color: var(--table-header-text);
+    font-family: var(--font-family-head);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.85em;
+}
+
+.leaderboard td,
+.events td,
+.details td {
+    background-color: var(--table-row-bg);
+    border-bottom: 1px solid var(--table-row-border);
+}
+
+.leaderboard tbody tr:nth-child(even) td,
+.events tbody tr:nth-child(even) td,
+.details tbody tr:nth-child(even) td {
+    background-color: var(--table-row-alt);
+}
+
+.details td.amount,
+.details td.points,
+.details td.t1,
+.details td.t2,
+.details td.t3,
+.details td.subs,
+.details td.bits,
+.details td.donations,
+.details td.rownum,
+.events td.amount,
+.events td.points {
+    font-family: var(--font-family-mono);
+    color: #7aecc9;
+}
+
+/* Goals */
+.goal-summary .card {
+    background: var(--card-background);
+    border: 1px solid var(--card-border);
+    border-top: 2px solid var(--amber);
+    border-radius: 12px;
+    box-shadow: var(--card-glow);
+    color: var(--card-text);
+}
+
+.goal-summary .goal-progress {
+    background: #00000073;
+}
+
+.goal-summary .goal-progress-fill {
+    background: linear-gradient(90deg, #46f0bc, #16b58c);
+}
+
+.goals-editor div.goal-row {
+    background: var(--card-background);
+    color: var(--card-text);
+}
+
+.goals-editor div.goal-row input {
+    background: #081419;
+    border-color: var(--panel-line);
+}
+
+.goals-editor div.goal-row>span.goal-progress-text {
+    color: #7aecc9;
+}
+
+.goals-editor div.goals-notice {
+    background-color: #0d1f26;
+}
+
+/* Leaderboard Container */
+.leaderboard {
+    background: var(--card-background);
+    border: 1px solid var(--card-border);
+    border-top: 2px solid var(--card-accent);
+    border-radius: 12px;
+    box-shadow: var(--card-glow);
+    color: var(--card-text);
+}
+
+.leaderboard table {
+    box-shadow: none;
+    border: none;
+    border-radius: 8px;
+}

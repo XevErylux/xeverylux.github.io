@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "lib": [
+            "es2023",
+            "DOM",
+            "DOM.Iterable"
+        ],
+        "moduleResolution": "bundler",
+        "target": "ES2023",
+        "module": "es2022",
+        "resolveJsonModule": true,
+        "allowJs": true,
+        "checkJs": true,
+        "noEmit": true,
+        "strict": true
+    },
+    "include": [
+        "**/*.js",
+        "**/*.d.ts",
+        "**/*.mjs",
+        "../../../../shared/**/*.js",
+        "../../../../shared/**/*.d.ts",
+        "../../../../shared/**/*.mjs"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

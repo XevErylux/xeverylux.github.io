@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bunathon 2026 Dashboard</title>
+    <link rel="stylesheet" data-href="styles.css" />
+    <link rel="stylesheet" data-href="theme.css" />
+    <link rel="stylesheet" data-href="theme-dark.css" media="(prefers-color-scheme: dark)" />
+    <script>
+        document.querySelectorAll("link[rel=stylesheet][data-href]").forEach((/** @type {HTMLLinkElement} */ link) => {
+            link.onload = () => {
+                // Mark style as loaded to activate color transitions.
+                requestAnimationFrame(function () {
+                    requestAnimationFrame(function () {
+                        link.setAttribute('data-loaded', '');
+                    });
+                });
+            };
+            link.href = link.getAttribute("data-href") + "?t=" + new Date().getTime();
+        });
+    </script>
+    <style>
+        body:not([data-has-key]):has(> #loadingState:not(:empty))> :not(#loadingState),
+        body:has(div.details[subpage][open])>*:not(header):not([subpage]),
+        body>div.details[subpage]:not([open]) {
+            display: none;
+        }
+
+        body:has(#loadingState:not(:empty)):has(div.details[subpage][open])>div.details[subpage] {
+            display: none;
+        }
+
+        body:has(#loadingState:not(:empty)):has(div.details[subpage])>div.details[subpage][open] {
+            display: initial;
+        }
+
+        #loadingState:not(:empty) {
+            display: block;
+            margin-top: calc(100vh / 2 - 1em);
+            text-align: center;
+            font-size: 32px;
+        }
+
+        #loadingState:empty {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <span id="loadingState">Loading...</span>
+
+    <header>
+        <h1>Bunathon 2026</h1>
+    </header>
+
+    <section class="summary">
+        <div class="card" id="sport-wheels-card">
+            <h3>🎡 Sports wheels</h3>
+            <p id="sport-wheels-count">0</p>
+            <button onclick="openSubpage('sportWheels')">Details</button>
+        </div>
+        <div class="card" id="postcards-card">
+            <h3>📮  Postcards</h3>
+            <p id="postcards-count">0</p>
+            <button onclick="openSubpage('postcards')">Details</button>
+        </div>
+        <div class="card" id="pins-card">
+            <h3>🎨 Pins</h3>
+            <p id="pins-count">0</p>
+            <button onclick="openSubpage('pins')">Details</button>
+        </div>
+    </section>
+
+    <div class="h2-container">
+        <h2 class="goals-header">🎯 Fortschritt</h2>
+        <button onclick="openSubpage('goals')">Ziele bearbeiten</button>
+    </div>
+    <section class="goal-summary">
+        <div class="card" id="goal-card">
+            <div class="active-goal" id="active-goal">
+                <p>
+                    <span class="goal-title" id="active-goal-title"></span>
+                    <span class="goal-description" id="active-goal-description"></span>
+                </p>
+                <p class="goal-progress-text" id="active-goal-progress-text"></p>
+                <span class="goal-progress"><span class="goal-progress-fill"
+                        id="active-goal-progress-fill"></span></span>
+            </div>
+            <div class="total-points-corner">
+                <h3>Gesamtpunktzahl</h3>
+                <p id="total-points-count">0</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="h2-container">
+        <h2 class="leaderboards-header">🏆 Top Unterstützer</h2>
+        <button onclick="openSubpage('allSupports')">Alle Unterstützungen</button>
+    </div>
+    <section class="leaderboards">
+        <div class="leaderboard">
+            <h3>Direkte Spender</h3>
+            <table id="donor-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Punkte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="donor-1-name"></td>
+                        <td id="donor-1-points"></td>
+                    </tr>
+                    <tr>
+                        <td id="donor-2-name"></td>
+                        <td id="donor-2-points"></td>
+                    </tr>
+                    <tr>
+                        <td id="donor-3-name"></td>
+                        <td id="donor-3-points"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="leaderboard">
+            <h3>Abonnement-Verschenker</h3>
+            <table id="gifter-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Punkte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="gifter-1-name"></td>
+                        <td id="gifter-1-points"></td>
+                    </tr>
+                    <tr>
+                        <td id="gifter-2-name"></td>
+                        <td id="gifter-2-points"></td>
+                    </tr>
+                    <tr>
+                        <td id="gifter-3-name"></td>
+                        <td id="gifter-3-points"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="leaderboard">
+            <h3>Bits verwendet</h3>
+            <table id="bits-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Punkte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="bits-1-name"></td>
+                        <td id="bits-1-points"></td>
+                    </tr>
+                    <tr>
+                        <td id="bits-2-name"></td>
+                        <td id="bits-2-points"></td>
+                    </tr>
+                    <tr>
+                        <td id="bits-3-name"></td>
+                        <td id="bits-3-points"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="leaderboard">
+            <h3>Gesamt-Unterstützer</h3>
+            <table id="supporter-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Punkte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="supporter-1-name"></td>
+                        <td id="supporter-1-points"></td>
+                    </tr>
+                    <tr>
+                        <td id="supporter-2-name"></td>
+                        <td id="supporter-2-points"></td>
+                    </tr>
+                    <tr>
+                        <td id="supporter-3-name"></td>
+                        <td id="supporter-3-points"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="events">
+        <h2>📅 Ereignisse der letzten Stunde</h2>
+        <button onclick="toggleEvents()">Ein-/Ausklappen</button>
+        <table>
+            <thead>
+                <tr>
+                    <th class="timestamp">Zeitpunkt</th>
+                    <th class="supporter">Zuschauer</th>
+                    <th class="category">Kategorie</th>
+                    <th class="amount">Menge</th>
+                    <th class="points">Punkte</th>
+                </tr>
+            </thead>
+            <tbody id="event-table-body"></tbody>
+        </table>
+        <button class="fold-in" onclick="toggleEvents()">Einklappen</button>
+
+        <template id="event-row-template">
+            <tr>
+                <td class="timestamp"></td>
+                <td class="supporter"></td>
+                <td class="category"></td>
+                <td class="amount"></td>
+                <td class="points"></td>
+            </tr>
+        </template>
+    </section>
+
+
+    <div id="all-supports" subpage class="details">
+        <div class="h2-container">
+            <h2 id="all-supports-title">💰 Alle Unterstützungen</h2>
+            <a role="button" href="#">Zurück</a>
+        </div>
+        <div class="info">
+            <p>Klicke auf die Spaltenüberschrift um zwischen ab-/aufsteigend zu wechseln.</p>
+            <p>Aktive Sortierung: <span class="active-sorting"></span></p>
+        </div>
+        <table id="all-supports-table">
+            <thead>
+                <tr>
+                    <th class="rownum">#</th>
+                    <th class="reached-at">Zuletzt am</th>
+                    <th class="supporter">Name</th>
+                    <th class="subs">Abo</th>
+                    <th class="t1">T1</th>
+                    <th class="t2">T2</th>
+                    <th class="t3">T3</th>
+                    <th class="bits">Bits</th>
+                    <th class="donations">Donos</th>
+                    <th class="points">Punkte</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <span class="table-loading">
+            Einträge werden abgerufen...
+        </span>
+        <template id="all-supports-row-template">
+            <tr>
+                <td class="rownum"></td>
+                <td class="reached-at"></td>
+                <td class="supporter"></td>
+                <td class="subs"></td>
+                <td class="t1"></td>
+                <td class="t2"></td>
+                <td class="t3"></td>
+                <td class="bits"></td>
+                <td class="donations"></td>
+                <td class="points"></td>
+            </tr>
+        </template>
+    </div>
+
+
+    <div id="wheel-spins-details" subpage class="details">
+        <div class="h2-container">
+            <h2>🎡 Rad drehen</h2>
+            <a role="button" href="#">Zurück</a>
+        </div>
+        <div class="info">
+            <p>Listet alle Abo-Bomben mit der Größe von mindestens 20 Abos sortiert nach Name und Zeitpunkt.</p>
+            <p>Klicke auf die Spaltenüberschrift um zwischen ab-/aufsteigend zu wechseln.</p>
+            <p>Aktive Sortierung: <span class="active-sorting"></span></p>
+        </div>
+        <table id="wheel-spins-details-table">
+            <thead>
+                <tr>
+                    <th class="rownum">#</th>
+                    <th class="timestamp">Zeitpunkt</th>
+                    <th class="supporter">Name</th>
+                    <th class="level">Stufe</th>
+                    <th class="amount">Menge</th>
+                    <th class="points">Punkte</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <span class="table-loading">
+            Einträge werden abgerufen...
+        </span>
+
+        <template id="wheel-spins-details-row-template">
+            <tr>
+                <td class="rownum"></td>
+                <td class="timestamp"></td>
+                <td class="supporter"></td>
+                <td class="level"></td>
+                <td class="amount"></td>
+                <td class="points"></td>
+            </tr>
+        </template>
+    </div>
+
+    <div id="subgifts-details" subpage class="details">
+        <div class="h2-container">
+            <h2 id="subgifts-details-title"></h2>
+            <a role="button" href="#">Zurück</a>
+        </div>
+        <div class="info">
+            <p>Listet alle Unterstützer auf, die genug für diesen Anreiz (Insentive) gesammelt haben.</p>
+            <p>Klicke auf die Spaltenüberschrift um zwischen ab-/aufsteigend zu wechseln.</p>
+            <p>Aktive Sortierung: <span class="active-sorting"></span></p>
+        </div>
+        <table id="subgifts-details-table">
+            <thead>
+                <tr>
+                    <th class="rownum">#</th>
+                    <th class="reached-at">Zuletzt am</th>
+                    <th class="supporter">Name</th>
+                    <th class="subs">Abo</th>
+                    <th class="t1">T1</th>
+                    <th class="t2">T2</th>
+                    <th class="t3">T3</th>
+                    <th class="bits">Bits</th>
+                    <th class="donations">Donos</th>
+                    <th class="points">Punkte</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <span class="table-loading">
+            Einträge werden abgerufen...
+        </span>
+
+        <template id="subgifts-details-row-template">
+            <tr>
+                <td class="rownum"></td>
+                <td class="reached-at"></td>
+                <td class="supporter"></td>
+                <td class="subs"></td>
+                <td class="t1"></td>
+                <td class="t2"></td>
+                <td class="t3"></td>
+                <td class="bits"></td>
+                <td class="donations"></td>
+                <td class="points"></td>
+            </tr>
+        </template>
+    </div>
+
+    <div id="goals-edit" subpage class="details goals-editor">
+        <div class="h2-container">
+            <h2>🎯 Ziele bearbeiten</h2>
+            <a role="button" href="#">Zurück</a>
+        </div>
+        <div class="info">
+            <p>Aktuelle Gesamtpunktzahl: <strong id="goals-total-points">0</strong></p>
+            <p>Die Liste ist aufsteigend nach Punktzahl sortiert. Punkte, Titel und Beschreibung sind
+                bearbeitbar - erledigt / aktiv / ausstehend ergibt sich aus der Punktzahl.</p>
+            <p>Gespeichert wird erst über „Speichern“. Vor dem Schreiben wird geprüft, ob das Ziel
+                seit dem Laden unverändert ist; andersartige Fremdänderungen werden verworfen und gemeldet.</p>
+        </div>
+        <div class="goals-notice" id="goals-notice" hidden></div>
+        <div id="goals-list"></div>
+        <div class="goals-actions">
+            <button id="goals-add-button" type="button">➕ Neues Ziel</button>
+            <button id="goals-save-button" type="button" disabled>💾 Speichern</button>
+            <button id="goals-revert-button" type="button" disabled>Änderungen verwerfen</button>
+        </div>
+        <span class="table-loading">
+            Ziele werden abgerufen...
+        </span>
+
+        <template id="goal-row-template">
+            <div class="goal-row">
+                <span class="goal-state"></span>
+                <label class="goal-points"><input class="points" type="number" min="0" step="any" /></label>
+                <label class="goal-title"><span>Titel</span><input class="title" type="text" maxlength="120" /></label>
+                <label class="goal-description"><span>Beschreibung</span><input class="description" type="text"
+                        maxlength="200" /></label>
+                <button class="goal-delete" type="button">
+                    <svg viewBox="0 0 24 24">
+                        <use xlink:href="assets/trash.svg"></use>
+                    </svg>
+                </button>
+            </div>
+        </template>
+    </div>
+
+    <script>
+        var openSubpageClicked = undefined;
+
+        function openSubpage(type) {
+            if (openSubpageClicked) {
+                openSubpageClicked(type);
+            }
+        }
+
+        function toggleEvents() {
+            document.querySelector(".events").classList.toggle("expanded");
+        }
+    </script>
+    <script data-src="scripts.mjs" type="module"></script>
+    <script>
+        document.querySelectorAll("script[data-src]").forEach((/** @type {HTMLScriptElement} */ link) =>
+            link.src = link.getAttribute("data-src") + (location.host === '127.0.0.1:5500' ? '' : "?t=" + new Date().getTime()));
+    </script>
+</body>
+
+</html>

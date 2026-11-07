@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Goal Widget for Bunathon 2026</title>
+  <link rel="stylesheet" data-href="./widget.css">
+  <script>
+    document.querySelectorAll("link[rel=stylesheet][data-href]").forEach((/** @type {HTMLLinkElement} */ link) =>
+      link.href = link.getAttribute("data-href") + "?t=" + new Date().getTime());
+  </script>
+</head>
+
+<body>
+
+  <div class="widget" id="widget">
+    <div class="panel">
+      <div class="panel-fill">
+        <div class="layer grid"></div>
+        <div class="layer sweep"></div>
+        <div class="layer conduit">
+          <div class="stripes">
+
+          </div>
+        </div>
+        <canvas class="layer fx" id="fx-back"></canvas>
+
+        <div class="content" id="content">
+          <div class="row row-score">
+            <div class="score-meta">
+              <span class="kicker">Bunathon 2026</span>
+              <span class="status"><i class="live-dot"></i>System&nbsp;Status&nbsp;<em>//</em>&nbsp;<span id="status-value">live</span></span>
+            </div>
+            <div class="score-readout">
+              <span class="delta" id="delta">+0</span>
+              <span class="total" id="total">0</span>
+            </div>
+          </div>
+
+          <div class="row row-goal" id="goal-row">
+            <div class="target-chip">
+              <span class="chip-caption">Ziel</span>
+              <span class="chip-value" id="active-points">0</span>
+              <span class="chip-check">✓</span>
+            </div>
+            <div class="goal-text">
+              <div class="title-line"><span class="title" id="active-title">Bitte warten</span></div>
+              <div class="desc-line">
+                <span class="desc" id="active-desc">Punktestand und Ziele werden abgerufen...</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row row-progress">
+            <div class="progress" id="progress">
+              <span class="progress-track">
+                <span class="progress-fill" id="progress-fill"></span>
+                <span class="progress-ticks"></span>
+                <span class="progress-wave"></span>
+              </span>
+              <span class="progress-head" id="progress-head"></span>
+            </div>
+            <span class="progress-info">
+              <span class="remaining" id="remaining">–</span>
+              <span class="pct" id="pct">0%</span>
+            </span>
+          </div>
+
+          <div class="row row-next" id="next-row">
+            <span class="next-tag">Next</span>
+            <span class="next-points" id="next-points">–</span>
+            <span class="next-sep"></span>
+            <span class="next-title" id="next-title">–</span>
+          </div>
+        </div>
+
+        <canvas class="layer fx front" id="fx-front"></canvas>
+        <div class="layer flash"></div>
+        <div class="banner" id="banner"><span class="banner-text" id="banner-text"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <script data-src="scripts.mjs" type="module"></script>
+  <script>
+    document.querySelectorAll("script[data-src]").forEach((/** @type {HTMLScriptElement} */ link) =>
+      link.src = link.getAttribute("data-src") + "?t=" + new Date().getTime());
+  </script>
+</body>
+
+</html>

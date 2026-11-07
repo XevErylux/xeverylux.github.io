@@ -1,0 +1,562 @@
+@import url('https://fonts.googleapis.com/css?family=Boogaloo');
+
+:root {
+    --font-family: Arial, sans-serif;
+}
+
+html:has(> head > link[href][data-loaded]) * {
+    transition-property: background, background-color, color, border-color;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: 1em;
+    background: #f4f4f4;
+    margin: auto;
+    padding: 0;
+    max-width: 800px;
+    color: #333;
+}
+
+header {
+    background: #6441a5;
+    color: white;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+    text-shadow: gray 0px 0px 4px, gray 2px 2px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+h2 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    justify-content: center;
+}
+
+.summary .card {
+    width: initial;
+    min-width: 211.3px;
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    width: 220px;
+}
+
+div[subpage]>div.info {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.card {
+    text-align: center;
+}
+
+.details {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+}
+
+.details table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.details th,
+.details td {
+    padding: 0.5rem;
+    text-align: left;
+    height: 1rem;
+    border-bottom: 1px solid #eee;
+    font-weight: bold;
+}
+
+.details table th.rownum,
+.details table td.rownum,
+.details table th.amount,
+.details table td.amount,
+.details table th.t1,
+.details table td.t1,
+.details table th.t2,
+.details table td.t2,
+.details table th.t3,
+.details table td.t3,
+.details table th.subs,
+.details table td.subs,
+.details table th.bits,
+.details table td.bits,
+.details table th.donations,
+.details table td.donations,
+.details table th.points,
+.details table td.points,
+.details table td.reached-at {
+    text-align: right;
+}
+
+.details table th.rownum {
+    cursor: not-allowed;
+}
+
+.details table th {
+    cursor: pointer;
+    user-select: none;
+}
+
+.details tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.details span.table-loading {
+    display: none;
+}
+
+.details[data-loading] span.table-loading {
+    display: inline-block;
+    width: calc(100% - 2rem);
+    font-size: 2rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+.card h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    height: 2em;
+}
+
+.card p {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.h2-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.h2-container h2 {
+    flex-grow: 1;
+}
+
+
+
+.h2-container button,
+.h2-container a[role=button] {
+    margin: 0rem 0rem 0.5rem 0rem;
+}
+
+.h2-container:has(> .leaderboards-header) h2 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.h2-container:has(> .leaderboards-header) button,
+.h2-container:has(> .leaderboards-header) a[role=button] {
+    margin: 0rem 1rem 0.5rem 0rem;
+}
+
+.leaderboards {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.leaderboard {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+}
+
+.leaderboard h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.leaderboard table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.leaderboard th,
+.leaderboard td {
+    padding: 0.5rem;
+    text-align: left;
+    height: 1rem;
+    border-bottom: 1px solid #eee;
+    font-weight: bold;
+}
+
+.leaderboard thead tr th:last-child,
+.leaderboard tbody tr td:last-child {
+    width: 30%;
+    text-align: right;
+}
+
+.leaderboard tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+.events {
+    padding: 1rem;
+}
+
+.events table,
+div[subpage] table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.events th,
+.events td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    font-weight: bold;
+}
+
+.events th.amount,
+.events td.amount,
+.events th.points,
+.events td.points {
+    text-align: right;
+}
+
+.events.expanded tbody tr {
+    display: table-row;
+}
+
+.events button,
+.events a[role=button] {
+    margin-bottom: 0.5rem;
+}
+
+.events:not(.expanded) table {
+    overflow: hidden;
+}
+
+.events:not(.expanded) tbody tr:nth-child(n+11) {
+    display: none;
+}
+
+.events.expanded button.fold-in,
+.events.expanded a[role=button].fold-in {
+    margin-top: 0.5rem;
+}
+
+.events:not(.expanded) button.fold-in,
+.events:not(.expanded) a[role=button].fold-in {
+
+    display: none;
+}
+
+.h2-container:has(> .goals-header) h2 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.h2-container:has(> .goals-header) button,
+.h2-container:has(> .goals-header) a[role=button] {
+    margin: 0rem 1rem 0.5rem 0rem;
+}
+
+.goal-summary {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0 1rem 1rem;
+}
+
+.goal-summary .card {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    padding-bottom: 0;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+#total-points-count {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+}
+
+.goal-summary .card p {
+    font-size: 1rem;
+}
+
+.goal-summary .total-points-corner {
+    flex-grow: 0;
+    flex-shrink: 1;
+    padding: 0 1rem;
+}
+
+.goal-summary .active-goal {
+    text-align: left;
+    flex-grow: 1;
+}
+
+.goal-summary .goal-title {
+    font-weight: bold;
+    margin: 0;
+}
+
+.goal-summary .goal-description {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.goal-summary .goal-description:empty {
+    display: none;
+}
+
+.goal-summary .goal-progress {
+    display: block;
+    height: 10px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+    background: #16262e26;
+}
+
+.goal-summary .goal-progress-fill {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #3ee0b0, #16b58c);
+    transition: width 0.5s ease-in-out;
+}
+
+.goal-summary .goal-progress-text {
+    font-size: 0.9rem;
+    margin: 0.35rem 0 0;
+}
+
+/* Goals editor */
+.goals-editor div.goals-notice {
+    padding: 0.6rem 0.8rem;
+    border-radius: 10px;
+    margin-bottom: 0.6rem;
+    border-left: 3px solid var(--card-border);
+}
+
+.goals-editor div.goals-notice[hidden] {
+    display: none;
+}
+
+.goals-editor div.goals-notice[data-kind="conflict"],
+.goals-editor div.goals-notice[data-kind="error"] {
+    border-left-color: #d9534f;
+    background: #d9534f1a;
+}
+
+.goals-editor div.goals-notice[data-kind="saved"] {
+    border-left-color: #16b58c;
+    background: #16b58c1a;
+}
+
+.goals-editor div.goals-notice[data-kind="info"] {
+    border-left-color: #e4b33f;
+    background: #e4b33f1a;
+}
+
+.goals-editor div.goals-notice ul {
+    margin: 0.35rem 0 0.5rem 1.2rem;
+    padding: 0;
+}
+
+.goals-editor div.goal-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.4rem 0.6rem;
+    padding: 0.6rem;
+    margin-bottom: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid var(--card-border);
+    border-left: 4px solid var(--card-border);
+}
+
+.goals-editor div.goal-row[data-goal-state="completed"] {
+    border-left-color: #16b58c;
+}
+
+.goals-editor div.goal-row[data-goal-state="active"] {
+    border-left-color: #e4b33f;
+}
+
+.goals-editor div.goal-row[data-goal-state="upcoming"] {
+    opacity: 0.85;
+}
+
+.goals-editor div.goal-row[data-modified] {
+    box-shadow: 0 0 0 1px #e4b33f66;
+}
+
+.goals-editor div.goal-row[data-conflict] {
+    border-color: #d9534f;
+    background: #d9534f14;
+}
+
+.goals-editor div.goal-row[data-invalid] input.points,
+.goals-editor div.goal-row[data-invalid] input.title {
+    outline: 2px solid #d9534f;
+}
+
+.goals-editor div.goal-row>span.goal-state {
+    flex: 0 0 auto;
+    align-self: center;
+    font-size: 2.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    min-width: 0.0rem;
+    margin-top: -0.2rem;
+    text-align: center;
+}
+
+.goals-editor div.goal-row>label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--card-text-soft);
+}
+
+.goals-editor div.goal-row>label.goal-points {
+    flex: 0 1 6.1rem;
+}
+
+.goals-editor div.goal-row>label.goal-title {
+    flex: 3 1 10rem;
+}
+
+.goals-editor div.goal-row>label.goal-description {
+    flex: 4 1 10rem;
+}
+
+.goals-editor div.goal-row>label.goal-title span,
+.goals-editor div.goal-row>label.goal-description span {
+    /* Align text with the text inside the input fields */
+    margin-left: calc(0.35rem + 1px);
+}
+
+.goals-editor div.goal-row input {
+    font: inherit;
+    text-transform: none;
+    letter-spacing: normal;
+    padding: 0.1rem 0.35rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--card-border);
+    color: var(--card-text);
+    width: 100%;
+    box-sizing: border-box;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.goals-editor div.goal-row input::-webkit-outer-spin-button,
+.goals-editor div.goal-row input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.goals-editor div.goal-row input.points {
+    text-align: end;
+    padding: 0.0rem 0.2rem;
+    font-size: 2rem;
+}
+
+.goals-editor div.goal-row>span.goal-progress-text {
+    flex: 1 1 10rem;
+    align-self: center;
+    font-family: var(--font-family-mono);
+    font-size: 0.85rem;
+    text-align: right;
+}
+
+.goals-editor div.goal-row button.goal-delete {
+    --padding: 0.1rem;
+    --icon-size: 2rem;
+    flex: 0 0 auto;
+    align-self: center;
+    padding: var(--padding);
+    width: calc(var(--padding)*2 + var(--icon-size));
+    height: calc(var(--padding)*2 + var(--icon-size));
+}
+
+.goals-editor div.goal-row button.goal-delete svg {
+    width: var(--icon-size);
+    height: var(--icon-size);
+}
+
+.goals-editor div.goals-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+button,
+a[role=button] {
+    background: #6441a5;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: var(--font-family);
+}
+
+a[role=button] {
+    text-decoration: none;
+    padding-top: 0.75rem;
+}
+
+button:hover:not(:disabled),
+a[role=button]:hover:not(:disabled) {
+    background: #4b2c91;
+}
+
+button:disabled,
+a[role=button]:disabled {
+    filter: grayscale();
+    cursor: not-allowed;
+}
+
+table thead {
+    position: sticky;
+    top: -1px;
+}

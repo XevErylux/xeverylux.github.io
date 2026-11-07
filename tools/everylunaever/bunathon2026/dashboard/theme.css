@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+    color-scheme: light;
+
+    /* Rohpalette */
+    --mint-glow: #3EE0B0;
+    --mint-bright: #A6F5DC;
+    --mint-deep: #0F7F63; /* lesbare Mint-Variante auf hellem Grund */
+
+    --steel-900: #16262E; /* Panel-Rahmen, Kopfzeile */
+    --steel-700: #24404B;
+    --steel-500: #61798566; /* Hairlines */
+    --steel-300: #C3D4DC;
+    --wall: #E7EFF3;
+    --coat: #FBFDFE;
+
+    --amber: #E4B33F;
+    --pink: #F090BC;
+    --violet: #7B6AC6;
+    --amber-line: #D89B1E;
+    --pink-line: #E270A8;
+    --violet-line: #6F5CBF;
+
+    --background-color: var(--wall);
+    --grid-line: #b6cdd640;
+    /* Feste Höhe des Hintergrund-Glows: bewusst in px, damit es nicht mit der Dokumenthöhe skaliert */
+    --bg-glow-height: 460px;
+
+    --card-background: var(--coat);
+    --card-border: #b9cfd8;
+    --card-accent: var(--mint-glow);
+    --card-text: #1d3540;
+    --card-text-soft: #4f6a76;
+    --card-glow: 0 1px 0 #ffffffb0, 0 0 0 1px #ffffff80, 0 6px 22px #16262e1f, 0 0 18px #3ee0b026;
+
+    --header-background: linear-gradient(160deg, #1b2f38 0%, #22414d 55%, #1a3a3c 100%);
+    --header-text: #b8f5e2;
+    --header-shadow: var(--mint-glow);
+
+    --button-background: linear-gradient(180deg, #55ecc0, #16b58c);
+    --button-hover: linear-gradient(180deg, #6ef4cc, #14c795);
+    --button-text: #06251c;
+
+    --table-header-bg: linear-gradient(180deg, #21414c, #16262e);
+    --table-header-text: #9ef0d5;
+    --table-row-bg: var(--coat);
+    --table-row-alt: #eef7f6;
+    --table-row-border: var(--steel-500);
+    --table-text: #22414d;
+
+    --font-family-head: 'Chakra Petch', 'Segoe UI', Arial, sans-serif;
+    --font-family-mono: 'Share Tech Mono', ui-monospace, 'Consolas', monospace;
+}
+
+/* Body */
+body {
+    background-color: var(--background-color);
+    background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+        radial-gradient(130% 100% at 50% 0%, #3ee0b01f, transparent 68%);
+    background-size: 44px 44px, 44px 44px, 100% var(--bg-glow-height);
+    background-position: 0 0, 0 0, top center;
+    background-repeat: repeat, repeat, no-repeat;
+    color: var(--card-text);
+}
+
+/* Header */
+header {
+    background: var(--header-background);
+    color: var(--header-text);
+    font-family: var(--font-family-head);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-shadow: 0 0 14px #3ee0b099;
+    border-bottom: 2px solid var(--mint-glow);
+    box-shadow: 0 0 22px #3ee0b03d, inset 0 -22px 34px #3ee0b014;
+}
+
+header h1 {
+    margin: 0;
+    font-weight: 600;
+}
+
+h2 {
+    font-family: var(--font-family-head);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--steel-700);
+    text-shadow: 0 0 10px #3ee0b04d;
+}
+
+h3 {
+    font-family: var(--font-family-head);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--steel-700);
+    text-shadow: 0 0 8px #3ee0b033;
+}
+
+/* Karten */
+.card {
+    background-color: var(--card-background);
+    border: 1px solid var(--card-border);
+    border-top: 2px solid var(--card-accent);
+    border-radius: 12px;
+    box-shadow: var(--card-glow);
+    color: var(--card-text);
+}
+
+/* Akzent-Kanten der Summary-Karten: Mint, Amber, Pink, Violett */
+.summary .card:nth-child(4n+1) {
+    border-top-color: var(--mint-glow);
+}
+
+.summary .card:nth-child(4n+2) {
+    border-top-color: var(--amber-line);
+}
+
+.summary .card:nth-child(4n+3) {
+    border-top-color: var(--pink-line);
+}
+
+.summary .card:nth-child(4n) {
+    border-top-color: var(--violet-line);
+}
+
+.card h3 {
+    color: var(--mint-deep);
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+}
+
+.card p {
+    font-family: var(--font-family-mono);
+    color: var(--steel-900);
+    text-shadow: 0 0 12px #3ee0b059;
+}
+
+div[subpage]>div.info {
+    background-color: var(--card-background);
+    border: 1px solid var(--card-border);
+    border-left: 3px solid var(--amber);
+    border-radius: 10px;
+    color: var(--card-text-soft);
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* Buttons */
+button,
+a[role=button] {
+    background: var(--button-background);
+    color: var(--button-text);
+    font-family: var(--font-family-head);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    border: 1px solid #0f8f70;
+    box-shadow: 0 0 0 1px #ffffff66, 0 2px 10px #16262e2e;
+}
+
+button:hover:not(:disabled),
+button:focus:not(:disabled),
+a[role=button]:hover:not(:disabled),
+a[role=button]:focus:not(:disabled) {
+    background: var(--button-hover);
+    box-shadow: 0 0 0 1px #ffffff80, 0 0 16px #3ee0b073;
+}
+
+button:focus,
+a[role=button]:focus {
+    outline: none;
+}
+
+/* Tabellen */
+.leaderboard table,
+.events table,
+.details table {
+    background-color: var(--card-background);
+    color: var(--table-text);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    box-shadow: var(--card-glow);
+    overflow: hidden;
+}
+
+.leaderboard th,
+.events th,
+.details th {
+    background: var(--table-header-bg);
+    color: var(--table-header-text);
+    font-family: var(--font-family-head);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.85em;
+}
+
+.leaderboard td,
+.events td,
+.details td {
+    background-color: var(--table-row-bg);
+    border-bottom: 1px solid var(--table-row-border);
+}
+
+.leaderboard tbody tr:nth-child(even) td,
+.events tbody tr:nth-child(even) td,
+.details tbody tr:nth-child(even) td {
+    background-color: var(--table-row-alt);
+}
+
+.details td.amount,
+.details td.points,
+.details td.t1,
+.details td.t2,
+.details td.t3,
+.details td.subs,
+.details td.bits,
+.details td.donations,
+.details td.rownum,
+.events td.amount,
+.events td.points {
+    font-family: var(--font-family-mono);
+    color: var(--mint-deep);
+}
+
+/* Goals */
+.goal-summary .card {
+    background-color: var(--card-background);
+    border: 1px solid var(--card-border);
+    border-top: 2px solid var(--amber);
+    border-radius: 12px;
+    box-shadow: var(--card-glow);
+    color: var(--card-text);
+}
+
+.goal-summary .goal-progress {
+    background: #16262e26;
+}
+
+.goals-editor div.goal-row {
+    background-color: var(--card-background);
+    color: var(--card-text);
+}
+
+.goals-editor div.goal-row input {
+    background: #ffffff;
+    border-color: var(--card-border);
+}
+
+.goals-editor div.goal-row>span.goal-progress-text {
+    color: var(--mint-deep);
+}
+
+/* Leaderboard Container */
+.leaderboard {
+    background-color: var(--card-background);
+    border: 1px solid var(--card-border);
+    border-top: 2px solid var(--card-accent);
+    border-radius: 12px;
+    box-shadow: var(--card-glow);
+    color: var(--card-text);
+}
+
+.leaderboard table {
+    box-shadow: none;
+    border: none;
+    border-radius: 8px;
+}
