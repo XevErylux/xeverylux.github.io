@@ -707,6 +707,7 @@ const app = await (async function () {
         const states = determineGoalStates(goals, totalPoints);
         const activeIndex = states.indexOf(/** @type {GoalState} */('active'));
         const allDone = activeIndex < 0;
+        const previousGoalPoints = goals[(allDone ? goals.length - 1 : activeIndex) - 1]?.points ?? 0;
         const goal = goals[allDone ? goals.length - 1 : activeIndex];
 
         trySetTextContentIfChanged(titleElement, goal.title);
@@ -714,7 +715,7 @@ const app = await (async function () {
 
         const reached = totalPoints ?? 0;
         const percent = goal.points > 0
-            ? Math.min(100, Math.max(0, reached / goal.points * 100))
+            ? Math.min(100, Math.max(0, (reached - previousGoalPoints) / (goal.points - previousGoalPoints) * 100))
             : 100;
         if (progressFill)
             progressFill.style.width = `${percent}%`;
