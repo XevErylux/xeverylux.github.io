@@ -286,9 +286,12 @@ function applyPoints(
  */
 async function refreshPoints(/** @type {DataAccess} */ data) {
     try {
-        const total = await data.readPoints();
+        let total = await data.readPoints();
         if (total !== null)
+        {
+            total = Math.floor(total);
             applyPoints(total, !havePoints);
+        }
 
         setOnline(true);
         return true;
