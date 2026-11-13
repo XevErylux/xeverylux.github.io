@@ -1748,7 +1748,7 @@ const app = await (async function () {
                     const [elementIdPrefix, minCount] = (function (type) {
                         switch (type) {
                             case "postcards": return ["postcards", 50];
-                            case "pins": return ["artwork-names", 100];
+                            case "pins": return ["pins", 100];
                             default: throw unreachable(type);
                         }
                     })(subpage.type);
