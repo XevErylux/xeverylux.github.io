@@ -1771,7 +1771,7 @@ const app = await (async function () {
 
                     renderTable(
                         subpage.sortBy,
-                        allSupports.filter(x => x.points >= minCount),
+                        allSupports.filter(x => x.total >= minCount),
                         entry => `${entry.supporter}`,
                         rowTemplate,
                         tableBody,
