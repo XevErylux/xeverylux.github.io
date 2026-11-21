@@ -247,7 +247,7 @@ export function createGoalWidget(root, options = {}) {
     let renderedIndex = 0;
 
     /** Chat fragt doch so gerne nach weiteren Zielen. So wo sind sie denn? */
-    const keineWeiterenZieleText = 'Wo weitere Ziele?';
+    const woWeitereZieleText = 'Wo weitere Ziele?';
 
     /**
      * @param {{promote?: boolean}} [opts]
@@ -267,7 +267,7 @@ export function createGoalWidget(root, options = {}) {
             el.activeTitle.textContent = 'Alle Ziele erreicht';
             el.activeDesc.textContent = 'Vielen Dank!';
             el.nextPoints.textContent = '–';
-            el.nextTitle.textContent = goals.length === 0 ? '' : keineWeiterenZieleText;
+            el.nextTitle.textContent = goals.length === 0 ? '' : woWeitereZieleText;
             return;
         }
 
@@ -275,7 +275,7 @@ export function createGoalWidget(root, options = {}) {
 
         if (opts.promote) {
             scrambleText(el.activeTitle, goal.title, options.scrambleMs ?? 700);
-            scrambleText(el.nextTitle, next ? next.title : keineWeiterenZieleText, 450);
+            scrambleText(el.nextTitle, next ? next.title : 'Keine weiteren Ziele', 450);
             el.chip.classList.remove('flip');
             void el.chip.offsetWidth;
             el.chip.classList.add('flip');
